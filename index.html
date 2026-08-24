@@ -1,0 +1,240 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Jamal Ofori-Adu</title>
+<meta name="description" content="Applied AI engineering from inside a working clinic. Production agents, evaluation-gated releases, live products.">
+<meta property="og:title" content="Jamal Ofori-Adu">
+<meta property="og:description" content="Applied AI engineering from inside a working clinic.">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><circle cx='50' cy='50' r='34' fill='none' stroke='%232f6bff' stroke-width='10'/><circle cx='50' cy='50' r='9' fill='%23ece9e2'/></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..700;1,9..144,300..600&family=Hanken+Grotesk:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ink:#0a0c10; --ink-2:#0e1117; --line:#1d222c;
+  --bone:#ece9e2; --dim:#9aa1ad; --mono:#7c8494;
+  --blue:#2f6bff; --blue-soft:#7aa0ff;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  background:var(--ink); color:var(--bone);
+  font-family:"Hanken Grotesk",system-ui,sans-serif; font-weight:300;
+  font-size:17px; line-height:1.6;
+  -webkit-font-smoothing:antialiased;
+}
+body::after{
+  content:""; position:fixed; inset:0; pointer-events:none; opacity:.05; z-index:9;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='140' height='140' filter='url(%23n)' opacity='0.55'/%3E%3C/svg%3E");
+}
+.wrap{max-width:1060px;margin:0 auto;padding:0 24px}
+a{color:inherit;text-decoration:none}
+::selection{background:var(--blue);color:#fff}
+
+.kicker{
+  font-family:"JetBrains Mono",monospace;font-size:12px;letter-spacing:.14em;
+  color:var(--mono);text-transform:lowercase;
+}
+.kicker .dot{color:var(--blue)}
+
+/* hero */
+header{padding:9vh 0 7vh;border-bottom:1px solid var(--line)}
+h1{
+  font-family:"Fraunces",serif;font-weight:390;font-variation-settings:"opsz" 100;
+  font-size:clamp(46px,8.2vw,96px);line-height:1.02;letter-spacing:-.015em;
+  margin:22px 0 26px;
+}
+h1 .dot{color:var(--blue)}
+.lede{max-width:600px;font-size:19px;color:var(--bone)}
+.lede b{font-weight:500}
+.anchor{
+  margin-top:30px;max-width:560px;
+  font-family:"Fraunces",serif;font-style:italic;font-weight:340;
+  font-size:17px;color:var(--dim);
+}
+.hero-meta{display:flex;gap:28px;flex-wrap:wrap;margin-top:44px}
+.hero-meta a{border-bottom:1px solid var(--line);padding-bottom:2px;font-size:14px;
+  font-family:"JetBrains Mono",monospace;color:var(--dim);transition:color .2s,border-color .2s}
+.hero-meta a:hover{color:var(--bone);border-color:var(--blue)}
+
+/* sections */
+section{padding:64px 0;border-bottom:1px solid var(--line)}
+.sec-head{display:flex;align-items:baseline;justify-content:space-between;margin-bottom:34px}
+h2{font-family:"Fraunces",serif;font-weight:420;font-size:26px;letter-spacing:-.01em}
+
+/* work rows */
+.row{
+  display:grid;grid-template-columns:minmax(150px,240px) 1fr minmax(200px,300px);
+  gap:20px;padding:26px 12px;margin:0 -12px;border-top:1px solid var(--line);
+  position:relative;transition:background .25s;
+}
+.row:last-child{border-bottom:1px solid var(--line)}
+.row::before{
+  content:"";position:absolute;left:0;top:-1px;height:1px;width:0;
+  background:var(--blue);transition:width .45s cubic-bezier(.22,.61,.2,1);
+}
+a.row:hover{background:var(--ink-2)}
+a.row:hover::before{width:100%}
+.row h3{
+  font-family:"Fraunces",serif;font-weight:460;font-size:21px;line-height:1.2;
+}
+.row h3 .ext{color:var(--mono);font-family:"JetBrains Mono",monospace;font-size:12px;
+  font-style:normal;margin-left:6px;transition:color .2s}
+a.row:hover h3 .ext{color:var(--blue-soft)}
+.row .tag{display:block;margin-top:8px;font-family:"JetBrains Mono",monospace;
+  font-size:11px;letter-spacing:.1em;color:var(--mono)}
+.row p{color:var(--dim);font-size:15.5px;max-width:52ch}
+.row p b{color:var(--bone);font-weight:500}
+.rcp{
+  font-family:"JetBrains Mono",monospace;font-size:12.5px;line-height:1.75;color:var(--mono);
+  align-self:center;
+}
+.rcp em{font-style:normal;color:var(--blue-soft)}
+
+/* discipline */
+.disc{display:grid;grid-template-columns:1fr 1fr;gap:34px;max-width:900px}
+.disc p{font-size:18px;color:var(--bone);max-width:40ch}
+.disc p span{color:var(--dim)}
+
+/* footer */
+footer{padding:70px 0 90px}
+footer .big{
+  font-family:"Fraunces",serif;font-weight:390;font-size:clamp(28px,4.4vw,44px);
+  letter-spacing:-.01em;margin:18px 0 34px;max-width:640px;line-height:1.15;
+}
+footer .big a{border-bottom:2px solid var(--blue);transition:color .2s}
+footer .big a:hover{color:var(--blue-soft)}
+.foot-links{display:flex;gap:26px;flex-wrap:wrap}
+.foot-links a{font-family:"JetBrains Mono",monospace;font-size:13px;color:var(--dim);
+  border-bottom:1px solid var(--line);padding-bottom:2px;transition:color .2s,border-color .2s}
+.foot-links a:hover{color:var(--bone);border-color:var(--blue)}
+.colophon{margin-top:56px;font-family:"JetBrains Mono",monospace;font-size:11px;color:#565d69}
+
+/* reveal */
+.rv{opacity:0;transform:translateY(14px);animation:rv .7s cubic-bezier(.22,.61,.2,1) forwards}
+@keyframes rv{to{opacity:1;transform:none}}
+.rv:nth-child(1){animation-delay:.05s}.rv:nth-child(2){animation-delay:.12s}
+.rv:nth-child(3){animation-delay:.19s}.rv:nth-child(4){animation-delay:.26s}
+.rv:nth-child(5){animation-delay:.33s}.rv:nth-child(6){animation-delay:.4s}
+.rv:nth-child(7){animation-delay:.47s}
+@media (prefers-reduced-motion:reduce){.rv{animation:none;opacity:1;transform:none}}
+
+@media (max-width:760px){
+  .row{grid-template-columns:1fr;gap:10px;padding:22px 10px}
+  .rcp{margin-top:4px}
+  .disc{grid-template-columns:1fr}
+}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap">
+    <p class="kicker rv">applied ai engineering <span class="dot">·</span> london</p>
+    <h1 class="rv">Jamal Ofori&#8209;Adu<span class="dot">.</span></h1>
+    <p class="lede rv">I run a physiotherapy clinic and build the software that runs it.
+      Production agents, evaluation-gated releases, live products with paying customers.
+      <b>Eight years HCPC-registered, still practising.</b></p>
+    <p class="anchor rv">fashion, music, design, sport, sales, then software.
+      the rooms changed; the discipline didn't.</p>
+    <nav class="hero-meta rv" aria-label="profiles">
+      <a href="https://github.com/mrshippers">github/mrshippers</a>
+      <a href="https://www.linkedin.com/in/joaphysio">linkedin/joaphysio</a>
+      <a href="mailto:j.o.adu@hotmail.co.uk">j.o.adu@hotmail.co.uk</a>
+    </nav>
+  </div>
+</header>
+
+<section id="work">
+  <div class="wrap">
+    <div class="sec-head">
+      <h2>Selected work</h2>
+      <p class="kicker">every claim carries a receipt</p>
+    </div>
+
+    <a class="row" href="https://strydeos.com">
+      <div><h3>StrydeOS<span class="ext">↗</span></h3><span class="tag">founder · live</span></div>
+      <p>An AI operating system for UK physiotherapy clinics. Multi-tenant B2B SaaS with paying
+        customers; sole builder across engineering, product, security and commercial delivery.
+        Includes <b>Ava</b>, a voice agent on real clinic phone lines that books real appointments.</p>
+      <p class="rcp"><em>release gate</em> 300+ simulated callers<br>
+        deploys block under 95% or on any P0</p>
+    </a>
+
+    <div class="row">
+      <div><h3>Evidence</h3><span class="tag">private build</span></div>
+      <p>On-device clinical retrieval: a local model with sqlite-vec, zero query-time egress,
+        sealed per-clinic instances. The model never authors a citation; the system refuses
+        what it cannot support. The failing metric ships in the scorecard alongside the passing ones.</p>
+      <p class="rcp"><em>eval</em> 0 fabricated citations<br>
+        100% refusal on unanswerable queries</p>
+    </div>
+
+    <a class="row" href="https://peoples-of-africa.pages.dev">
+      <div><h3>Peoples of Africa<span class="ext">↗</span></h3><span class="tag">webgl · live · <span style="color:var(--blue-soft)">open source</span></span></div>
+      <p>A 3D terrain diorama of the continent's peoples and heritage: 835 ethnographic groups
+        joined across three academic datasets, story vignettes that reveal as you explore,
+        cartographic type laid out on camera settle.</p>
+      <p class="rcp"><em>perf</em> load staged 37s &#8594; 5.5s TTI<br>
+        <em>gate</em> verify harness 23/23</p>
+    </a>
+
+    <a class="row" href="https://injury-time.vercel.app">
+      <div><h3>Injury Time<span class="ext">↗</span></h3><span class="tag">webgl · live demo · <span style="color:var(--blue-soft)">open source</span></span></div>
+      <p>Squad-load and injury-risk tracking (ACWR) for my own non-league team. An FM-style
+        readiness hub, an interactive 3D pitch with auto-picked XI, and a 3D body map per player.</p>
+      <p class="rcp"><em>stack</em> next.js · supabase · r3f<br>
+        <em>data</em> live demo runs a fictional club</p>
+    </a>
+
+    <div class="row">
+      <div><h3>TradeMind</h3><span class="tag">client work · in production</span></div>
+      <p>An operations platform for a UK electrical contractor: voice intake, payments workflow,
+        Stripe Connect reconciliation and certificate generation. Scoped, contracted, delivered
+        and handed over end to end.</p>
+      <p class="rcp"><em>state</em> live · stripe in production<br>
+        client portal + weekly changelog</p>
+    </div>
+
+    <a class="row" href="https://shippersstudio.io">
+      <div><h3>Shippers Studio<span class="ext">↗</span></h3><span class="tag">the studio</span></div>
+      <p>The product studio the rest of this ships from. Its own site is a six-act scrollytelling
+        piece driving one WebGL aperture rig, with a command palette hiding in the keyboard.</p>
+      <p class="rcp"><em>site</em> one webgl rig, six acts<br>
+        press <em>/</em> when you get there</p>
+    </a>
+
+  </div>
+</section>
+
+<section id="how">
+  <div class="wrap">
+    <div class="sec-head"><h2>How I ship</h2></div>
+    <div class="disc">
+      <p>Nothing reaches a user on vibes. <span>Releases pass simulated-caller evaluation gates,
+        design gates and verify harnesses before a human sees them, and a red gate stops the ship.</span></p>
+      <p>The unflattering number gets published too. <span>A scorecard that hides its failures
+        is marketing; one that prints them is engineering.</span></p>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <p class="kicker">currently: strydeos + the studio <span class="dot">·</span> open to applied ai roles</p>
+    <p class="big">If you want the receipts behind any of this,
+      <a href="mailto:j.o.adu@hotmail.co.uk">ask for them</a>.</p>
+    <div class="foot-links">
+      <a href="https://github.com/mrshippers">github</a>
+      <a href="https://www.linkedin.com/in/joaphysio">linkedin</a>
+      <a href="https://strydeos.com">strydeos</a>
+      <a href="https://shippersstudio.io">shippers studio</a>
+    </div>
+    <p class="colophon">london · hand-built, no framework · type: fraunces / hanken grotesk / jetbrains mono</p>
+  </div>
+</footer>
+
+</body>
+</html>
