@@ -168,10 +168,12 @@ footer .big a:hover{color:var(--blue-soft)}
     <a class="row" href="https://github.com/mrshippers/evidence">
       <div><h3>Evidence<span class="ext">↗</span></h3><span class="tag"><span style="color:var(--blue-soft)">open source</span> · mirror</span></div>
       <p>An evidence-based clinical knowledge resource: curated guidelines and protocols
-        answered with citations constructed in code, never authored by the model. RAG and a
-        recursive learning loop underneath; local model, sqlite-vec, zero query-time egress,
-        sealed per-clinic instances.</p>
-      <p class="rcp"><em>eval</em> 100% red-flag recall<br>
+        answered with citations constructed in code, never authored by the model. Multi-turn
+        answers keep their sources across a thread. Runs on open-weight models on-device:
+        Qwen, and a Gemma I distilled and fine-tuned for clinical reasoning. RAG and a
+        recursive learning loop underneath; sqlite-vec, zero query-time egress, sealed
+        per-clinic instances.</p>
+      <p class="rcp"><em>eval</em> 100% red-flag recall · 95% refusal gate<br>
         the failing metric ships too</p>
     </a>
 
