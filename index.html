@@ -4,251 +4,518 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Jamal Ofori-Adu</title>
-<meta name="description" content="Applied AI engineering from inside a working clinic. Production agents, evaluation-gated releases, live products.">
+<meta name="description" content="Applied AI engineer and chartered physiotherapist. Production web apps in React and TypeScript, voice agents, evaluation-gated releases.">
 <meta property="og:title" content="Jamal Ofori-Adu">
-<meta property="og:description" content="Applied AI engineering from inside a working clinic.">
-<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><circle cx='50' cy='50' r='34' fill='none' stroke='%232f6bff' stroke-width='10'/><circle cx='50' cy='50' r='9' fill='%23ece9e2'/></svg>">
+<meta property="og:description" content="Applied AI engineer building production web applications in React and TypeScript.">
+<meta property="og:image" content="https://joadu.pages.dev/assets/og.jpg">
+<meta name="theme-color" content="#07080c">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><circle cx='50' cy='50' r='34' fill='none' stroke='%234d8dff' stroke-width='10'/><circle cx='50' cy='50' r='9' fill='%23eef0f6'/></svg>">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..700;1,9..144,300..600&family=Hanken+Grotesk:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@1,9..144,400;1,9..144,500&family=Hanken+Grotesk:wght@300;400;500;600;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
 :root{
-  --ink:#0a0c10; --ink-2:#0e1117; --line:#1d222c;
-  --bone:#ece9e2; --dim:#9aa1ad; --mono:#7c8494;
-  --blue:#2f6bff; --blue-soft:#7aa0ff;
+  --bg:#07080c; --bg-2:#0c0e14; --line:#1a1e28; --line-2:#262b37;
+  --ink:#eef0f6; --body:#b9bfcc; --mute:#878e9e;
+  --blue:#4d8dff; --blue-deep:#1c50d2; --gold:#cdb76e;
+  --r:4px;
+  --ease:cubic-bezier(.2,.7,.1,1);
 }
 *{margin:0;padding:0;box-sizing:border-box}
-html{scroll-behavior:smooth}
-body{
-  background:var(--ink); color:var(--bone);
-  font-family:"Hanken Grotesk",system-ui,sans-serif; font-weight:300;
-  font-size:17px; line-height:1.6;
-  -webkit-font-smoothing:antialiased;
-}
-body::after{
-  content:""; position:fixed; inset:0; pointer-events:none; opacity:.05; z-index:9;
-  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='140' height='140' filter='url(%23n)' opacity='0.55'/%3E%3C/svg%3E");
-}
-.wrap{max-width:1060px;margin:0 auto;padding:0 24px}
-a{color:inherit;text-decoration:none}
-::selection{background:var(--blue);color:#fff}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{background:var(--bg);color:var(--ink);font-family:"Hanken Grotesk",system-ui,sans-serif;font-weight:400;font-size:17px;line-height:1.6;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+a{color:inherit}
+img,video{display:block;max-width:100%}
+::selection{background:var(--blue-deep);color:#fff}
+:focus-visible{outline:2px solid var(--blue);outline-offset:3px;border-radius:2px}
+.wrap{max-width:1180px;margin:0 auto;padding:0 32px}
+.num{font-family:"JetBrains Mono",ui-monospace,monospace;font-variant-numeric:tabular-nums;font-feature-settings:"tnum"}
 
-.kicker{
-  font-family:"JetBrains Mono",monospace;font-size:12px;letter-spacing:.14em;
-  color:var(--mono);text-transform:lowercase;
-}
-.kicker .dot{color:var(--blue)}
+/* top */
+.top{position:relative;z-index:3;display:flex;justify-content:space-between;align-items:center;padding:28px 0}
+.mark{font-weight:800;font-size:19px;letter-spacing:-.02em;text-decoration:none}
+.mark i{font-style:normal;color:var(--blue)}
+.top nav{display:flex;gap:28px;font-size:15px;color:var(--mute)}
+.top nav a{text-decoration:none;transition:color .2s}
+.top nav a:hover{color:var(--ink)}
 
 /* hero */
-header{padding:9vh 0 7vh;border-bottom:1px solid var(--line)}
-h1{
-  font-family:"Fraunces",serif;font-weight:390;font-variation-settings:"opsz" 100;
-  font-size:clamp(46px,8.2vw,96px);line-height:1.02;letter-spacing:-.015em;
-  margin:22px 0 26px;
-}
-h1 .dot{color:var(--blue)}
-.lede{max-width:600px;font-size:19px;color:var(--bone)}
-.lede b{font-weight:500}
-.anchor{
-  margin-top:30px;max-width:560px;
-  font-family:"Fraunces",serif;font-style:italic;font-weight:340;
-  font-size:17px;color:var(--dim);
-}
-.hero-meta{display:flex;gap:28px;flex-wrap:wrap;margin-top:44px}
-.hero-meta a{border-bottom:1px solid var(--line);padding-bottom:2px;font-size:14px;
-  font-family:"JetBrains Mono",monospace;color:var(--dim);transition:color .2s,border-color .2s}
-.hero-meta a:hover{color:var(--bone);border-color:var(--blue)}
+.hero{position:relative;min-height:min(760px,100svh);display:grid;grid-template-columns:minmax(0,1fr);align-items:center}
+#orb{position:absolute;top:50%;right:-14vw;width:min(980px,86vw);aspect-ratio:1;transform:translateY(-52%);z-index:0}
+.hero-copy{position:relative;z-index:2;max-width:700px;padding:40px 0 24px}
+h1{font-weight:800;font-size:clamp(52px,8.6vw,124px);line-height:.92;letter-spacing:-.045em}
+h1 em{display:block;font-family:"Fraunces",serif;font-style:italic;font-weight:400;letter-spacing:-.02em;color:var(--gold);font-size:.4em;line-height:1.15;margin-top:.22em}
+.lede{margin-top:34px;font-size:clamp(18px,1.7vw,21px);line-height:1.55;color:var(--body);max-width:560px;font-weight:300}
+.lede b{color:var(--ink);font-weight:500}
+.legend{margin-top:44px;display:grid;grid-template-columns:repeat(5,auto);gap:0;justify-content:start;border-top:1px solid var(--line);max-width:640px}
+.legend button{all:unset;cursor:pointer;padding:14px 22px 0 0;display:grid;gap:2px;align-content:start}
+.legend .num{font-size:26px;font-weight:500;color:var(--ink);transition:color .25s}
+.legend span:last-child{text-wrap:balance;font-size:13px;color:var(--mute);line-height:1.35;transition:color .25s}
+.legend button:hover .num,.legend button.on .num{color:var(--gold)}
+.legend button:hover span:last-child,.legend button.on span:last-child{color:var(--ink)}
+.legend button:focus-visible{outline-offset:6px}
+.orb-note{margin-top:18px;font-size:14px;color:var(--mute)}
+.orb-note .num{color:var(--ink)}
 
-/* sections */
-section{padding:64px 0;border-bottom:1px solid var(--line)}
-.sec-head{display:flex;align-items:baseline;justify-content:space-between;margin-bottom:34px}
-h2{font-family:"Fraunces",serif;font-weight:420;font-size:26px;letter-spacing:-.01em}
+/* tabs */
+.tabbar{position:sticky;top:0;z-index:5;background:linear-gradient(var(--bg) 70%,transparent);padding:14px 0 26px}
+.tabs{position:relative;display:grid;grid-template-columns:1fr 1fr;max-width:520px;margin:0 auto;border:1px solid var(--line-2);border-radius:var(--r);background:var(--bg-2)}
+.tabs button{all:unset;cursor:pointer;text-align:center;padding:14px 10px;font-size:16px;font-weight:600;color:var(--mute);position:relative;z-index:1;transition:color .25s}
+.tabs button[aria-selected=true]{color:var(--ink)}
+.tabs button small{display:block;font-weight:400;font-size:13px;color:var(--mute);margin-top:1px}
+.tabs .ind{position:absolute;inset:3px auto 3px 3px;width:calc(50% - 3px);background:#141824;border:1px solid var(--line-2);border-radius:3px;transition:transform .45s var(--ease)}
+.tabs[data-on=craft] .ind{transform:translateX(100%)}
+.tabs button:focus-visible{outline-offset:-4px}
+.panel{display:none;padding-bottom:40px}
+.panel.on{display:block;animation:rise .5s var(--ease)}
+@keyframes rise{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
 
-/* work rows */
-.row{
-  display:grid;grid-template-columns:minmax(150px,240px) 1fr minmax(200px,300px);
-  gap:20px;padding:26px 12px;margin:0 -12px;border-top:1px solid var(--line);
-  position:relative;transition:background .25s;
-}
-.row:last-child{border-bottom:1px solid var(--line)}
-.row::before{
-  content:"";position:absolute;left:0;top:-1px;height:1px;width:0;
-  background:var(--blue);transition:width .45s cubic-bezier(.22,.61,.2,1);
-}
-a.row:hover{background:var(--ink-2)}
-a.row:hover::before{width:100%}
-.row h3{
-  font-family:"Fraunces",serif;font-weight:460;font-size:21px;line-height:1.2;
-}
-.row h3 .ext{color:var(--mono);font-family:"JetBrains Mono",monospace;font-size:12px;
-  font-style:normal;margin-left:6px;transition:color .2s}
-a.row:hover h3 .ext{color:var(--blue-soft)}
-.row .tag{display:block;margin-top:8px;font-family:"JetBrains Mono",monospace;
-  font-size:11px;letter-spacing:.1em;color:var(--mono)}
-.row p{color:var(--dim);font-size:15.5px;max-width:52ch}
-.row p b{color:var(--bone);font-weight:500}
-.rcp{
-  font-family:"JetBrains Mono",monospace;font-size:12.5px;line-height:1.75;color:var(--mono);
-  align-self:center;
-}
-.rcp em{font-style:normal;color:var(--blue-soft)}
+/* work */
+.sec{display:grid;grid-template-columns:220px 1fr;gap:48px;padding:56px 0;border-top:1px solid var(--line)}
+.sec>h2{font-size:15px;font-weight:600;color:var(--mute);letter-spacing:.01em;padding-top:6px}
+.role{padding-bottom:40px}
+.role+.role{padding-top:40px;border-top:1px solid var(--line)}
+.role-head{display:flex;justify-content:space-between;gap:20px;align-items:baseline;flex-wrap:wrap}
+.role h3{font-size:26px;font-weight:600;letter-spacing:-.02em}
+.role h3 span{color:var(--mute);font-weight:400}
+.when{font-size:14px;color:var(--mute);white-space:nowrap}
+.role>p{margin-top:10px;color:var(--body);max-width:720px}
+.role ul{list-style:none;margin-top:18px;display:grid;gap:12px;max-width:760px}
+.role li{position:relative;padding-left:22px;color:var(--body)}
+.role li::before{content:"";position:absolute;left:0;top:.72em;width:9px;height:1px;background:var(--blue)}
+.role li b{color:var(--ink);font-weight:600}
+.compact{display:grid;gap:22px}
+.compact .role-head h3{font-size:20px}
+.compact p{color:var(--body);margin-top:4px;max-width:720px}
 
-/* discipline */
-.disc{display:grid;grid-template-columns:1fr 1fr;gap:34px;max-width:900px}
-.disc p{font-size:18px;color:var(--bone);max-width:40ch}
-.disc p span{color:var(--dim)}
+.proj{display:grid;grid-template-columns:96px 1fr 180px;gap:28px;align-items:center;padding:26px 0;border-top:1px solid var(--line);text-decoration:none;transition:background .3s}
+.proj:first-child{border-top:0;padding-top:0}
+.proj canvas{width:96px;height:96px}
+.proj h3{font-size:22px;font-weight:600;letter-spacing:-.015em}
+.proj h3 small{font-size:14px;font-weight:400;color:var(--mute);margin-left:10px}
+.proj p{color:var(--body);margin-top:4px;font-size:16px}
+.proj .rc{text-align:right}
+.proj .rc .num{display:block;font-size:30px;color:var(--ink);line-height:1}
+.proj .rc span:last-child{font-size:13px;color:var(--mute)}
+a.proj:hover h3{color:var(--gold)}
 
-/* footer */
-footer{padding:70px 0 90px}
-footer .big{
-  font-family:"Fraunces",serif;font-weight:390;font-size:clamp(28px,4.4vw,44px);
-  letter-spacing:-.01em;margin:18px 0 34px;max-width:640px;line-height:1.15;
+.skills{display:grid;grid-template-columns:repeat(2,1fr);gap:28px 48px}
+.skills h3{font-size:16px;font-weight:600}
+.skills p{color:var(--body);font-size:16px;margin-top:4px}
+.edu p{color:var(--body)}
+.edu p+p{margin-top:8px}
+
+.contact{padding:80px 0 40px;border-top:1px solid var(--line);display:grid;grid-template-columns:1fr auto;gap:40px;align-items:end}
+.contact h2{font-weight:800;font-size:clamp(34px,5vw,64px);letter-spacing:-.04em;line-height:1}
+.contact h2 a{text-decoration:none;background:linear-gradient(var(--blue),var(--blue)) 0 100%/0 2px no-repeat;transition:background-size .5s var(--ease)}
+.contact h2 a:hover{background-size:100% 2px}
+.contact p{text-wrap:balance;color:var(--body);margin-top:14px;max-width:520px}
+.links{display:grid;gap:8px;text-align:right;font-size:16px}
+.links a{color:var(--body);text-decoration:none}
+.links a:hover{color:var(--ink)}
+
+/* craft */
+.craft-intro{max-width:720px;margin:24px auto 56px;text-align:center;color:var(--body);font-size:18px}
+.piece{display:grid;grid-template-columns:minmax(0,1.55fr) minmax(260px,.75fr);gap:48px;align-items:center;padding:56px 0;border-top:1px solid var(--line)}
+.piece:nth-of-type(even){grid-template-columns:minmax(260px,.75fr) minmax(0,1.55fr)}
+.piece.wide{grid-template-columns:1fr;gap:28px;padding-top:24px}
+.piece.wide .stage{aspect-ratio:16/10}
+.piece.wide .cap{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.2fr);gap:48px;align-items:start}
+.piece.wide .cap dl{margin-top:4px}
+.piece:nth-of-type(even) .frame{order:2}
+.frame{position:relative;border:1px solid var(--line-2);border-radius:var(--r);background:var(--bg-2);overflow:hidden;box-shadow:0 40px 80px -40px rgba(0,0,0,.8)}
+.chrome{display:flex;align-items:center;gap:12px;height:34px;padding:0 12px;border-bottom:1px solid var(--line);font-size:12.5px;color:var(--mute)}
+.chrome i{width:9px;height:9px;border-radius:50%;background:#2a2f3b;display:inline-block;margin-right:-6px}
+.chrome .url{flex:1;text-align:center;font-family:"JetBrains Mono",monospace;font-size:12px}
+.chrome button{all:unset;cursor:pointer;font-size:12.5px;color:var(--ink);padding:3px 9px;border:1px solid var(--line-2);border-radius:3px;white-space:nowrap}
+.chrome button:hover{border-color:var(--blue)}
+.stage{position:relative;aspect-ratio:16/10;background:#000}
+.stage>video,.stage>img,.stage>iframe{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:top;border:0}
+.piece h3{font-size:30px;font-weight:600;letter-spacing:-.025em;line-height:1.1}
+.piece .what{margin-top:12px;color:var(--body)}
+.piece dl{margin-top:22px;display:grid;grid-template-columns:auto 1fr;gap:8px 18px;font-size:15px}
+.piece dt{color:var(--mute)}
+.piece dd{color:var(--body)}
+.piece .go{display:inline-block;margin-top:22px;font-size:15px;color:var(--ink);text-decoration:none;border-bottom:1px solid var(--blue);padding-bottom:2px}
+.duo{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.duo{align-items:start}
+.phones{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;align-items:end}
+.phone{border:1px solid var(--line-2);border-radius:26px;padding:7px;background:#0b0c10}
+.phone img{border-radius:20px;width:100%;aspect-ratio:780/1688;object-fit:cover}
+.phone:nth-child(2){transform:translateY(-28px)}
+.self{text-wrap:balance;margin:72px auto 0;max-width:760px;text-align:center;color:var(--mute);font-size:15px}
+.self a{color:var(--ink)}
+
+footer{padding:28px 0 48px;color:var(--mute);font-size:13px;display:flex;justify-content:space-between;gap:20px;border-top:1px solid var(--line)}
+
+@media (max-width:900px){
+  .wrap{padding:0 16px}
+  .top nav{gap:16px;font-size:14px}
+  .top nav a.hide-s{display:none}
+  .hero{min-height:auto}
+  #orb{right:auto;top:-22vw;left:50%;transform:translateX(-50%);width:132vw;opacity:.45}
+  .hero-copy{padding:62vw 0 56px}
+  .legend{grid-template-columns:repeat(3,1fr)}
+  .legend button{padding-right:10px}
+  .sec{grid-template-columns:1fr;gap:20px;padding:40px 0}
+  .proj{grid-template-columns:64px 1fr;gap:16px}
+  .proj canvas{width:64px;height:64px}
+  .proj .rc{grid-column:2;text-align:left;display:flex;gap:10px;align-items:baseline}
+  .proj .rc .num{font-size:20px}
+  .skills{grid-template-columns:1fr}
+  .contact{grid-template-columns:1fr}
+  .links{text-align:left}
+  .piece,.piece:nth-of-type(even){grid-template-columns:1fr;gap:24px;padding:40px 0}
+  .piece:nth-of-type(even) .frame{order:0}
+  .duo{grid-template-columns:1fr}
+  .piece.wide .cap{grid-template-columns:1fr;gap:20px}
+  .piece.wide .stage{aspect-ratio:16/10}
+  .chrome i{display:none}
+  .chrome .url{text-align:left;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;min-width:0}
+  .phones{gap:10px}
+  .phone{border-radius:18px;padding:4px}.phone img{border-radius:14px}
+  footer{flex-direction:column}
 }
-footer .big a{border-bottom:2px solid var(--blue);transition:color .2s}
-footer .big a:hover{color:var(--blue-soft)}
-.foot-links{display:flex;gap:26px;flex-wrap:wrap}
-.foot-links a{font-family:"JetBrains Mono",monospace;font-size:13px;color:var(--dim);
-  border-bottom:1px solid var(--line);padding-bottom:2px;transition:color .2s,border-color .2s}
-.foot-links a:hover{color:var(--bone);border-color:var(--blue)}
-.colophon{margin-top:56px;font-family:"JetBrains Mono",monospace;font-size:11px;color:#565d69}
-
-/* reveal */
-.rv{opacity:0;transform:translateY(14px);animation:rv .7s cubic-bezier(.22,.61,.2,1) forwards}
-@keyframes rv{to{opacity:1;transform:none}}
-.rv:nth-child(1){animation-delay:.05s}.rv:nth-child(2){animation-delay:.12s}
-.rv:nth-child(3){animation-delay:.19s}.rv:nth-child(4){animation-delay:.26s}
-.rv:nth-child(5){animation-delay:.33s}.rv:nth-child(6){animation-delay:.4s}
-.rv:nth-child(7){animation-delay:.47s}
-@media (prefers-reduced-motion:reduce){.rv{animation:none;opacity:1;transform:none}}
-
-@media (max-width:760px){
-  .row{grid-template-columns:1fr;gap:10px;padding:22px 10px}
-  .rcp{margin-top:4px}
-  .disc{grid-template-columns:1fr}
+@media (prefers-reduced-motion:reduce){
+  *{animation:none!important;transition:none!important;scroll-behavior:auto!important}
 }
 </style>
 </head>
 <body>
 
-<header>
-  <div class="wrap">
-    <p class="kicker rv">applied ai engineering <span class="dot">·</span> london</p>
-    <h1 class="rv">Jamal Ofori&#8209;Adu<span class="dot">.</span></h1>
-    <p class="lede rv">I run a physiotherapy clinic and build the software that runs it.
-      Production web apps in React and TypeScript, agents, evaluation-gated releases,
-      live products with paying customers.
-      <b>Eight years HCPC-registered, still practising.</b></p>
-    <p class="anchor rv">fashion, music, design, sport, sales, then software.
-      the rooms changed; the discipline didn't.</p>
-    <nav class="hero-meta rv" aria-label="profiles">
-      <a href="https://github.com/mrshippers">github/mrshippers</a>
-      <a href="https://www.linkedin.com/in/joaphysio">linkedin/joaphysio</a>
-      <a href="mailto:jamal@strydeos.com">jamal@strydeos.com</a>
+<div class="wrap">
+  <header class="top">
+    <a class="mark" href="#">Jamal Ofori-Adu<i>.</i></a>
+    <nav aria-label="profiles">
+      <a href="https://github.com/mrshippers">GitHub</a>
+      <a href="https://www.linkedin.com/in/joaphysio">LinkedIn</a>
+      <a class="hide-s" href="mailto:jamal@strydeos.com">jamal@strydeos.com</a>
     </nav>
-  </div>
-</header>
+  </header>
 
-<section id="work">
+  <section class="hero">
+    <canvas id="orb" aria-hidden="true"></canvas>
+    <div class="hero-copy">
+      <h1>Applied AI<br>engineer.<em>Chartered physio, still practising.</em></h1>
+      <p class="lede">I build production web apps in <b>React and TypeScript</b>, and the voice agents and evaluation gates behind them. <b>StrydeOS</b> is live in two UK clinics; I run one of them.</p>
+      <div class="legend" role="group" aria-label="What the orb is made of">
+        <button data-k="0"><span class="num">300</span><span>simulated callers per Ava release</span></button>
+        <button data-k="1"><span class="num">579</span><span>patients scored by Pulse</span></button>
+        <button data-k="2"><span class="num">535</span><span>tests behind the Driiva cutover</span></button>
+        <button data-k="3"><span class="num">835</span><span>peoples mapped in 3D</span></button>
+        <button data-k="4"><span class="num">500</span><span>Evidence training examples</span></button>
+      </div>
+      <p class="orb-note">The orb is <span class="num">2,749</span> points, one per number above. Point at one.</p>
+    </div>
+  </section>
+</div>
+
+<div class="tabbar">
   <div class="wrap">
-    <div class="sec-head">
-      <h2>Selected work</h2>
-      <p class="kicker">every claim carries a receipt</p>
+    <div class="tabs" role="tablist" aria-label="Portfolio" data-on="work">
+      <span class="ind" aria-hidden="true"></span>
+      <button role="tab" id="t-work" aria-controls="work" aria-selected="true">The work<small>roles, products, receipts</small></button>
+      <button role="tab" id="t-craft" aria-controls="craft" aria-selected="false" tabindex="-1">The craft<small>interfaces, live and recorded</small></button>
     </div>
-
-    <a class="row" href="https://strydeos.com">
-      <div><h3>StrydeOS<span class="ext">↗</span></h3><span class="tag">founder · live</span></div>
-      <p>An AI operating system for UK physiotherapy clinics, live in two clinics. Multi-tenant
-        B2B SaaS on Next.js and TypeScript; sole builder across engineering, product, security and
-        commercial delivery. Includes <b>Ava</b>, a voice agent on real clinic phone lines that books
-        real appointments, and <b>Pulse</b>, which scores 579 patient records into lifecycle cohorts.</p>
-      <p class="rcp"><em>release gate</em> 300+ simulated callers<br>
-        deploys block under 95% or on any P0</p>
-    </a>
-
-    <a class="row" href="https://github.com/mrshippers/evidence">
-      <div><h3>Evidence<span class="ext">↗</span></h3><span class="tag"><span style="color:var(--blue-soft)">open source</span> · mirror</span></div>
-      <p>An evidence-based clinical knowledge resource: curated guidelines and protocols
-        answered with citations constructed in code, never authored by the model. Multi-turn
-        answers keep their sources across a thread. Runs on open-weight models on-device:
-        Qwen, and a Gemma I distilled and fine-tuned for clinical reasoning. RAG and a
-        recursive learning loop underneath; sqlite-vec, zero query-time egress, sealed
-        per-clinic instances.</p>
-      <p class="rcp"><em>eval</em> 100% red-flag recall · 95% refusal gate<br>
-        the failing metric ships too</p>
-    </a>
-
-    <a class="row" href="https://peoples-of-africa.pages.dev">
-      <div><h3>Peoples of Africa<span class="ext">↗</span></h3><span class="tag">webgl · live · <span style="color:var(--blue-soft)">open source</span></span></div>
-      <p>A 3D terrain diorama of the continent's peoples and heritage: 835 ethnographic groups
-        joined across three academic datasets, story vignettes that reveal as you explore,
-        cartographic type laid out on camera settle.</p>
-      <p class="rcp"><em>perf</em> load staged 37s &#8594; 5.5s TTI<br>
-        <em>gate</em> verify harness 23/23</p>
-    </a>
-
-    <a class="row" href="https://injury-time.vercel.app">
-      <div><h3>Injury Time<span class="ext">↗</span></h3><span class="tag">webgl · live demo · <span style="color:var(--blue-soft)">open source</span></span></div>
-      <p>Football management for non-league: squad-load and injury-risk tracking (ACWR),
-        an FM-style readiness hub, an interactive 3D pitch with auto-picked XI, and a 3D body
-        map per player. In use at a couple of clubs.</p>
-      <p class="rcp"><em>stack</em> next.js · supabase · r3f<br>
-        <em>data</em> live demo runs a fictional club</p>
-    </a>
-
-    <div class="row">
-      <div><h3>Driiva</h3><span class="tag">insurtech · client build</span></div>
-      <p>Web (React, Vite, Firebase) and mobile (Expo) clients over one identity layer, rebuilt
-        and cut over in production. Insurer and Stripe webhooks hardened for production.</p>
-      <p class="rcp"><em>gate</em> 535-test suite<br>
-        cut over in production</p>
-    </div>
-
-    <div class="row">
-      <div><h3>TradeMind</h3><span class="tag">client work · in production</span></div>
-      <p>A voice-first operations app for UK electricians: live dictation into certificate
-        generation, a compliance vault, receipt-scan RAG and Stripe Connect payouts. Scoped,
-        contracted, delivered and handed over end to end.</p>
-      <p class="rcp"><em>state</em> live · stripe in production<br>
-        client portal + weekly changelog</p>
-    </div>
-
-    <a class="row" href="https://shippersstudio.io">
-      <div><h3>Shippers Studio<span class="ext">↗</span></h3><span class="tag">the studio</span></div>
-      <p>The product studio the rest of this ships from. Its own site is a six-act scrollytelling
-        piece driving one WebGL aperture rig, with a command palette hiding in the keyboard.</p>
-      <p class="rcp"><em>site</em> one webgl rig, six acts<br>
-        press <em>/</em> when you get there</p>
-    </a>
-
   </div>
+</div>
+
+<main class="wrap">
+
+<!-- WORK -->
+<section class="panel on" id="work" role="tabpanel" aria-labelledby="t-work">
+
+  <div class="sec">
+    <h2>Selected experience</h2>
+    <div>
+      <article class="role">
+        <div class="role-head"><h3>StrydeOS <span>founder and director</span></h3><span class="when">Feb 2026 to now, London</span></div>
+        <p>An operating system for UK physiotherapy clinics: a voice agent, clinical and operational intelligence over the practice-management system, and an evidence layer, in one multi-tenant product. I own engineering, product, infrastructure, security and GDPR.</p>
+        <ul>
+          <li><b>Ava, the voice agent.</b> Twilio into ElevenLabs Conversational AI running Claude, with webhook tools into a TypeScript booking layer that writes to Cliniko and WriteUpp.</li>
+          <li><b>Pulse.</b> Scores 579 patient records at the pilot clinic into lifecycle cohorts with a risk score each, and feeds a re-engagement queue.</li>
+          <li><b>Evidence.</b> On-device RAG over open-weight models: Qwen, and a Gemma I distilled and fine-tuned for clinical reasoning. Multi-turn answers keep their sources; citations are built in code, never by the model.</li>
+          <li><b>Release gating.</b> 300+ simulated-caller scenarios before each release. Below a 95% pass rate, or with any P0 failure, nothing ships.</li>
+          <li><b>Frontend.</b> Next.js, React and TypeScript on a typed token layer, so every surface retints from one palette; WCAG contrast audited across nine routes in both themes.</li>
+        </ul>
+      </article>
+      <article class="role">
+        <div class="role-head"><h3>Shippers Studio <span>founder</span></h3><span class="when">Jan 2026 to now, London</span></div>
+        <p>My product studio: agent systems, web design and UI builds for clients and for my own ventures. Paying clients from the first month.</p>
+        <ul>
+          <li><b>Driiva.</b> React, Vite and Firebase web plus an Expo app over one identity layer, rebuilt and cut over in production behind a 535-test suite.</li>
+          <li><b>TradeMind.</b> A voice-first operations app for UK electricians: live dictation into certificates, a compliance vault and Stripe Connect payouts. Scoped, built and handed over end to end.</li>
+        </ul>
+      </article>
+      <div class="role compact">
+        <div><div class="role-head"><h3>Spires Physiotherapy <span>managing director, senior physio</span></h3><span class="when">2021 to now</span></div>
+          <p>Grew to four clinicians with year-on-year revenue growth; 150+ five-star reviews. Led AI adoption across the practice, cutting clinician admin by roughly 40%.</p></div>
+        <div><div class="role-head"><h3>Bupa <span>remote MSK triage physiotherapist</span></h3><span class="when">2025 to now</span></div>
+          <p>Triage and caseload management for national insurer services, inside Meddbase and Citrix. Entered Bupa Accelerate 2026, the internal AI hackathon.</p></div>
+        <div><div class="role-head"><h3>CodeVerse, then Connect Health</h3><span class="when">2018 to 2023</span></div>
+          <p>Placed technologists from under-represented communities at Spotify, Sky and Accenture. Before that, graduate to senior physiotherapist in 18 months at the UK's largest integrated MSK provider.</p></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="sec">
+    <h2>Products, with receipts</h2>
+    <div>
+      <a class="proj" href="https://strydeos.com" data-k="0"><canvas aria-hidden="true"></canvas><div><h3>StrydeOS <small>live, two clinics</small></h3><p>Voice agent, patient intelligence and evidence in one clinic platform.</p></div><div class="rc"><span class="num">95%</span><span>release gate, any P0 blocks</span></div></a>
+      <a class="proj" href="https://github.com/mrshippers/evidence" data-k="4"><canvas aria-hidden="true"></canvas><div><h3>Evidence <small>open source</small></h3><p>Cited clinical answers from local models; the failing metric is published too.</p></div><div class="rc"><span class="num">100%</span><span>red-flag recall</span></div></a>
+      <a class="proj" href="https://peoples-of-africa.pages.dev" data-k="3"><canvas aria-hidden="true"></canvas><div><h3>Peoples of Africa <small>WebGL, open source</small></h3><p>A 3D terrain diorama of 835 ethnographic groups joined across three academic datasets.</p></div><div class="rc"><span class="num">5.5s</span><span>to interactive, from 37s</span></div></a>
+      <a class="proj" href="https://injury-time.vercel.app" data-k="-1"><canvas aria-hidden="true"></canvas><div><h3>Injury Time <small>Next.js, Supabase, R3F</small></h3><p>Football management for non-league clubs: squad load, injury risk and readiness.</p></div><div class="rc"><span class="num">2</span><span>clubs using it</span></div></a>
+      <div class="proj" data-k="2"><canvas aria-hidden="true"></canvas><div><h3>Driiva <small>insurtech, client build</small></h3><p>Web and mobile over one identity layer; insurer and Stripe webhooks hardened for production.</p></div><div class="rc"><span class="num">535</span><span>tests at cutover</span></div></div>
+    </div>
+  </div>
+
+  <div class="sec">
+    <h2>Skills</h2>
+    <div class="skills">
+      <div><h3>Frontend</h3><p>React, Next.js, TypeScript, Tailwind, Three.js and React Three Fiber, motion design, accessible interfaces.</p></div>
+      <div><h3>Agent systems</h3><p>Tool-using agents, orchestration across a fleet, memory between runs, prompt and context design.</p></div>
+      <div><h3>Evaluation</h3><p>Release-gating harnesses, simulated callers, red-flag recall testing, contract tests on every schema.</p></div>
+      <div><h3>Models and data</h3><p>RAG on sqlite-vec, local open-weight models, distillation and LoRA fine-tuning, MCP servers.</p></div>
+      <div><h3>Voice</h3><p>Twilio, ElevenLabs Conversational AI, webhook tool design, practice-management booking integrations.</p></div>
+      <div><h3>Platform</h3><p>Firebase, Firestore, Postgres, Supabase, Vercel, Cloudflare, GitHub CI/CD, GDPR documentation.</p></div>
+    </div>
+  </div>
+
+  <div class="sec edu">
+    <h2>Education</h2>
+    <div>
+      <p>BSc (Hons) Physiotherapy, 2:1, University of East London, 2018.</p>
+      <p>HCPC registered. Member of the Chartered Society of Physiotherapy.</p>
+    </div>
+  </div>
+
 </section>
 
-<section id="how">
-  <div class="wrap">
-    <div class="sec-head"><h2>How I ship</h2></div>
-    <div class="disc">
-      <p>Nothing reaches a user on vibes. <span>Releases pass simulated-caller evaluation gates,
-        design gates and verify harnesses before a human sees them, and a red gate stops the ship.</span></p>
-      <p>The unflattering number gets published too. <span>A scorecard that hides its failures
-        is marketing; one that prints them is engineering.</span></p>
+<!-- CRAFT -->
+<section class="panel" id="craft" role="tabpanel" aria-labelledby="t-craft" hidden>
+  <p class="craft-intro">Everything here is running somewhere. The recordings are real sessions; switch any frame to the live site and use it in place.</p>
+
+  <article class="piece wide">
+    <div class="frame">
+      <div class="chrome"><span class="url">peoples-of-africa.pages.dev</span><button data-live="https://peoples-of-africa.pages.dev">Open live here</button></div>
+      <div class="stage"><video src="assets/africa.mp4" poster="assets/africa-poster.jpg" muted loop playsinline preload="none" aria-label="Recording: orbiting and zooming the 3D map of Africa"></video></div>
     </div>
-  </div>
+    <div class="cap">
+      <div><h3>Peoples of Africa</h3>
+      <p class="what">A cartographic diorama of the continent's peoples, after the 1971 National Geographic pair. Drag to orbit, scroll to fall into the terrain.</p>
+      <a class="go" href="https://peoples-of-africa.pages.dev">Open full screen</a></div>
+      <dl><dt>Built with</dt><dd>Three.js, custom terrain shaders, three academic datasets</dd><dt>Detail</dt><dd>Labels set along their regions and laid out as the camera settles</dd><dt>Speed</dt><dd>Load staged from 37s to 5.5s to interactive</dd></dl>
+    </div>
+  </article>
+
+  <article class="piece">
+    <div class="frame">
+      <div class="chrome"><span class="url">shippersstudio.io</span><button data-live="https://shippersstudio.io">Open live here</button></div>
+      <div class="stage"><video src="assets/shippers.mp4" poster="assets/shippers-poster.jpg" muted loop playsinline preload="none" aria-label="Recording: scrolling the Shippers Studio home page"></video></div>
+    </div>
+    <div>
+      <h3>Shippers Studio</h3>
+      <p class="what">The studio site is a six-act scroll driving one WebGL aperture of 92,000 points, which resolves into type as you read.</p>
+      <dl><dt>Built with</dt><dd>WebGL2 point cloud, GSAP, hand-set type</dd><dt>Detail</dt><dd>A command palette sits behind the / key</dd></dl>
+      <a class="go" href="https://shippersstudio.io">Visit shippersstudio.io</a>
+    </div>
+  </article>
+
+  <article class="piece">
+    <div class="duo">
+      <div class="frame">
+        <div class="chrome"><span class="url">strydeos.com</span><button data-live="https://strydeos.com">Open live here</button></div>
+        <div class="stage"><img src="assets/strydeos.jpg" alt="StrydeOS marketing site hero: The Clinic OS for private practice" loading="lazy"></div>
+      </div>
+      <div class="frame">
+        <div class="chrome"><span class="url">portal, demo clinic</span></div>
+        <div class="stage"><img src="assets/portal.jpg" alt="StrydeOS portal home in demo mode, leading with one sentence about patients with nothing booked next" loading="lazy"></div>
+      </div>
+    </div>
+    <div>
+      <h3>StrydeOS</h3>
+      <p class="what">The portal leads with one sentence about the clinic, then the record underneath it. Owners act on the sentence; the tiles are there to check it.</p>
+      <dl><dt>Built with</dt><dd>Next.js, TypeScript, Tailwind, Firebase</dd><dt>Detail</dt><dd>Status never carried by colour alone; contrast audited in both themes</dd></dl>
+      <a class="go" href="https://portal.strydeos.com/login?demo=1">Try the demo clinic</a>
+    </div>
+  </article>
+
+  <article class="piece">
+    <div class="frame">
+      <div class="chrome"><span class="url">injury-time.vercel.app</span><button data-live="https://injury-time.vercel.app">Open live here</button></div>
+      <div class="stage"><img src="assets/injury.jpg" alt="Injury Time hub for Belstone: 27 points with a season chart against promotion pace" loading="lazy"></div>
+    </div>
+    <div>
+      <h3>Injury Time</h3>
+      <p class="what">The hub reads the season as a sentence a manager would say, with the points line plotted against promotion and play-off pace.</p>
+      <dl><dt>Built with</dt><dd>Next.js, Supabase, React Three Fiber</dd><dt>Detail</dt><dd>A real club in read-only; switch to the fictional club to try everything</dd></dl>
+      <a class="go" href="https://injury-time.vercel.app">Open the hub</a>
+    </div>
+  </article>
+
+  <article class="piece">
+    <div class="phones">
+      <div class="phone"><img loading="eager" src="assets/tm-welcome.jpg" alt="TradeMind welcome: jobs recorded, certs issued, payment collected, from one voice note"></div>
+      <div class="phone"><img loading="eager" src="assets/tm-home.jpg" alt="TradeMind home: talk in a job, jobs booked in with certificate status"></div>
+      <div class="phone"><img loading="eager" src="assets/tm-onboard.jpg" alt="TradeMind onboarding: four short steps to a working line"></div>
+    </div>
+    <div>
+      <h3>TradeMind</h3>
+      <p class="what">An electrician talks a job in from the van; the certificate drafts itself and is held until the customer pays.</p>
+      <dl><dt>Built with</dt><dd>Expo, Supabase, ElevenLabs Scribe Realtime, Claude, Stripe Connect</dd><dt>Detail</dt><dd>One amber, used only for the thing to press</dd></dl>
+    </div>
+  </article>
+
+  <p class="self">This page is hand-built, no framework. The orb at the top is drawn from the five numbers beside it. <a href="https://github.com/mrshippers/portfolio">Read the source</a>.</p>
 </section>
 
-<footer>
-  <div class="wrap">
-    <p class="kicker">currently: strydeos + the studio <span class="dot">·</span> open to applied ai roles</p>
-    <p class="big">If you want the receipts behind any of this,
-      <a href="mailto:jamal@strydeos.com">ask for them</a>.</p>
-    <div class="foot-links">
-      <a href="https://github.com/mrshippers">github</a>
-      <a href="https://www.linkedin.com/in/joaphysio">linkedin</a>
-      <a href="https://strydeos.com">strydeos</a>
-      <a href="https://shippersstudio.io">shippers studio</a>
-    </div>
-    <p class="colophon">london · hand-built, no framework · type: fraunces / hanken grotesk / jetbrains mono</p>
+<section class="contact">
+  <div>
+    <h2><a href="mailto:jamal@strydeos.com">jamal@strydeos.com</a></h2>
+    <p>Open to applied AI and frontend engineering roles in London or remote.</p>
   </div>
-</footer>
+  <div class="links">
+    <a href="https://github.com/mrshippers">github.com/mrshippers</a>
+    <a href="https://www.linkedin.com/in/joaphysio">linkedin.com/in/joaphysio</a>
+  </div>
+</section>
+</main>
 
+<footer class="wrap"><span>London, 2026</span><span>Hanken Grotesk, Fraunces, JetBrains Mono</span></footer>
+
+<script>
+(() => {
+  const RM = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const COUNTS = [300, 579, 535, 835, 500];
+  const TOTAL = COUNTS.reduce((a, b) => a + b, 0);
+  // cool aperture ramp from the Shippers mark, outer to inner
+  const RAMP = ['#5f7aab', '#6a5bd0', '#3f62e0', '#4d8dff', '#7fb0ff'];
+
+  function rand(seed) { return () => (seed = (seed * 16807) % 2147483647) / 2147483647; }
+
+  /* hero orb: five sectors of an aperture ring, one per receipt */
+  const cv = document.getElementById('orb');
+  const ctx = cv.getContext('2d');
+  const R = rand(7);
+  const pts = [];
+  let start = 0;
+  const GAP = 0.1;
+  COUNTS.forEach((n, k) => {
+    const span = (n / TOTAL) * (Math.PI * 2 - GAP * 5);
+    for (let i = 0; i < n; i++) {
+      const a = start + R() * span;
+      const band = Math.pow(R(), 0.7);
+      pts.push({ k, a, r: 0.52 + band * 0.44, z: R() * 2 - 1, s: 1 + R() * 1.9, w: R() * 6.28, c: RAMP[Math.min(4, Math.floor((1 - band) * 5))] });
+    }
+    start += span + GAP;
+  });
+  let active = -1, glow = [0, 0, 0, 0, 0], W = 0, H = 0, dpr = 1, mx = 0, my = 0, visible = true;
+  function size() {
+    dpr = Math.min(2, devicePixelRatio || 1);
+    const b = cv.getBoundingClientRect(); W = b.width; H = b.height;
+    cv.width = W * dpr; cv.height = H * dpr; ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+  }
+  function draw(t) {
+    ctx.clearRect(0, 0, W, H);
+    const cx = W / 2 + mx * 14, cy = H / 2 + my * 14, rad = W * 0.46, rot = t * 0.00004;
+    for (let k = 0; k < 5; k++) glow[k] += ((active === k ? 1 : 0) - glow[k]) * 0.2;
+    // lens
+    ctx.beginPath(); ctx.arc(cx, cy, rad * 0.47, 0, 6.283);
+    ctx.strokeStyle = 'rgba(77,141,255,.45)'; ctx.lineWidth = 1; ctx.stroke();
+    for (const p of pts) {
+      const breathe = 1 + Math.sin(t * 0.0006 + p.w) * 0.012;
+      const a = p.a + rot * (1 + p.z * 0.15);
+      const x = cx + Math.cos(a) * p.r * rad * breathe;
+      const y = cy + Math.sin(a) * p.r * rad * breathe * 0.98;
+      const g = glow[p.k], dim = active >= 0 && active !== p.k ? 0.12 : 1;
+      ctx.globalAlpha = Math.min(1, (0.5 + (p.z + 1) * 0.24) * dim + g * 0.5);
+      ctx.fillStyle = g > 0.3 ? '#cdb76e' : p.c;
+      const s = p.s * (1 + g);
+      ctx.fillRect(x - s / 2, y - s / 2, s, s);
+    }
+    ctx.globalAlpha = 1;
+  }
+  let raf;
+  function loop(t) { draw(t); if (!RM && visible) raf = requestAnimationFrame(loop); }
+  size(); addEventListener('resize', () => { size(); if (RM) draw(0); });
+  new IntersectionObserver(([e]) => { visible = e.isIntersecting; if (visible && !RM) { cancelAnimationFrame(raf); raf = requestAnimationFrame(loop); } }).observe(cv);
+  if (RM) draw(0); else raf = requestAnimationFrame(loop);
+  addEventListener('pointermove', e => { mx = e.clientX / innerWidth - 0.5; my = e.clientY / innerHeight - 0.5; }, { passive: true });
+
+  const legend = [...document.querySelectorAll('.legend button')];
+  const set = k => { active = k; legend.forEach((b, i) => b.classList.toggle('on', i === k)); if (RM) { glow = glow.map((_, i) => i === k ? 1 : 0); draw(0); } };
+  legend.forEach((b, i) => {
+    b.addEventListener('pointerenter', () => set(i));
+    b.addEventListener('focus', () => set(i));
+    b.addEventListener('click', () => set(active === i ? -1 : i));
+  });
+  document.querySelector('.legend').addEventListener('pointerleave', () => set(-1));
+
+  /* product rows: the hero ring in miniature, with that product's slice lit */
+  document.querySelectorAll('.proj').forEach(row => {
+    const c = row.querySelector('canvas'), x = c.getContext('2d'), k = +row.dataset.k;
+    const sub = pts.filter((_, i) => i % 3 === 0);
+    let spin = 0, on = false;
+    function d() {
+      const b = c.getBoundingClientRect(), q = Math.min(2, devicePixelRatio || 1);
+      if (c.width !== b.width * q) { c.width = b.width * q; c.height = b.height * q; }
+      x.setTransform(q, 0, 0, q, 0, 0); x.clearRect(0, 0, b.width, b.height);
+      const m = b.width / 2;
+      for (const p of sub) {
+        const lit = p.k === k;
+        x.globalAlpha = lit ? 1 : (on ? 0.18 : 0.32);
+        x.fillStyle = lit ? '#cdb76e' : p.c;
+        const sz = lit ? 1.7 : 1.1;
+        x.fillRect(m + Math.cos(p.a + spin) * p.r * m * 0.98 - sz / 2, m + Math.sin(p.a + spin) * p.r * m * 0.98 - sz / 2, sz, sz);
+      }
+      x.globalAlpha = 1;
+      x.beginPath(); x.arc(m, m, m * 0.46, 0, 6.283); x.strokeStyle = 'rgba(77,141,255,.5)'; x.lineWidth = 1; x.stroke();
+      if (on && !RM) { spin += 0.006; requestAnimationFrame(d); }
+    }
+    row.addEventListener('pointerenter', () => { on = true; d(); });
+    row.addEventListener('pointerleave', () => { on = false; d(); });
+    d();
+  });
+
+  /* tabs */
+  const tabs = [...document.querySelectorAll('[role=tab]')], bar = document.querySelector('.tabs');
+  function show(id, focus) {
+    tabs.forEach(t => {
+      const on = t.getAttribute('aria-controls') === id;
+      t.setAttribute('aria-selected', on); t.tabIndex = on ? 0 : -1;
+      const p = document.getElementById(t.getAttribute('aria-controls'));
+      p.hidden = !on; p.classList.toggle('on', on);
+      if (on && focus) t.focus();
+    });
+    bar.dataset.on = id;
+    document.querySelectorAll('#craft video').forEach(v => id === 'craft' ? v.play().catch(() => {}) : v.pause());
+    history.replaceState(null, '', id === 'craft' ? '#craft' : location.pathname);
+  }
+  tabs.forEach((t, i) => {
+    t.addEventListener('click', () => show(t.getAttribute('aria-controls')));
+    t.addEventListener('keydown', e => {
+      if (e.key === 'ArrowRight' || e.key === 'ArrowLeft') { e.preventDefault(); show(tabs[(i + 1) % 2].getAttribute('aria-controls'), true); }
+    });
+  });
+  if (location.hash === '#craft') show('craft');
+  addEventListener('hashchange', () => show(location.hash === '#craft' ? 'craft' : 'work'));
+  if (RM) document.querySelectorAll('#craft video').forEach(v => v.removeAttribute('loop'));
+
+  /* swap a recording for the live site, in place */
+  document.querySelectorAll('[data-live]').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const stage = btn.closest('.frame').querySelector('.stage');
+      if (stage.querySelector('iframe')) {
+        stage.querySelector('iframe').remove(); stage.firstElementChild.hidden = false; btn.textContent = 'Open live here'; return;
+      }
+      const f = document.createElement('iframe');
+      f.src = btn.dataset.live; f.title = 'Live: ' + btn.dataset.live; f.loading = 'lazy';
+      f.allow = 'fullscreen; accelerometer; gyroscope';
+      stage.firstElementChild.hidden = true; stage.firstElementChild.pause?.();
+      stage.appendChild(f); btn.textContent = 'Back to recording';
+    });
+  });
+})();
+</script>
 </body>
 </html>
