@@ -199,13 +199,13 @@ footer{padding:28px 0 48px;color:var(--mute);font-size:13px;display:flex;justify
       <h1>Applied AI<br>engineer.<em>Chartered physio, still practising.</em></h1>
       <p class="lede">I build production web apps in <b>React and TypeScript</b>, and the voice agents and evaluation gates behind them. <b>StrydeOS</b> is live in two UK clinics; I run one of them.</p>
       <div class="legend" role="group" aria-label="What the orb is made of">
-        <button data-k="0"><span class="num">300</span><span>simulated callers per Ava release</span></button>
+        <button data-k="0"><span class="num">504</span><span>simulated calls gate each Ava release</span></button>
         <button data-k="1"><span class="num">579</span><span>patients scored by Pulse</span></button>
         <button data-k="2"><span class="num">535</span><span>tests behind the Driiva cutover</span></button>
         <button data-k="3"><span class="num">835</span><span>peoples mapped in 3D</span></button>
         <button data-k="4"><span class="num">500</span><span>Evidence training examples</span></button>
       </div>
-      <p class="orb-note">The orb is <span class="num">2,749</span> points, one per number above. Point at one.</p>
+      <p class="orb-note">The orb is <span class="num">2,953</span> points, one per number above. Point at one.</p>
     </div>
   </section>
 </div>
@@ -233,9 +233,9 @@ footer{padding:28px 0 48px;color:var(--mute);font-size:13px;display:flex;justify
         <p>An operating system for UK physiotherapy clinics: a voice agent, clinical and operational intelligence over the practice-management system, and an evidence layer, in one multi-tenant product. I own engineering, product, infrastructure, security and GDPR.</p>
         <ul>
           <li><b>Ava, the voice agent.</b> Twilio into ElevenLabs Conversational AI running Claude, with webhook tools into a TypeScript booking layer that writes to Cliniko and WriteUpp.</li>
-          <li><b>Pulse.</b> Scores 579 patient records at the pilot clinic into lifecycle cohorts with a risk score each, and feeds a re-engagement queue.</li>
+          <li><b>Pulse.</b> Scores 579 patient records at the pilot clinic into lifecycle cohorts with a risk score each, and runs re-engagement on each patient's preferred channel, measured against a randomised holdout.</li>
           <li><b>Evidence.</b> On-device RAG over open-weight models: Qwen, and a Gemma I distilled and fine-tuned for clinical reasoning. Multi-turn answers keep their sources; citations are built in code, never by the model.</li>
-          <li><b>Release gating.</b> 300+ simulated-caller scenarios before each release. Below a 95% pass rate, or with any P0 failure, nothing ships.</li>
+          <li><b>Release gating.</b> A 504-scenario simulated-caller harness runs before each release. Below a 95% pass rate, or with any P0 failure, nothing ships.</li>
           <li><b>Frontend.</b> Next.js, React and TypeScript on a typed token layer, so every surface retints from one palette; WCAG contrast audited across nine routes in both themes.</li>
         </ul>
       </article>
@@ -252,8 +252,12 @@ footer{padding:28px 0 48px;color:var(--mute);font-size:13px;display:flex;justify
           <p>Grew to four clinicians with year-on-year revenue growth; 150+ five-star reviews. Led AI adoption across the practice, cutting clinician admin by roughly 40%.</p></div>
         <div><div class="role-head"><h3>Bupa <span>remote MSK triage physiotherapist</span></h3><span class="when">2025 to now</span></div>
           <p>Triage and caseload management for national insurer services, inside Meddbase and Citrix. Entered Bupa Accelerate 2026, the internal AI hackathon.</p></div>
-        <div><div class="role-head"><h3>CodeVerse, then Connect Health</h3><span class="when">2018 to 2023</span></div>
-          <p>Placed technologists from under-represented communities at Spotify, Sky and Accenture. Before that, graduate to senior physiotherapist in 18 months at the UK's largest integrated MSK provider.</p></div>
+        <div><div class="role-head"><h3>Square Health <span>remote MSK physiotherapist</span></h3><span class="when">2023 to 2025</span></div>
+          <p>Remote MSK caseloads across several insurer brands as an independent supplier: rehabilitation and patient education by video.</p></div>
+        <div><div class="role-head"><h3>CodeVerse <span>business development manager</span></h3><span class="when">2022 to 2023</span></div>
+          <p>Closed enterprise accounts in banking, media and consulting, placing technologists from under-represented communities at Spotify, Sky and Accenture. Ran the technical demos, including live prototypes in Python and HTML.</p></div>
+        <div><div class="role-head"><h3>Hills Physical Developments, then Connect Health</h3><span class="when">2018 to 2021</span></div>
+          <p>Private MSK practice alongside S&amp;C coaches. Before that, graduate to senior physiotherapist in 18 months at the UK's largest integrated MSK provider.</p></div>
       </div>
     </div>
   </div>
@@ -282,10 +286,11 @@ footer{padding:28px 0 48px;color:var(--mute);font-size:13px;display:flex;justify
   </div>
 
   <div class="sec edu">
-    <h2>Education</h2>
+    <h2>Education and volunteering</h2>
     <div>
       <p>BSc (Hons) Physiotherapy, 2:1, University of East London, 2018.</p>
       <p>HCPC registered. Member of the Chartered Society of Physiotherapy.</p>
+      <p>Volunteer, medical team, IAAF World Athletics Championships, London 2017.</p>
     </div>
   </div>
 
@@ -386,7 +391,7 @@ footer{padding:28px 0 48px;color:var(--mute);font-size:13px;display:flex;justify
 <script>
 (() => {
   const RM = matchMedia('(prefers-reduced-motion: reduce)').matches;
-  const COUNTS = [300, 579, 535, 835, 500];
+  const COUNTS = [504, 579, 535, 835, 500];
   const TOTAL = COUNTS.reduce((a, b) => a + b, 0);
   // cool aperture ramp from the Shippers mark, outer to inner
   const RAMP = ['#5f7aab', '#6a5bd0', '#3f62e0', '#4d8dff', '#7fb0ff'];
