@@ -1,0 +1,486 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>the week, resolved 2.3</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@700;800&family=Hanken+Grotesk:wght@300;500&family=JetBrains+Mono:wght@400;500&display=swap">
+<style>
+/* layout: the week drawn from git as one tape (a lane per repo, a mark per commit); every act hangs off its own stretch of that tape */
+:root{
+  color-scheme:dark;
+  --void:#04060c; --lift:#0a0e17; --ink:#eef3fa; --text:#bcc5d3; --dim:#8791a3;
+  --line:rgba(238,243,250,.13); --gold:#C8A96E; --blue:#6f9dff; --live:#2FF3C4;
+  --display:'Plus Jakarta Sans','Hanken Grotesk','Segoe UI',Helvetica,Arial,sans-serif;
+  --body:'Hanken Grotesk','Segoe UI',Helvetica,Arial,sans-serif;
+  --mono:'JetBrains Mono',ui-monospace,Menlo,Consolas,monospace;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--void);color:var(--text);font-family:var(--body);font-weight:300;font-size:17px;line-height:1.6;
+  padding-inline:clamp(16px,4vw,56px);-webkit-font-smoothing:antialiased;overflow-x:hidden}
+body::before{content:"";position:fixed;inset:0;pointer-events:none;z-index:0;
+  background:radial-gradient(70vw 46vh at 50% -8vh,rgba(111,157,255,.17),transparent 70%),radial-gradient(40vw 30vh at 50% -6vh,rgba(200,169,110,.10),transparent 70%)}
+body::after{content:"";position:fixed;inset:0;pointer-events:none;z-index:0;opacity:.10;mix-blend-mode:overlay;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='180' height='180' filter='url(%23n)'/%3E%3C/svg%3E")}
+.page{position:relative;z-index:1;max-width:1320px;margin:0 auto;padding-block:20px 96px;display:flex;flex-direction:column;gap:clamp(88px,13vw,176px)}
+a{color:var(--blue)}
+:focus-visible{outline:2px solid var(--blue);outline-offset:3px}
+.mono{font-family:var(--mono);font-weight:400;font-variant-numeric:tabular-nums}
+
+.top{display:flex;justify-content:space-between;align-items:baseline;gap:16px;flex-wrap:wrap;font-size:14px;color:var(--dim)}
+.wm{font-family:var(--display);font-weight:800;letter-spacing:-.035em;font-size:20px;color:var(--ink)}
+.wm b,.d b{color:var(--gold)}
+.wm span{font-family:var(--mono);font-weight:400;font-size:12px;letter-spacing:0;color:var(--gold);margin-left:10px}
+.wm .eq{display:inline-flex;align-items:flex-end;gap:2px;height:17px;margin:0 9px 0 0;vertical-align:-2px}
+.wm .eq i{width:2px;border-radius:2px;display:block;height:100%;transform-origin:bottom;animation:eqb 1.4s cubic-bezier(.4,0,.2,1) infinite}
+@keyframes eqb{0%,100%{transform:scaleY(.24)}50%{transform:scaleY(1)}}
+#gl{position:fixed;inset:0;width:100%;height:100%;display:block;z-index:-1;pointer-events:none;opacity:0;transition:opacity 1.8s ease}
+#gl.up{opacity:.85}
+
+.hero{display:flex;flex-direction:column;gap:clamp(24px,3.2vw,44px);margin-top:calc(clamp(88px,13vw,176px) * -1 + clamp(28px,5vw,72px))}
+.d{font-family:var(--display);font-weight:800;letter-spacing:-.055em;line-height:.9;color:var(--ink);margin:0;text-wrap:balance}
+h1.d{font-size:clamp(2.5rem,9.4vw,8.6rem);text-align:center}
+h2.d{font-size:clamp(2.1rem,5.6vw,4.7rem);max-width:17ch;letter-spacing:-.045em;line-height:.94}
+.lede{max-width:62ch;margin:0;font-size:clamp(17px,1.5vw,20px);color:var(--text)}
+.lede strong{font-weight:500;color:var(--ink)}
+.hero .lede{align-self:center;text-align:left}
+
+.tapebox{overflow-x:auto;overscroll-behavior-x:contain;border-top:1px solid var(--line);border-bottom:1px solid var(--line);padding-block:14px 6px}
+.tape{display:block;min-width:740px;width:100%}
+.tape text{font-family:var(--body);font-weight:300;fill:var(--dim);font-size:13px}
+.tape .nm{fill:var(--ink);font-size:14px}
+.tape .ct,.tape .dn{font-family:var(--mono);font-size:12px}
+.tape .dn{fill:var(--ink);font-size:13px;font-weight:500}
+.tape .tk{fill:var(--ink);animation:rise .5s ease-out backwards}
+.tape .bot{fill:none;stroke:var(--dim);stroke-width:1}
+.tape .hit{fill:var(--gold)}
+.tape .bot.hit{fill:none;stroke:var(--gold)}
+.tape .sil{stroke:var(--line);stroke-dasharray:2 5}
+.tape .day{stroke:var(--line)}
+@keyframes rise{from{opacity:.15}}
+.readout{min-height:2.9em;font-size:14px;color:var(--dim);display:flex;gap:14px;flex-wrap:wrap;align-items:baseline;justify-content:space-between}
+.readout b{font-family:var(--mono);font-weight:500;color:var(--gold)}
+.readout span{color:var(--text);min-width:0}
+.key{display:flex;gap:22px;flex-wrap:wrap;font-size:13px}
+.key i{display:inline-block;vertical-align:middle;margin-right:7px}
+.key .k1{width:7px;height:7px;background:var(--ink)}
+.key .k2{width:7px;height:7px;border:1px solid var(--dim)}
+.key .k3{width:16px;border-top:1px dashed var(--dim)}
+
+.act{display:grid;grid-template-columns:minmax(0,7fr) minmax(0,5fr);gap:clamp(24px,3vw,40px) clamp(28px,5vw,72px);align-items:start}
+.act>.strip,.act>.where{grid-column:1/-1}
+.strip{border-top:1px solid var(--line);padding-top:10px}
+.strip svg{display:block;width:100%;height:44px}
+.strip .tk{stroke:var(--ink);opacity:.22;stroke-width:1}
+.strip .hit{stroke:var(--gold);opacity:1;stroke-width:1.6}
+.where{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;font-size:14px;color:var(--dim);margin-top:-14px}
+.where b{font-weight:500;color:var(--ink)}
+.txt{display:flex;flex-direction:column;gap:26px;min-width:0}
+.fig{min-width:0;display:flex;flex-direction:column;gap:14px}
+@media (min-width:821px){.act>.fig{position:sticky;top:28px}}
+.fig svg{display:block;width:100%;height:auto}
+.fig img{display:block;max-width:100%;height:auto;border:1px solid var(--line)}
+.fig figcaption,.cap{font-size:14px;color:var(--dim);margin:0}
+.cap b{font-weight:500;color:var(--ink)}
+figure{margin:0}
+.fig text{font-family:var(--body);font-weight:300;fill:var(--text);font-size:15px}
+.fig .m{font-family:var(--mono);font-size:13px;fill:var(--dim)}
+.fig .h{fill:var(--ink);font-weight:500}
+.fig .g{fill:var(--gold)}
+.fig .big{font-family:var(--display);font-weight:800;font-size:40px;letter-spacing:-.04em}
+.fig .s-ink{stroke:var(--ink);fill:none;stroke-width:1.5}.fig .s-dim{stroke:var(--dim);fill:none}.fig .s-gold{stroke:var(--gold);fill:none;stroke-width:1.5}
+.fig .f-ink{fill:var(--ink)}.fig .f-gold{fill:var(--gold)}.fig .w3{stroke-width:3}.fig .dash{stroke-dasharray:4 5}
+.rcp{display:grid;grid-template-columns:auto minmax(0,1fr);margin:0;border-top:1px solid var(--line)}
+.rcp dt,.rcp dd{margin:0;padding:11px 0;border-bottom:1px solid var(--line);font-size:15px;line-height:1.5}
+.rcp dt{font-family:var(--mono);font-size:13px;color:var(--gold);padding-right:22px;padding-top:13px;white-space:nowrap}
+.rcp dd{color:var(--text)}
+.verdict{display:flex;gap:12px;align-items:flex-start;font-size:15px;color:var(--ink);font-weight:500}
+.verdict i{flex:none;width:13px;height:13px;margin-top:6px;border:1.5px solid var(--live)}
+.verdict.prod i{background:var(--live)}
+.verdict.code i{background:linear-gradient(90deg,var(--live) 50%,transparent 50%)}
+.verdict.claim i{border-color:var(--gold);border-style:dashed}
+.verdict span{font-weight:300;color:var(--text)}
+
+.wrong{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,7fr);gap:clamp(24px,5vw,72px);align-items:start;border-top:1px solid var(--line);padding-top:28px}
+.wrong .big{font-family:var(--display);font-weight:800;letter-spacing:-.06em;line-height:.8;color:var(--gold);font-size:clamp(7rem,31vw,27rem);margin:0}
+.wrong .big small{display:block;font-family:var(--body);font-weight:300;letter-spacing:0;line-height:1.3;font-size:16px;color:var(--dim);margin-top:18px}
+.totals{width:100%;border-collapse:collapse;font-size:16px}
+.totals td{padding:12px 0;border-bottom:1px solid var(--line);vertical-align:baseline}
+.totals td:last-child{text-align:right;font-family:var(--mono);font-weight:500;color:var(--ink);white-space:nowrap;padding-left:20px}
+.totals small{display:block;color:var(--dim);font-size:14px}
+.fine{max-width:76ch;font-size:14px;color:var(--dim);margin:0}
+.close{display:flex;flex-direction:column;gap:clamp(36px,5vw,64px)}
+
+@media (max-width:820px){
+  #gl.up{opacity:.45}
+  .act,.wrong{grid-template-columns:minmax(0,1fr)}
+  .where{margin-top:-8px}
+  body{font-size:16px}
+}
+@media (prefers-reduced-motion:reduce){.tape .tk,.wm .eq i{animation:none}html{scroll-behavior:auto}#gl{transition:none}}
+</style>
+
+</head><body>
+<div class="page">
+<canvas id="gl" aria-hidden="true"></canvas>
+<header class="top">
+  <div class="wm"><span class="eq" id="eq1" aria-hidden="true"></span>shippers<b>.</b><span>studio 2.3</span></div>
+  <div>5 october 17:00 to 17 october 2026, read from git on origin/main</div>
+</header>
+
+<section class="hero" id="hero">
+  <h1 class="d">the week, resolved<b>.</b></h1>
+  <p class="lede">one hundred and eighty commits in twelve days, and <strong>nothing at all on sunday or monday</strong>. strydeos took 116 of them. wednesday the fourteenth, the second tallest day, is mostly the voice agent and the simulated callers that grade it, working through a safety rule until it held. injury time arrived late, sixteen pull requests in under three days, and the studio site moved only by its bot. the acts further down are six pieces of that work with a mechanism worth keeping, each pinned to its own marks on the tape. the close opens on what the last edition got wrong.</p>
+
+  <div>
+    <div class="tapebox" tabindex="0" role="img" aria-label="every commit of the week as one mark, by repository and time. arrow keys step through commits." id="tapebox"><svg class="tape" id="tape"></svg></div>
+    <div class="readout" id="readout"><span>point at a mark, or focus the tape and use the arrow keys, to read the commit under it</span>
+      <div class="key"><span><i class="k1"></i>one commit, stacked by the hour it landed</span><span><i class="k2"></i>the studio bot</span><span><i class="k3"></i>nothing landed all week</span></div></div>
+  </div>
+</section>
+
+<section class="act" id="flip">
+  <div class="strip" data-shas="81e4377c,7bbe7208,fbc9787d,7c4cd2f0,4f12c17a,4b27d265"></div>
+  <div class="where"><span><b>strydeos</b>, the voice receptionist's red-flag rules</span><span>mon 5, then wed 14 to thu 15 october, <span data-n></span> commits lit</span></div>
+  <div class="txt">
+    <h2 class="d">the ban that kept the words in<b>.</b></h2>
+    <p class="lede">on 5 october the receptionist learned that a caller describing cauda equina in their own words gets "call 999 or get to a&amp;e now". six everyday phrasings joined the emergency list. nine days later the rule was reversed: weak or tingly legs are often ordinary back pain, and the decision belongs to a clinician. the case got a tier of its own, a clinician rings back and nothing is booked. then ten runs per scenario showed her adding "if it gets worse, call 111 or a&amp;e" anyway. a sentence forbidding that did not stop it. what the ledger credits is writing the exact line she should say at that moment, and taking the banned words out of the rule entirely.</p>
+    <dl class="rcp">
+      <dt>81e4377c</dt><dd>six regexes added to the 999 list, with a test for each phrasing. the changelog still carries this line as policy</dd>
+      <dt>7bbe7208</dt><dd>those patterns move to a callback tier with its own message, graph node and alert. a description that also matches chest pain still goes to 999</dd>
+      <dt>fbc9787d</dt><dd>one prompt sentence: add no safety-net advice of your own. the message records 4 of 10 and 7 of 10 runs still adding it</dd>
+      <dt>7c4cd2f0</dt><dd>the sentence becomes a script for the close, and a test asserts the rule contains neither "a&amp;e" nor "111"</dd>
+    </dl>
+    <p class="verdict code"><i></i><span><b style="font-weight:500;color:var(--ink)">read in code on origin/main.</b> "ten in a row" after the script is claimed only: no run count is recorded in the repo. the model moved to a larger one a minute after the script landed (295d3735), so the repo cannot say which of the two made it hold.</span></p>
+  </div>
+  <figure class="fig">
+    <svg viewBox="0 0 520 330" role="img" aria-label="two rows of ten runs after the ban, four and seven of them still adding a and e advice, then the scripted close with no recorded count">
+      <text class="h" x="0" y="18">after the ban, runs that still said a&amp;e</text>
+      <g transform="translate(0,40)">
+        <circle class="f-gold" cx="12" cy="12" r="9"/><circle class="f-gold" cx="44" cy="12" r="9"/><circle class="f-gold" cx="76" cy="12" r="9"/><circle class="f-gold" cx="108" cy="12" r="9"/>
+        <circle class="s-dim" cx="140" cy="12" r="9"/><circle class="s-dim" cx="172" cy="12" r="9"/><circle class="s-dim" cx="204" cy="12" r="9"/><circle class="s-dim" cx="236" cy="12" r="9"/><circle class="s-dim" cx="268" cy="12" r="9"/><circle class="s-dim" cx="300" cy="12" r="9"/>
+        <text class="m" x="330" y="17">scenario a, 4 of 10</text>
+      </g>
+      <g transform="translate(0,82)">
+        <circle class="f-gold" cx="12" cy="12" r="9"/><circle class="f-gold" cx="44" cy="12" r="9"/><circle class="f-gold" cx="76" cy="12" r="9"/><circle class="f-gold" cx="108" cy="12" r="9"/><circle class="f-gold" cx="140" cy="12" r="9"/><circle class="f-gold" cx="172" cy="12" r="9"/><circle class="f-gold" cx="204" cy="12" r="9"/>
+        <circle class="s-dim" cx="236" cy="12" r="9"/><circle class="s-dim" cx="268" cy="12" r="9"/><circle class="s-dim" cx="300" cy="12" r="9"/>
+        <text class="m" x="330" y="17">scenario b, 7 of 10</text>
+      </g>
+      <line class="s-dim" x1="0" y1="146" x2="520" y2="146"/>
+      <text class="h" x="0" y="182">after the script</text>
+      <g transform="translate(0,202)">
+        <circle class="s-dim dash" cx="12" cy="12" r="9"/><circle class="s-dim dash" cx="44" cy="12" r="9"/><circle class="s-dim dash" cx="76" cy="12" r="9"/><circle class="s-dim dash" cx="108" cy="12" r="9"/><circle class="s-dim dash" cx="140" cy="12" r="9"/><circle class="s-dim dash" cx="172" cy="12" r="9"/><circle class="s-dim dash" cx="204" cy="12" r="9"/><circle class="s-dim dash" cx="236" cy="12" r="9"/><circle class="s-dim dash" cx="268" cy="12" r="9"/><circle class="s-dim dash" cx="300" cy="12" r="9"/>
+        <text class="m" x="330" y="17">no count in the repo</text>
+      </g>
+      <text x="0" y="276">the line she says now, once she has a number:</text>
+      <text class="g" x="0" y="304">"a clinician will ring you back as soon as possible."</text>
+    </svg>
+    <figcaption>filled gold is a run that added a&amp;e or 111 advice, hollow is a run that did not, dashed is a run nobody recorded.</figcaption>
+  </figure>
+</section>
+
+<section class="act" id="gate">
+  <div class="strip" data-shas="2ad8bae5,a66140cd,f02fa178,6cb8ccdb"></div>
+  <div class="where"><span><b>strydeos</b>, the war room gate</span><span>tue 6, wed 14 and fri 16 october, <span data-n></span> commits lit</span></div>
+  <div class="txt">
+    <h2 class="d">94.57 is not 95<b>.</b></h2>
+    <p class="lede">the war room puts the receptionist in front of hundreds of simulated callers and blocks a release on any failed top-severity scenario, or a pass rate under 95. on 6 october it was comparing a rounded figure: 854 of 903 is 94.57 percent, printed as 95, and that cleared the rate check. the same run failed on something else, so nothing got through, but the hole was real and the check is now in whole numbers. ten days later the gate moved the other way. full runs kept failing a different one or two scenarios that then passed alone, so a failed scenario is re-run twice and blocks only if it fails again.</p>
+    <dl class="rcp">
+      <dt>2ad8bae5</dt><dd>passes times 100 against gate times runs, in integers. a test pins 854 of 903 as a fail and 855 of 900 as a pass</dd>
+      <dt>a66140cd</dt><dd>the retest: two more calls per failed scenario, cleared only if every one passes. the pass rate still counts the first failure</dd>
+      <dt>f02fa178</dt><dd>a new top-severity failure: telling the caller they are booked before the booking tool has run</dd>
+      <dt>6cb8ccdb</dt><dd>the harness refuses to start if it cannot supply a value the live tools read, and a one-scenario run no longer paints the board green</dd>
+    </dl>
+    <p class="verdict code"><i></i><span><b style="font-weight:500;color:var(--ink)">read in code on origin/main.</b> the clearing path of the retest has only ever run in a unit test, by its own commit message. the odds in the drawing are worked from the code, not measured.</span></p>
+  </div>
+  <figure class="fig">
+    <svg viewBox="0 0 520 340" role="img" aria-label="a number line where 94.57 rounds up past the 95 gate, then bars showing a scenario failing three calls in ten avoids a block 49 percent of the time before the retest and 74 percent after">
+      <text class="h" x="0" y="18">the rate check before 6 october</text>
+      <line class="s-dim" x1="10" y1="70" x2="510" y2="70"/>
+      <line class="s-gold w3" x1="260" y1="44" x2="260" y2="96"/><text class="g" x="260" y="118" text-anchor="middle">gate 95</text>
+      <line class="s-ink" x1="10" y1="62" x2="10" y2="78"/><text class="m" x="10" y="118">94</text>
+      <line class="s-ink" x1="510" y1="62" x2="510" y2="78"/><text class="m" x="510" y="118" text-anchor="end">96</text>
+      <circle class="f-ink" cx="152" cy="70" r="7"/><text x="140" y="50" text-anchor="middle">94.57</text>
+      <path class="s-ink dash" d="M158 63 Q206 38 254 62"/><text class="m" x="272" y="50">rounded to 95</text>
+      <line class="s-dim" x1="0" y1="148" x2="520" y2="148"/>
+      <text class="h" x="0" y="182">a scenario that fails 3 calls in 10</text>
+      <text class="m" x="0" y="214">chance it clears the gate anyway</text>
+      <text x="0" y="252">before the retest</text>
+      <rect class="s-ink" x="170.5" y="236.5" width="245" height="22"/><rect class="f-ink" x="170" y="236" width="120" height="23"/><text class="m" x="425" y="253">49%</text>
+      <text x="0" y="300">after</text>
+      <rect class="s-ink" x="170.5" y="284.5" width="245" height="22"/><rect class="f-gold" x="170" y="284" width="181" height="23"/><text class="m" x="425" y="301">74%</text>
+    </svg>
+    <figcaption>two main calls plus two retests, the defaults in ci. that covers safety scenarios too, which cuts against the act above: judge a safety prompt by ten runs.</figcaption>
+  </figure>
+</section>
+
+<section class="act" id="unwritten">
+  <div class="strip" data-shas="68c2eb3c,d37f2980,f57e6180,7ce76648"></div>
+  <div class="where"><span><b>strydeos</b>, the owner dashboard and the booking path</span><span>tue 13 to sat 17 october, <span data-n></span> commits lit</span></div>
+  <div class="txt">
+    <h2 class="d">fields that nothing wrote<b>.</b></h2>
+    <p class="lede">the follow-up card on the owner dashboard counted events stamped as actioned by the follow-up engine. over the summer that stamp was narrowed, correctly, until one path wrote it: an owner approving a gap-fill. automatic sends never stamp it, so the card read zero beside a send ledger that was full. it now reads that ledger. the same fortnight turned up two more of the kind. a "follow-up booked" flag was written by five places, every one hard-coded to false, so a discharge rule that checked it always passed. and the marker that locks a call's outcome as booked never ran on a live call, because no tool sent the conversation id it waits for.</p>
+    <dl class="rcp">
+      <dt>68c2eb3c</dt><dd>the card drops the stamp query for the send ledger. unconfirmed after 48 hours is not counted as sent, and money shows only on high-confidence attribution</dd>
+      <dt>7ce76648</dt><dd>the follow-up flag is deleted along with its five writers, each of which set it to false</dd>
+      <dt>d37f2980</dt><dd>every booking tool now posts the conversation id. its own comment: the id "was undefined on every live call"</dd>
+      <dt>f57e6180</dt><dd>switched on, the marker failed on every call with no clinician preference: one undefined value and the database refuses the whole write. the test double now refuses it too</dd>
+    </dl>
+    <p class="verdict code"><i></i><span><b style="font-weight:500;color:var(--ink)">read in code on origin/main.</b> the live counts in the commit messages were not re-measured. one write further down the same booking path still sends the same undefined value, and its failure only reaches the console.</span></p>
+  </div>
+  <figure class="fig">
+    <svg viewBox="0 0 520 300" role="img" aria-label="three readers each joined to a field by a dashed line because nothing live wrote to it">
+      <text class="m" x="0" y="18">reads</text><text class="m" x="250" y="18">waiting on</text><text class="m" x="520" y="18" text-anchor="end">written by</text>
+      <g transform="translate(0,44)">
+        <text class="h" x="0" y="16">follow-up card</text><line class="s-dim dash" x1="130" y1="11" x2="244" y2="11"/><text x="250" y="16">the actioned stamp</text>
+        <text class="g" x="520" y="16" text-anchor="end">one manual path</text>
+        <text class="m" x="250" y="42">until 14 october</text>
+      </g>
+      <line class="s-dim" x1="0" y1="112" x2="520" y2="112"/>
+      <g transform="translate(0,130)">
+        <text class="h" x="0" y="16">discharge rule</text><line class="s-dim dash" x1="130" y1="11" x2="244" y2="11"/><text x="250" y="16">follow-up booked</text>
+        <text class="g" x="520" y="16" text-anchor="end">5, all false</text>
+        <text class="m" x="250" y="42">until 17 october</text>
+      </g>
+      <line class="s-dim" x1="0" y1="198" x2="520" y2="198"/>
+      <g transform="translate(0,216)">
+        <text class="h" x="0" y="16">booking marker</text><line class="s-dim dash" x1="130" y1="11" x2="244" y2="11"/><text x="250" y="16">conversation id</text>
+        <text class="g" x="520" y="16" text-anchor="end">no tool</text>
+        <text class="m" x="250" y="42">until 13 october</text>
+      </g>
+    </svg>
+    <figcaption>dashed is a reader joined to something nothing live was writing. each was right in its own file.</figcaption>
+  </figure>
+</section>
+
+<section class="act" id="one-rule">
+  <div class="strip" data-shas="a1cf2e25,7ce76648,449b29ae"></div>
+  <div class="where"><span><b>strydeos</b>, the patient-state contract</span><span>fri 16 and sat 17 october, <span data-n></span> commits lit</span></div>
+  <div class="txt">
+    <h2 class="d">six rulers, then one<b>.</b></h2>
+    <p class="lede">until 17 october the code had no single answer to whether a patient had drifted. the lifecycle measured each patient against their own rhythm, the dropout insight used 35 to 49 days, deep metrics a flat 30, and a classifier written three days earlier had its own order. whether someone counted as churned turned on whether the clinic had texted them in the last 60 days, so our own messaging decided their state. someone who reached six appointments and then cancelled was filed as discharged. there is now one function with eight states, first match wins, read by the board, the messaging, the metrics and the voice agent. the subject says every module. one insight still keeps its own window.</p>
+    <dl class="rcp">
+      <dt>a1cf2e25</dt><dd>a cancellation after the last visit stops an inferred discharge. the message counts 22 of 55 inferred discharges that had one</dd>
+      <dt>7ce76648</dt><dd>one classifier, 72 files. the commit says four definitions; the diff removes six places that had their own</dd>
+      <dt>449b29ae</dt><dd>the first churn row counted every starter under six visits as lost and read 93% for one month. 70 minutes later, lost means seen once or cancelled away</dd>
+    </dl>
+    <p class="verdict code"><i></i><span><b style="font-weight:500;color:var(--ink)">read in code on origin/main.</b> the clinic counts are the commit messages' own. the revenue insight that still says "due a rebook" from its own 35 to 49 day window is still there, and a quiet three-visit course reads churned on the board but finished in the owner summary.</span></p>
+  </div>
+  <figure class="fig">
+    <svg viewBox="0 0 520 320" role="img" aria-label="old thresholds scattered above a day axis, and the one rule's bands below it for a patient seen weekly">
+      <text class="h" x="0" y="18">before: each module's own line</text>
+      <line class="s-dim" x1="0" y1="120" x2="520" y2="120"/>
+      <g class="m">
+        <line class="s-ink" x1="80" y1="46" x2="80" y2="112"/><text x="84" y="56">30, flat</text>
+        <line class="s-ink" x1="93" y1="74" x2="93" y2="112"/><line class="s-ink" x1="131" y1="74" x2="131" y2="112"/><text x="135" y="84">35 to 49</text>
+        <line class="s-ink" x1="160" y1="96" x2="160" y2="112"/><text x="164" y="106">60 since our last text</text>
+        <line class="s-ink" x1="40" y1="96" x2="40" y2="112"/><text x="0" y="106">own</text>
+      </g>
+      <text class="m" x="0" y="144">0</text><text class="m" x="240" y="144">90 days</text><text class="m" x="480" y="144">180</text>
+      <text class="h" x="0" y="196">now: one rule, for someone seen weekly</text>
+      <rect class="f-ink" x="0" y="214" width="37" height="26"/>
+      <rect class="s-ink" x="38.5" y="214.5" width="81" height="25"/>
+      <rect class="f-gold" x="121" y="214" width="359" height="26"/>
+      <rect class="s-dim dash" x="481.5" y="214.5" width="38" height="25"/>
+      <text class="m" x="0" y="264">between</text><text class="m" x="44" y="284">overdue</text><text class="m" x="128" y="264">stopped, shown as churned</text><text class="m" x="520" y="284" text-anchor="end">past</text>
+      <text class="m" x="0" y="312">14, then 45, then 180 days, from patient-state.ts on main</text>
+    </svg>
+    <figcaption>the bands stretch with a person's own gap between visits; the floors are the ones drawn.</figcaption>
+  </figure>
+</section>
+
+<section class="act" id="scanner">
+  <div class="strip" data-shas="b2c1232,4eee0e2,1429a10,72c9592"></div>
+  <div class="where"><span><b>outreach</b>, the unsubscribe link and the send path</span><span>tue 6 october, <span data-n></span> commits lit</span></div>
+  <div class="txt">
+    <h2 class="d">the scanner pressed unsubscribe<b>.</b></h2>
+    <p class="lede">the unsubscribe link acted on a plain fetch, so anything that fetched it could press it, and mail scanners fetch every link in a message. two opt-outs landed 3 and 8 seconds after an open, and the click counter had scored them as clicks. the fix splits the verb: a fetch checks the signed token and shows a button, and only pressing it opts out and stamps the time. the same evening the opt-out question moved inside the one function every prospect email passes through, so a draft written before someone unsubscribed, or a duplicate row on the same address, can no longer slip past a caller that forgot to ask.</p>
+    <dl class="rcp">
+      <dt>b2c1232</dt><dd>the fetch handler is read-only, with a comment saying so. the write moved to a post on the same address, which also suits a one-click unsubscribe</dd>
+      <dt>4eee0e2</dt><dd>the confirm page used to say "will no longer receive emails" before anything had happened</dd>
+      <dt>1429a10</dt><dd>five checks inside the send function, before the provider is called. a failed lookup means not this time, never send anyway</dd>
+      <dt>72c9592</dt><dd>a hold on first emails, flipped in the database. while it is on, a held first email's later steps wait too</dd>
+    </dl>
+    <p class="verdict code"><i></i><span><b style="font-weight:500;color:var(--ink)">read in code on origin/main.</b> not exercised here: pressing a live unsubscribe is a state change. the click counter itself is untouched since july and still counts every visit to the confirm page.</span></p>
+  </div>
+  <figure class="fig">
+    <svg viewBox="0 0 520 290" role="img" aria-label="a timeline where an email is opened and two opt-outs follow within eight seconds, then the new two-step flow">
+      <text class="h" x="0" y="18">before: seconds after an open</text>
+      <line class="s-dim" x1="0" y1="66" x2="270" y2="66"/>
+      <circle class="s-ink" cx="20" cy="66" r="8"/><text class="m" x="20" y="100" text-anchor="middle">open</text>
+      <circle class="f-gold" cx="110" cy="66" r="8"/><text class="m" x="110" y="100" text-anchor="middle">+3s</text>
+      <circle class="f-gold" cx="260" cy="66" r="8"/><text class="m" x="260" y="100" text-anchor="middle">+8s</text>
+      <text x="290" y="71">opted out, logged as clicks</text>
+      <line class="s-dim" x1="0" y1="136" x2="520" y2="136"/>
+      <text class="h" x="0" y="172">now</text>
+      <rect class="s-ink" x="0.5" y="192.5" width="200" height="40"/><text x="16" y="217">fetch: show a button</text>
+      <line class="s-gold w3" x1="210" y1="212" x2="300" y2="212"/><text class="g" x="255" y="202" text-anchor="middle">a person</text>
+      <rect class="f-gold" x="310" y="192" width="210" height="41"/><text x="326" y="217" style="fill:var(--void)">press: opt out, stamp</text>
+      <text class="m" x="0" y="270">a scanner can do the first step only</text>
+    </svg>
+    <figcaption>gold is an opt-out. the timings are the ledger's own record, not re-read from events.</figcaption>
+  </figure>
+</section>
+
+<section class="act" id="coinflip">
+  <div class="strip" data-shas="04693b9,7b9ca1f"></div>
+  <div class="where"><span><b>injury time</b>, the matchday opposition card</span><span>wed 14 to sat 17 october, <span data-n></span> commits lit</span></div>
+  <div class="txt">
+    <h2 class="d">a coin flip, worked out<b>.</b></h2>
+    <p class="lede">the opposition card is a small, standard football model rather than a feeling. attack and defence come from goals per game against the league average, pulled toward average by three phantom games so a short season is not over-read. home advantage is measured from the league's own home and away points, square-rooted and clamped. two poisson scorelines give the win, draw and loss chances and the likeliest scores. a language model then writes the brief from those numbers, and that is where one figure drifts: the live brief pairs the raw conceded rate with the shrunk percentage, so it says 32 percent fewer where the raw rate is 38.</p>
+    <dl class="rcp">
+      <dt>04693b9</dt><dd>a pure model file: three prior games, home edge clamped to 1 to 1.4, a ten by ten score grid renormalised</dd>
+      <dt>04693b9</dt><dd>its test runs on the real table but pins only bounds and orderings, so a wrong coefficient that keeps the order would pass</dd>
+      <dt>7b9ca1f</dt><dd>the same days moved health data rules into the database. its own build record says those migrations are applied only on a local stack</dd>
+    </dl>
+    <p class="verdict prod"><i></i><span><b style="font-weight:500;color:var(--ink)">seen in production.</b> injury-time.vercel.app/team, fetched 17 october, prints the odds drawn here; 1.53 each way reproduces from the committed table. nothing checks the brief's arithmetic against the numbers it was handed.</span></p>
+  </div>
+  <figure class="fig">
+    <svg viewBox="0 0 520 300" role="img" aria-label="win 38 percent, draw 24, lose 38, expected goals 1.53 each way, and the brief's 32 percent beside the raw 38">
+      <text class="h" x="0" y="18">the card as served</text>
+      <rect class="f-ink" x="0" y="40" width="197" height="34"/><rect class="s-ink" x="199.5" y="40.5" width="123" height="33"/><rect class="f-gold" x="324" y="40" width="196" height="34"/>
+      <text class="m" x="0" y="96">win 38%</text><text class="m" x="261" y="96" text-anchor="middle">draw 24%</text><text class="m" x="520" y="96" text-anchor="end">lose 38%</text>
+      <text class="m" x="0" y="142">goals we should score</text><text class="h big" x="0" y="184">1.53</text>
+      <text class="m" x="520" y="142" text-anchor="end">goals they should score</text><text class="h big" x="520" y="184" text-anchor="end">1.53</text>
+      <line class="s-dim" x1="0" y1="212" x2="520" y2="212"/>
+      <text x="0" y="244">the brief: concedes 1.2 a game,</text>
+      <text class="g" x="0" y="272">"32% fewer than the league average"</text>
+      <text class="m" x="520" y="272" text-anchor="end">raw: 38%</text>
+    </svg>
+    <figcaption>filled is a win, hollow a draw, gold a loss. symmetric looks like a bug and is not: it reproduces from the data.</figcaption>
+  </figure>
+</section>
+
+
+<section class="close" id="close">
+  <h2 class="d" style="max-width:none">still wrong<b>.</b></h2>
+  <div class="wrong">
+    <p class="big">13<small>commits the last edition missed, found by recounting the same window on fresh clones</small></p>
+    <div class="txt">
+      <p class="lede">2.2 printed 252. counted again on clones fetched from each remote, the same window gives 265. nine of the thirteen sat in a lane that read a local copy with no remote, so nothing pushed elsewhere ever reached it. the other four carry 4 october dates and may have landed after that run. the fix is in how this edition counts: every lane now reads a bare clone fetched for the run, and shas the previous edition counted are dropped by prefix.</p>
+      <table class="totals">
+        <tr><td>the drift comparison tested through a stub<small>carried forward. a new test covers the message written after the comparison, not the comparison</small></td><td>untested</td></tr>
+        <tr><td>the seat price the refusal quoted<small>no longer true. fixed in f803a5c2, 22 minutes into this window. one stripe product description still says 49</small></td><td>fixed</td></tr>
+      </table>
+    </div>
+  </div>
+  <table class="totals" style="max-width:760px">
+    <tr><td>commits by a person, on origin's default branch, merges left out</td><td>180</td></tr>
+    <tr><td>of those, in strydeos</td><td>116</td></tr>
+    <tr><td>the busiest day, tuesday 6 october</td><td>48</td></tr>
+    <tr><td>days with nothing from a person<small>sunday 11 and monday 12 october</small></td><td>2</td></tr>
+    <tr><td>repositories that moved</td><td>9 of 15</td></tr>
+    <tr><td>pull requests merged by squash</td><td>50</td></tr>
+    <tr><td>commits by the studio bot, left out of the 180<small>each one refreshes the client portal's access registry, two lines at a time</small></td><td>23</td></tr>
+  </table>
+  <p class="fine">every figure came out of git log across fifteen repositories, 5 october 17:00 to 17 october 02:52, counted on origin's default branch in clones fetched for this edition, so an evicted icloud checkout cannot hang the count or hide a merge. merges are left out, and anything the last edition already counted is dropped. the evidence and strydelens lanes now read their own remotes. third-party repositories on the machine are left out. the monday 12 october run left no edition, so this one covers twelve days. the acts were read from the diffs and from the code as it stands on main, and each says whether it was seen in production. read from production on 17 october: injury time's public team page. this public cut leaves out findings still open in a live clinical system and the subjects of a personal planner lane; every count is unchanged. no test suite was re-run, no phone call was placed and no login-gated page was opened.<br>shippers studio 2.3, ldn to worldwide</p>
+</section>
+
+</div>
+
+<script>
+const C=[{"r":"trademind","h":"4cc6237","t":1792005205,"s":"fix(war-room): a --only run never writes a gate verdict to Oracle (#139)","c":25,"b":0},{"r":"trademind","h":"3c3e582","t":1791641719,"s":"docs: nightly roadmap/changelog sync (catch-up to 2026-10-10)","c":340,"b":0},{"r":"trademind","h":"23ec61f","t":1791533908,"s":"Home masthead: wordmark trimmed to its ink, set in an embossed plate","c":116,"b":0},{"r":"trademind","h":"95baa5b","t":1791533724,"s":"Home: day board matches day, the dock replaces the busbar, fluid scroll, trade copy","c":999,"b":0},{"r":"trademind","h":"a5df443","t":1791492602,"s":"docs(dusk): frames from the 10s TradeMind motion piece","c":0,"b":0},{"r":"trademind","h":"fb9d6ed","t":1791452173,"s":"fix(ios): onboarding step 2 edits the business a profile already has","c":80,"b":0},{"r":"trademind","h":"564d73e","t":1791356453,"s":"docs(dusk): Home without the hold ring, on the iOS simulator","c":0,"b":0},{"r":"trademind","h":"ca8e1bf","t":1791356269,"s":"Dusk: a status-bar scrim once scrolled, so the clock stays legible over the map","c":34,"b":0},{"r":"trademind","h":"e0e4e9e","t":1791356006,"s":"Dusk: take the hold-to-speak ring off Home; the map is the scroll","c":404,"b":0},{"r":"trademind","h":"b806c72","t":1791328586,"s":"docs(dusk): build 16 on the iOS simulator, Release configuration","c":0,"b":0},{"r":"trademind","h":"69833c8","t":1791325769,"s":"chore(ios): build 16 for TestFlight","c":2,"b":0},{"r":"trademind","h":"d209b21","t":1791314376,"s":"Dusk: plain-words headline, one hero, a Today line to the board","c":276,"b":0},{"r":"trademind","h":"4f7ace3","t":1791309265,"s":"Dusk: three hero options for review (preview only)","c":79,"b":0},{"r":"trademind","h":"1b2fad5","t":1791309265,"s":"Overdue is amber at night, app-wide","c":59,"b":0},{"r":"trademind","h":"c6149b4","t":1791308513,"s":"Dusk: night Home carries everything Day Home does","c":273,"b":0},{"r":"trademind","h":"c67cd55","t":1791307668,"s":"Dusk: hero steps down on 812-tall phones so the speak label clears the bar","c":7,"b":0},{"r":"trademind","h":"e8d982b","t":1791307319,"s":"Dusk preview route (dev only) and review screenshots","c":128,"b":0},{"r":"trademind","h":"b75eaea","t":1791307318,"s":"Tab bar: on night Home the bar takes the Dusk ground","c":19,"b":0},{"r":"trademind","h":"997e624","t":1791307318,"s":"Dusk: Home at night is the horizon","c":817,"b":0},{"r":"trademind","h":"5a60884","t":1791307318,"s":"Dusk: the week as a horizon, model and geometry","c":414,"b":0},{"r":"strydeos","h":"15fb1ef0","t":1792201064,"s":"fix(email): restore 8-internal-brief's history notes","c":8,"b":0},{"r":"strydeos","h":"34b150f8","t":1792200756,"s":"fix(pwa): serve icons network-first so a redrawn icon reaches installed phones","c":84,"b":0},{"r":"strydeos","h":"6ffbcbdc","t":1792200232,"s":"feat(pulse): NPS question built alongside the Google review ask; \"Churned\" band; month on ","c":333,"b":0},{"r":"strydeos","h":"72645ee8","t":1792199963,"s":"fix(email): templates use the blue monolith mark, retire the purple one","c":170,"b":0},{"r":"strydeos","h":"449b29ae","t":1792198916,"s":"fix(owner-summary): \"lost\" means seen once or cancelled away; add \"seen once only\" row","c":89,"b":0},{"r":"strydeos","h":"7ce76648","t":1792194684,"s":"feat(pulse): one patient-state rule for every module; cancelled-after-last-visit, cross-cl","c":2058,"b":0},{"r":"strydeos","h":"a66140cd","t":1792160856,"s":"feat(war-room): re-run a failed scenario, block the gate only if it fails again (#555)","c":93,"b":0},{"r":"strydeos","h":"a1cf2e25","t":1792146685,"s":"fix(pulse): a cancellation after the last visit is not a discharge; the band says Finished","c":595,"b":0},{"r":"strydeos","h":"62459b1e","t":1792077168,"s":"fix(ava-war-room): scope DECLINES_COVER to the claim it governs","c":34,"b":0},{"r":"strydeos","h":"f2a92bda","t":1792052994,"s":"fix(war-room): declining to quote insurer cover is not a quote (#551)","c":13,"b":0},{"r":"strydeos","h":"ec733833","t":1792046163,"s":"fix(war-room): keep the exact turns a failure was graded on, and flag a grader that disagr","c":10,"b":0},{"r":"strydeos","h":"2098a377","t":1792045338,"s":"fix(ava): a refused or failed booking is said before any goodbye, even the caller's (#549)","c":9,"b":0},{"r":"strydeos","h":"aedceed6","t":1792044310,"s":"fix(ava): a time the caller names is found and offered first when it is free (#548)","c":115,"b":0},{"r":"strydeos","h":"59027d4a","t":1792041932,"s":"chore: the GP word for a run of care is gone from StrydeOS (409 uses, 76 files)","c":1183,"b":0},{"r":"strydeos","h":"73da2ab0","t":1792041528,"s":"fix(war-room): 'I can't say you're booked in' is not a booking claim (#546)","c":7,"b":0},{"r":"strydeos","h":"c40f6ba4","t":1792025732,"s":"fix(war-room): collapse/seizure scenario mocks the milder tier's line, not the 999 line (#","c":4,"b":0},{"r":"strydeos","h":"4f12c17a","t":1792025076,"s":"feat(ava): the milder red-flag tier gets a clinician callback, no A&E or 111 (#544)","c":59,"b":0},{"r":"strydeos","h":"4b27d265","t":1792020436,"s":"docs(ava): ledger the script-the-moment lesson from the cauda equina ten-run tests (#543)","c":11,"b":0},{"r":"strydeos","h":"26fcab3b","t":1792019756,"s":"fix(war-room): grade 'the team will ring you' as taking a callback (#542)","c":6,"b":0},{"r":"strydeos","h":"db1830ed","t":1792019358,"s":"fix(war-room): 'have the team ring you' is a callback offer (#541)","c":12,"b":0},{"r":"strydeos","h":"295d3735","t":1792018513,"s":"fix(ava): move Ava to Sonnet 5.5; say how to read system__time; war room grades the goodby","c":65,"b":0},{"r":"strydeos","h":"7c4cd2f0","t":1792018441,"s":"fix(ava): script the close after a cauda equina caller gives their number (#540)","c":29,"b":0},{"r":"strydeos","h":"fbc9787d","t":1792017662,"s":"fix(ava): a possible cauda equina caller gets no safety-net advice of Ava's own (#539)","c":15,"b":0},{"r":"strydeos","h":"6b857b36","t":1792016931,"s":"docs(ava): cauda equina is a clinician callback; supersedes the 999 entries (#537)","c":3,"b":0},{"r":"strydeos","h":"25735198","t":1792016713,"s":"feat(pulse): Google review ask, built dark. Care-status categories + one-shot + dry run","c":1235,"b":0},{"r":"strydeos","h":"7bbe7208","t":1792016512,"s":"fix(ava): cauda equina is an urgent clinician callback, not a 999 or A&E instruction (#535","c":258,"b":0},{"r":"strydeos","h":"f02fa178","t":1792008425,"s":"fix(war-room): a booking claimed before book_appointment ran is a P0 blocker (#534)","c":41,"b":0},{"r":"strydeos","h":"717a9589","t":1792007099,"s":"docs(ava): record the noise floor, countable asks, and the harmless early identity call (#","c":4,"b":0},{"r":"strydeos","h":"68c2eb3c","t":1792006152,"s":"fix(dashboard): Pulse Impact reads the send ledger; clinic utilisation is pooled","c":1021,"b":0},{"r":"strydeos","h":"60138e6f","t":1792006065,"s":"fix(ava): count your own asks, the third request for the same thing is never allowed (#531","c":12,"b":0},{"r":"strydeos","h":"3d6b8494","t":1792005346,"s":"fix(ava): never offer to look up another person's appointment, even with their details (#5","c":13,"b":0},{"r":"strydeos","h":"decf7d02","t":1792005158,"s":"fix(ava): a yes to the read-back books; times keep the clinician the diary named; househol","c":27,"b":0},{"r":"strydeos","h":"4baf98a8","t":1792002948,"s":"fix(ava): examples never speak times in the same breath as 'let me check'; war room fails ","c":90,"b":0},{"r":"strydeos","h":"16fd884e","t":1791994211,"s":"docs(ava): record the 14 Oct war-room findings and the three prompt fixes (#527)","c":6,"b":0},{"r":"strydeos","h":"7d173544","t":1791993154,"s":"fix(ava): war room no longer demands the model send patient_phone (#526)","c":30,"b":0},{"r":"strydeos","h":"1cd9ab84","t":1791991973,"s":"fix(ava): errored booking is never all set or a promised text; both-legs weakness gets 999","c":49,"b":0},{"r":"strydeos","h":"e82581b9","t":1791988450,"s":"fix(ava): war room retries a simulated caller that leaks a control token (#524)","c":13,"b":0},{"r":"strydeos","h":"6cb8ccdb","t":1791987546,"s":"fix(ava): war room supplies the call variables the live tools read, and never records a --","c":128,"b":0},{"r":"strydeos","h":"0de955e2","t":1791986590,"s":"fix(dashboard): month-on-month shows this month on a phone","c":15,"b":0},{"r":"strydeos","h":"36959620","t":1791985734,"s":"feat(dashboard): month-on-month view, and fix two wrong numbers in the lower half","c":895,"b":0},{"r":"strydeos","h":"b2cdd0ca","t":1791983509,"s":"Ava: verify_identity needs a real date of birth before anything else","c":33,"b":0},{"r":"strydeos","h":"c575207f","t":1791980258,"s":"Ava: a booking refusal says nothing is booked and what books it","c":12,"b":0},{"r":"strydeos","h":"932b884e","t":1791978956,"s":"Ava: a 999 red flag is never softened to a GP or 111","c":10,"b":0},{"r":"strydeos","h":"f57e6180","t":1791978882,"s":"fix(ava): booking marker write failed on every no-preference call (#505)","c":55,"b":0},{"r":"strydeos","h":"c1cac338","t":1791977354,"s":"Ava: patient_phone is optional, so a caller's own line needs no invented number","c":45,"b":0},{"r":"strydeos","h":"c65719a6","t":1791962792,"s":"Eval grader: caller-phone, must-not-say and postcode checks","c":11,"b":0},{"r":"strydeos","h":"467b2651","t":1791962778,"s":"Eval harness: longer GET retries; cleanup guards by eval start, not a fixed day","c":7,"b":0},{"r":"strydeos","h":"0f521cea","t":1791958168,"s":"Ava: a time-of-day search names its window in the words she reads","c":40,"b":0},{"r":"strydeos","h":"5ecfe8e1","t":1791936046,"s":"Ava: moves name what moved; windowed searches say so; \"unknown\" is no phone","c":54,"b":0},{"r":"strydeos","h":"8310336f","t":1791935776,"s":"Ava: a back appointment is screened for cauda equina before it is booked","c":51,"b":0},{"r":"strydeos","h":"236a0f63","t":1791934196,"s":"Ava: never book a number copied from an example","c":35,"b":0},{"r":"strydeos","h":"9002e65d","t":1791932459,"s":"Ava: slot times spoken in words; diary searches the caller's time of day","c":108,"b":0},{"r":"strydeos","h":"f61f820b","t":1791930655,"s":"Ava: say each slot time exactly as the diary gave it","c":10,"b":0},{"r":"strydeos","h":"578395ed","t":1791928976,"s":"Ava: a caller's \"thank you\" can't cancel the diary lookup","c":8,"b":0},{"r":"strydeos","h":"1f218e33","t":1791928398,"s":"Ava: book under the caller's own number when the spoken one is a near-miss; no guessed sur","c":87,"b":0},{"r":"strydeos","h":"5e5b3330","t":1791927735,"s":"fix(ava): paused card does not repeat its own heading","c":8,"b":0},{"r":"strydeos","h":"a32da6c1","t":1791927388,"s":"fix(brand): onboarding ticks and billing trial card move off green and amber to brand blue","c":34,"b":0},{"r":"strydeos","h":"d4d67748","t":1791927387,"s":"fix(ava): examples are placeholders, never saved values, for a new clinic","c":119,"b":0},{"r":"strydeos","h":"98bca9ff","t":1791927386,"s":"fix(pulse): only call patient data live when a PMS is connected","c":75,"b":0},{"r":"strydeos","h":"13cc69b4","t":1791927385,"s":"fix(onboarding): a trial is not a done subscription; say when it ends and link to billing","c":106,"b":0},{"r":"strydeos","h":"a41383df","t":1791927382,"s":"fix(ava): name Ava's own number, not the clinic line, on the Ava page","c":91,"b":0},{"r":"strydeos","h":"9948e91b","t":1791927381,"s":"fix(onboarding): first-login tour stops writing user status the rules refuse","c":255,"b":0},{"r":"strydeos","h":"111780bf","t":1791927089,"s":"Ava: \"after hours\" says the clinic is closed, not that service continues","c":28,"b":0},{"r":"strydeos","h":"76e08bbb","t":1791925249,"s":"Ava: tools receive the caller's number from system__caller_id","c":149,"b":0},{"r":"strydeos","h":"67bdcc84","t":1791911503,"s":"fix(website): drop the hard-coded NOTIFY_EMAIL fallback on lead routes (#504)","c":28,"b":0},{"r":"strydeos","h":"d37f2980","t":1791904641,"s":"Ava: booking tools can't be cut off; every tool posts conversation_id","c":702,"b":0},{"r":"strydeos","h":"9f4ac70e","t":1791641731,"s":"docs: nightly roadmap/changelog sync (catch-up to 2026-10-10)","c":143,"b":0},{"r":"strydeos","h":"d88e5393","t":1791282939,"s":"fix(sim): retry pre-connect fetch failures; verify replays follow-up and new-patient","c":32,"b":0},{"r":"strydeos","h":"aa844386","t":1791282513,"s":"feat(sim): idempotent provisioning of the three sandbox sim clinics in prod","c":462,"b":0},{"r":"strydeos","h":"af9ce9f4","t":1791491876,"s":"fix(trial): sticky CTA bar no longer cuts its caption mid-word at 375px","c":2,"b":0},{"r":"strydeos","h":"df42c35f","t":1791491800,"s":"Ava prompt: a move, like a booking, exists only once its tool returned it","c":8,"b":0},{"r":"strydeos","h":"fe8320ed","t":1791491609,"s":"feat(trial): replace the four icon boxes with an animated first-14-days panel","c":317,"b":0},{"r":"strydeos","h":"9d5360f1","t":1791469115,"s":"copy(intelligence): programme, not program, in what owners read","c":42,"b":0},{"r":"strydeos","h":"47d89c87","t":1791468135,"s":"fix(intelligence): a revenue leak's owner text is its description, not a model sentence","c":31,"b":0},{"r":"strydeos","h":"81b8fe4d","t":1791467896,"s":"fix(dashboard): greeting cache replayed the previous user's name","c":54,"b":0},{"r":"strydeos","h":"4d0186d8","t":1791386117,"s":"fix(intelligence): urgent alerts never ride the founder preview allowlist","c":38,"b":0},{"r":"strydeos","h":"b9b1e9b7","t":1791355828,"s":"Trial logos: play the entrance when the cards scroll into view","c":53,"b":0},{"r":"strydeos","h":"f8f977e7","t":1791333082,"s":"Rebook list: week 5 to week 7 window, one-visit split, out of the urgent email","c":66,"b":0},{"r":"strydeos","h":"f566626a","t":1791331257,"s":"War room: Run 9 findings (refusal misread, BST scenario split)","c":34,"b":0},{"r":"strydeos","h":"b5217b54","t":1791329784,"s":"SIP trunk lookup lists by provider; the phone_number filter misses agent-id identifiers","c":50,"b":0},{"r":"strydeos","h":"e76cc4af","t":1791329735,"s":"Provisioning registers the SIP trunk number that lets a new clinic's calls reach Ava","c":376,"b":0},{"r":"strydeos","h":"1c4b3744","t":1791329618,"s":"Ava page: show the number button until a number is really bought, then the divert step","c":144,"b":0},{"r":"strydeos","h":"57c12293","t":1791329315,"s":"Pulse auto-sends for a trial clinic whose trial includes Pulse","c":174,"b":0},{"r":"strydeos","h":"150b82d5","t":1791328364,"s":"Trial page: copy for three choices, and module logos that settle","c":87,"b":0},{"r":"strydeos","h":"99993693","t":1791328359,"s":"Trial offers Core, Ava and Full Stack; Core is a real trial end to end","c":547,"b":0},{"r":"strydeos","h":"c425ec46","t":1791326032,"s":"Ava prompt: never ask a date of birth to book, even a returning patient","c":6,"b":0},{"r":"strydeos","h":"26282407","t":1791325720,"s":"fix(email): legal line is \"StrydeOS, London, UK\" with hello@strydeos.com","c":38,"b":0},{"r":"strydeos","h":"15fa9198","t":1791319622,"s":"Ava: no date of birth before checking the diary, returning patient or not","c":10,"b":0},{"r":"strydeos","h":"e377903b","t":1791318222,"s":"fix(website): replace pill radii on buttons, chips and tabs","c":14,"b":0},{"r":"strydeos","h":"c61215cf","t":1791317556,"s":"fix(website): fit the header on one line at 375px and make the menu open","c":22,"b":0},{"r":"strydeos","h":"4065eb4f","t":1791315613,"s":"Fix up the trial page: real prices, plain copy, visible focus","c":135,"b":0},{"r":"strydeos","h":"ce152ffc","t":1791315042,"s":"Rename follow-up rate and DNA rate on the marketing site","c":64,"b":0},{"r":"strydeos","h":"7729487a","t":1791315037,"s":"fix(email): no portal privacy link in the TS footer (welcome identity rule)","c":2,"b":0},{"r":"strydeos","h":"0b920cd5","t":1791314684,"s":"fix(email): sign-off is just StrydeOS, 18px footer icons, legal footer on every template","c":146,"b":0},{"r":"strydeos","h":"074ed67c","t":1791314314,"s":"Ava: a caller on someone else's phone gets a lookup, then a callback","c":11,"b":0},{"r":"strydeos","h":"9d4c43cd","t":1791308958,"s":"War room: read-back rule misread two refusals as disclosures","c":17,"b":0},{"r":"strydeos","h":"a4b28536","t":1791302916,"s":"Ava: temperature 0.6 -> 0.3; war room cap 400 sim min","c":33,"b":0},{"r":"strydeos","h":"c49bf1df","t":1791297289,"s":"docs(mcp): ava-pms-tools is not on the live call path (#451)","c":2,"b":0},{"r":"strydeos","h":"0f0b9e5c","t":1791296620,"s":"Ava: book the exact slot she offered, not her paraphrase of it","c":103,"b":0},{"r":"strydeos","h":"2ad8bae5","t":1791296326,"s":"War room gate: compare the exact pass rate, not a rounded one","c":40,"b":0},{"r":"strydeos","h":"865bc5a1","t":1791293228,"s":"docs(claim-chaser): record the 25 Sep action-queue lessons","c":22,"b":0},{"r":"strydeos","h":"2d8cc379","t":1791290134,"s":"Ava: refuse verify_identity before the caller answers","c":89,"b":0},{"r":"strydeos","h":"b182f50d","t":1791285507,"s":"War room workflow: run the sim clinics' personas on GitHub","c":15,"b":0},{"r":"strydeos","h":"986d9415","t":1791284721,"s":"Cliniko poll (functions): stock 'First Appointment' is a new-patient type","c":3,"b":0},{"r":"strydeos","h":"99262b14","t":1791284520,"s":"Ava: five P0s from the 6 Oct live fleet; grader reads two lines right","c":101,"b":0},{"r":"strydeos","h":"7a9bfe84","t":1791283151,"s":"Cliniko: stock 'First Appointment' is a new-patient type","c":71,"b":0},{"r":"strydeos","h":"f1644bf4","t":1791282940,"s":"War room workflow: Creator-plan budget (300 sim min, 120 min job)","c":10,"b":0},{"r":"strydeos","h":"b76c4221","t":1791219298,"s":"Primetime sandbox system 2: the 78-day, three-clinic world over the emulator","c":2920,"b":0},{"r":"strydeos","h":"dd54d228","t":1791218043,"s":"fix(act-panel): amber eyebrow and cost line follow the theme (#466)","c":20,"b":0},{"r":"strydeos","h":"81e4377c","t":1791217807,"s":"Ava safety: cauda equina in a caller's own words is a 999, not 111","c":36,"b":0},{"r":"strydeos","h":"6c2c0b1c","t":1791217798,"s":"War room v2: sim personas use sys2's 45-minute diary grid","c":25,"b":0},{"r":"strydeos","h":"f799525a","t":1791217680,"s":"War room v2 (primetime System 3): 504 scenarios, world-computed mocks","c":1198,"b":0},{"r":"strydeos","h":"1919fd5b","t":1791217493,"s":"feat(tenancy): server-side sandbox flag, excluded from every cross-tenant fan-out (primeti","c":515,"b":0},{"r":"strydeos","h":"f803a5c2","t":1791217351,"s":"feat(billing): System 6 billing lane, 78-day offline timeline + live test-clock script","c":1177,"b":0},{"r":"strydeos","h":"77a0c226","t":1791217305,"s":"test(rbac): primetime system 5 - RBAC grid over every authed route + Firestore rules","c":634,"b":0},{"r":"strydeos","h":"eff1d8db","t":1791217274,"s":"fix(website): link integrations, case studies, leak audit and the Motics comparison from t","c":4,"b":0},{"r":"outreach","h":"37a5735","t":1791976914,"s":"docs(lessons): record the 7 Oct v7 go-live and hold release","c":1,"b":0},{"r":"outreach","h":"1aa6339","t":1791976677,"s":"docs(lessons): record the 6 Oct opt-out guard and first-touch hold","c":2,"b":0},{"r":"outreach","h":"bdf4c1a","t":1791907809,"s":"feat(pwa): new Stryde Outreach icon set (#93)","c":133,"b":0},{"r":"outreach","h":"ef549fa","t":1791641980,"s":"docs: nightly roadmap/changelog sync (catch-up to 2026-10-10)","c":48,"b":0},{"r":"outreach","h":"18857ae","t":1791314694,"s":"First email v7: carry the prospect ref on the trial link","c":80,"b":0},{"r":"outreach","h":"738ebd6","t":1791314535,"s":"First email v7: SOLO and STUDIO variants by clinic size, tagged trial link","c":534,"b":0},{"r":"outreach","h":"1429a10","t":1791313831,"s":"fix(outreach): clinics that opted out never receive anything again","c":929,"b":0},{"r":"outreach","h":"72c9592","t":1791312207,"s":"Sender: operator hold on first emails, flipped in the database","c":576,"b":0},{"r":"outreach","h":"fee77df","t":1791306533,"s":"docs(lessons): record the 6 Oct two numbers work","c":5,"b":0},{"r":"outreach","h":"83049aa","t":1791305711,"s":"Concierge: hand a prospect's reply to the founder with a figure draft, never auto-send","c":1222,"b":0},{"r":"outreach","h":"68e614b","t":1791305547,"s":"feat(outreach): touch 1 is the fixed founder-approved \"two numbers\" email","c":597,"b":0},{"r":"outreach","h":"4eee0e2","t":1791295716,"s":"fix(unsubscribe): confirm page says the button still has to be pressed","c":2,"b":0},{"r":"outreach","h":"b2c1232","t":1791295617,"s":"fix(unsubscribe): GET only confirms, POST unsubscribes and stamps unsubscribed_at","c":386,"b":0},{"r":"outreach","h":"85654ed","t":1791271625,"s":"fix(cron): run the outreach generator hourly on weekdays, not once a day","c":4,"b":0},{"r":"injury time","h":"84ec436","t":1792200664,"s":"fix(no2): the boys, never the lads; formation, never shape, in every prompt (#20)","c":8,"b":0},{"r":"injury time","h":"04693b9","t":1792200073,"s":"feat: the No.2 (opponent model + brief, match report, season questions, nudge) and a subli","c":1007,"b":0},{"r":"injury time","h":"2b8e23a","t":1792194446,"s":"Kit drawn like an FM render: front view, crest on the chest, woven stripe, side panels; na","c":140,"b":0},{"r":"injury time","h":"785866a","t":1792194267,"s":"Kit reads as the club's real colour; cup names wrap on the board (#17)","c":10,"b":0},{"r":"injury time","h":"19b6d22","t":1792194128,"s":"Stats page, review and board tabs, drag-to-answer calls, player page with health and a rea","c":805,"b":0},{"r":"injury time","h":"fb53c19","t":1792191158,"s":"Phone squad toggle: starting XI on one line (#15)","c":2,"b":0},{"r":"injury time","h":"c9f6df7","t":1792191026,"s":"task/hub pager redesign (#14)","c":879,"b":0},{"r":"injury time","h":"4db593d","t":1792183792,"s":"League table, weather card with a drawn sky, a letter, no price anywhere (#13)","c":297,"b":0},{"r":"injury time","h":"ffa4256","t":1792181286,"s":"Pilot body clip: crop below the app's front/back buttons (#12)","c":2,"b":0},{"r":"injury time","h":"6dc8a9b","t":1792180627,"s":"Pilot: letter as a mate's note, moving pitch and 3D body, scroll reveal, crest on the base","c":75,"b":0},{"r":"injury time","h":"831a9ce","t":1792076355,"s":"Pilot letter: shorter, in Jamal's voice (#10)","c":7,"b":0},{"r":"injury time","h":"4a182bf","t":1792056931,"s":"Film v5: formation on a real floodlit pitch, no overlap (#9)","c":0,"b":0},{"r":"injury time","h":"5b0c5d1","t":1792043400,"s":"Pilot pass three: letter, crest stops, captain, answers deadline, weather, half-time swing","c":806,"b":0},{"r":"injury time","h":"da5e2d5","t":1792016638,"s":"Positions everywhere, pitch the right way round, call switch on a hairline (#7)","c":274,"b":0},{"r":"injury time","h":"38c8500","t":1792010796,"s":"feat: Belstone pilot pass (pilot page, cups, result dots, call switch, fuller review, cres","c":4675,"b":0},{"r":"injury time","h":"7b9ca1f","t":1791980374,"s":"feat: from demo to clubs that pay (sign-up, consent, lock-screen answers, season card) (#5","c":5054,"b":0},{"r":"studio site","h":"910f9d7","t":1792178025,"s":"chore(portal): refresh access registry from notion","c":2,"b":1},{"r":"studio site","h":"e730afe","t":1792152711,"s":"chore(portal): refresh access registry from notion","c":2,"b":1},{"r":"studio site","h":"258f476","t":1792093163,"s":"chore(portal): refresh access registry from notion","c":2,"b":1},{"r":"studio site","h":"5f8c185","t":1792067556,"s":"chore(portal): refresh access registry from notion","c":2,"b":1},{"r":"studio site","h":"6bc8fef","t":1792007775,"s":"chore(portal): refresh access registry from notion","c":2,"b":1},{"r":"studio site","h":"edf41ef","t":1791981941,"s":"chore(portal): refresh access registry from notion","c":2,"b":1},{"r":"studio site","h":"2039093","t":1791925033,"s":"chore(portal): refresh access registry from notion","c":2,"b":1},{"r":"studio site","h":"8c29ee9","t":1791903229,"s":"chore(portal): refresh access registry from notion","c":2,"b":1},{"r":"studio site","h":"c3059e7","t":1791844918,"s":"chore(portal): refresh access registry from notion","c":2,"b":1},{"r":"studio site","h":"674ec7c","t":1791823013,"s":"chore(portal): refresh access registry from notion","c":2,"b":1},{"r":"studio site","h":"24a69de","t":1791748386,"s":"chore(portal): refresh access registry from notion","c":2,"b":1},{"r":"studio site","h":"312711a","t":1791726756,"s":"chore(portal): refresh access registry from notion","c":2,"b":1},{"r":"studio site","h":"c1a9cc9","t":1791661263,"s":"chore(portal): refresh access registry from notion","c":2,"b":1},{"r":"studio site","h":"68d0bb8","t":1791638838,"s":"chore(portal): refresh access registry from notion","c":2,"b":1},{"r":"studio site","h":"ea13a98","t":1791577813,"s":"chore(portal): refresh access registry from notion","c":2,"b":1},{"r":"studio site","h":"6a56abb","t":1791555323,"s":"chore(portal): refresh access registry from notion","c":2,"b":1},{"r":"studio site","h":"f146036","t":1791493152,"s":"chore(portal): refresh access registry from notion","c":2,"b":1},{"r":"studio site","h":"f92a618","t":1791469702,"s":"chore(portal): refresh access registry from notion","c":2,"b":1},{"r":"studio site","h":"bf53bc5","t":1791406635,"s":"chore(portal): refresh access registry from notion","c":2,"b":1},{"r":"studio site","h":"2c9c2e0","t":1791382824,"s":"chore(portal): refresh access registry from notion","c":2,"b":1},{"r":"studio site","h":"cdf7fbd","t":1791319492,"s":"chore(portal): refresh access registry from notion","c":2,"b":1},{"r":"studio site","h":"b1156f8","t":1791295345,"s":"chore(portal): refresh access registry from notion","c":2,"b":1},{"r":"studio site","h":"114f9da","t":1791238659,"s":"chore(portal): refresh access registry from notion","c":2,"b":1},{"r":"sillage","h":"2f1d15b","t":1791907806,"s":"feat(pwa): new Sillage icon set, touch icon and manifest (#3)","c":27,"b":0},{"r":"sillage","h":"84d0024","t":1791642387,"s":"docs: nightly roadmap/changelog sync (catch-up to 2026-10-10)","c":20,"b":0},{"r":"driiva","h":"68d3870","t":1791642664,"s":"docs: nightly roadmap/changelog sync (catch-up to 2026-10-10)","c":58,"b":0},{"r":"strydelens","h":"970f371","t":1791643066,"s":"docs: nightly roadmap/changelog sync (catch-up to 2026-10-10)","c":38,"b":0},{"r":"shippers-tt","h":"32b27d4","t":1792200160,"s":"personal planner, subject withheld","c":2,"b":0},{"r":"shippers-tt","h":"4e756b7","t":1792196182,"s":"personal planner, subject withheld","c":4959,"b":0},{"r":"shippers-tt","h":"f595cfc","t":1791310574,"s":"personal planner, subject withheld","c":4,"b":0},{"r":"shippers-tt","h":"99dd4be","t":1791309765,"s":"personal planner, subject withheld","c":4,"b":0},{"r":"shippers-tt","h":"fa69b09","t":1791307061,"s":"personal planner, subject withheld","c":60,"b":0},{"r":"shippers-tt","h":"567e3da","t":1791305830,"s":"personal planner, subject withheld","c":2624,"b":0},{"r":"portfolio","h":"53f64ac","t":1791923622,"s":"Profile facts: 504-scenario harness, randomised holdout, Square Health, Hills, IAAF","c":21,"b":0},{"r":"portfolio","h":"6107093","t":1791893542,"s":"Portfolio redesign: receipt orb hero, Work and Craft tabs with recorded and live embeds; d","c":703,"b":0},{"r":"portfolio","h":"e851b94","t":1791654627,"s":"Evidence: distilled + fine-tuned Gemma, Qwen, multi-turn answers, 95% refusal gate","c":10,"b":0},{"r":"portfolio","h":"328c2b1","t":1791654368,"s":"Bring portfolio in line with Oct CV: Driiva, two live clinics, Pulse, React/TS framing, CV","c":28,"b":0}];
+const LANES=[["trademind", 20, 0], ["strydeos", 116, 0], ["injury time", 16, 0], ["outreach", 14, 0], ["studio site", 0, 23], ["sillage", 2, 0], ["driiva", 1, 0], ["the-bridge", 0, 0], ["subscriptions", 0, 0], ["strydelens", 1, 0], ["slate", 0, 0], ["shippers-tt", 6, 0], ["portfolio", 4, 0], ["evidence", 0, 0], ["ava-evals", 0, 0]];
+const DAYS=['mon 5','tue 6','wed 7','thu 8','fri 9','sat 10','sun 11','mon 12','tue 13','wed 14','thu 15','fri 16','sat 17'],T0=Date.parse('2026-10-05T00:00:00+01:00')/1000,SPAN=DAYS.length*86400,HRS=DAYS.length*24;
+const NS='http://www.w3.org/2000/svg';
+const el=(n,a,t)=>{const e=document.createElementNS(NS,n);for(const k in a)e.setAttribute(k,a[k]);if(t!=null)e.textContent=t;return e};
+const fmt=t=>new Date(t*1000).toLocaleString('en-GB',{weekday:'short',day:'numeric',month:'short',hour:'2-digit',minute:'2-digit',timeZone:'Europe/London'}).toLowerCase();
+const tape=document.getElementById('tape'),box=document.getElementById('tapebox'),ro=document.getElementById('readout');
+const roRest=ro.innerHTML;let order=[],cur=-1;
+function show(i){
+  if(cur>=0&&order[cur])order[cur].n.classList.remove('hit');
+  cur=i;const o=order[i];if(!o){ro.innerHTML=roRest;return}
+  o.n.classList.add('hit');const c=o.c;
+  ro.innerHTML='<span><b>'+c.h+'</b>&ensp;'+c.r+', '+fmt(c.t)+(c.b?', the studio bot':'')+'<br></span>';
+  ro.firstChild.append(c.s);
+}
+function draw(){
+  const W=Math.max(1100,box.clientWidth),L=132,R=52,top=46,act=LANES.filter(l=>l[1]>0||l[2]>0),sil=LANES.filter(l=>!l[1]&&!l[2]);
+  const bw=(W-L-R)/HRS,u=Math.min(bw,7),SH=19;
+  tape.replaceChildren();order=[];
+  const stacks=act.map(l=>{const m=new Map();C.filter(c=>c.r===l[0]).sort((a,b)=>a.t-b.t).forEach(c=>{const k=Math.floor((c.t-T0)/3600);m.set(k,(m.get(k)||[]).concat(c))});return m});
+  const hs=stacks.map(m=>Math.max(30,Math.max(...[...m.values()].map(v=>v.length))*u+16));
+  const actH=hs.reduce((a,b)=>a+b,0),H=top+actH+16+sil.length*SH+8;
+  tape.setAttribute('viewBox','0 0 '+W+' '+H);tape.setAttribute('height',H);
+  const dayN=Array(DAYS.length).fill(0);C.forEach(c=>{if(!c.b)dayN[Math.min(DAYS.length-1,Math.floor((c.t-T0)/86400))]++});
+  DAYS.forEach((d,i)=>{const dx=L+i*24*bw;
+    tape.append(el('line',{class:'day',x1:dx,x2:dx,y1:6,y2:H-6}),el('text',{x:dx+8,y:18},d),el('text',{class:'dn',x:dx+8,y:36},dayN[i]))});
+  let y=top;
+  act.forEach((l,i)=>{y+=hs[i];const base=y-4;
+    tape.append(el('text',{class:'nm',x:0,y:base-4},l[0]),el('text',{class:'ct',x:W,y:base-4,'text-anchor':'end'},l[1]),el('line',{class:'day',x1:L,x2:W-R,y1:base,y2:base}));
+    stacks[i].forEach((v,k)=>v.forEach((c,j)=>{
+      const n=el('rect',{class:c.b?'tk bot':'tk',x:L+k*bw+.5,y:base-(j+1)*u,width:Math.max(1.5,u-1.2),height:Math.max(1.5,u-1.2)});
+      n.style.animationDelay=(k/HRS*.8+j*.012).toFixed(2)+'s';
+      n.addEventListener('pointerenter',()=>show(order.findIndex(o=>o.n===n)));tape.append(n);order.push({n,c})}))});
+  sil.forEach((l,i)=>{const sy=y+16+i*SH+10;tape.append(el('text',{x:0,y:sy+4},l[0]),el('line',{class:'sil',x1:L,x2:W-R,y1:sy,y2:sy}),el('text',{class:'ct',x:W,y:sy+4,'text-anchor':'end'},'0'))});
+  order.sort((a,b)=>a.c.t-b.c.t);
+}
+box.addEventListener('keydown',e=>{if(e.key!=='ArrowRight'&&e.key!=='ArrowLeft')return;e.preventDefault();
+  show(Math.max(0,Math.min(order.length-1,cur+(e.key==='ArrowRight'?1:-1))))});
+box.addEventListener('pointerleave',()=>show(-1));
+function strips(){document.querySelectorAll('.strip').forEach(s=>{
+  const W=1200,shas=(s.dataset.shas||'').split(','),sv=el('svg',{viewBox:'0 0 '+W+' 44',preserveAspectRatio:'none','aria-hidden':'true'});let n=0;
+  C.filter(c=>!c.b).forEach(c=>{const hit=shas.some(h=>c.h.startsWith(h)||h.startsWith(c.h)),cx=(c.t-T0)/SPAN*W;if(hit)n++;
+    sv.append(el('line',{class:hit?'tk hit':'tk',x1:cx,x2:cx,y1:44,y2:hit?4:26,'vector-effect':'non-scaling-stroke'}))});
+  s.replaceChildren(sv);const k=s.nextElementSibling&&s.nextElementSibling.querySelector('[data-n]');if(k)k.textContent=n});}
+/* ---- brand equaliser and point cloud, ported from edition 2.1 (same shader, same colours), turned down to sit behind the page ---- */
+const RM=matchMedia('(prefers-reduced-motion: reduce)').matches,TAU=Math.PI*2;
+(function(el){['#1e96d2','#19b9a5','#286ef0','#beaf2d','#cd3237'].forEach((c,i)=>{const b=document.createElement('i');
+  b.style.background=c;b.style.animationDelay=(i*0.13)+'s';b.style.animationDuration=(1.1+i*0.11)+'s';el.appendChild(b)})})(document.getElementById('eq1'));
+(function(){
+  const canvas=document.getElementById('gl'),gl=canvas.getContext('webgl',{alpha:true,antialias:false});
+  if(!gl) return;
+  const N=RM?1400:4200,rnd=Math.random;
+  const GENS=[
+    P=>{for(let i=0;i<N;i++){let x,y;if(i%5<3){const r=6+(i%7)*3.6,a=rnd()*TAU;x=Math.cos(a)*r;y=Math.sin(a)*r}else{const a=(i%22)*(TAU/22),r=6+rnd()*24;x=Math.cos(a)*r;y=Math.sin(a)*r}
+      P[i*3]=x;P[i*3+1]=y;P[i*3+2]=-Math.pow(Math.hypot(x,y)*.09,2)*1.5+(rnd()-.5)*2}},
+    P=>{for(let i=0;i<N;i++){const r=i%13,t=rnd();P[i*3]=(t-.5)*62*(r%3===0?.72:1);P[i*3+1]=(r-6.5)*3.6+(rnd()-.5)*.5;P[i*3+2]=(r%3===0?-6:0)+(rnd()-.5)*3}},
+    P=>{for(let i=0;i<N;i++){const top=i%2===0;P[i*3]=(rnd()-.5)*66;P[i*3+1]=(top?12:-12)+(rnd()-.5)*7;P[i*3+2]=(rnd()-.5)*10}},
+    P=>{for(let i=0;i<N;i++){if(i%9===0){const a=rnd()*TAU,r=rnd()*7;P[i*3]=34+Math.cos(a)*r;P[i*3+1]=26+Math.sin(a)*r;P[i*3+2]=(rnd()-.5)*6}
+      else{const a=rnd()*TAU,r=Math.pow(rnd(),.6)*26;P[i*3]=Math.cos(a)*r-6;P[i*3+1]=Math.sin(a)*r;P[i*3+2]=(rnd()-.5)*12}}},
+    P=>{for(let i=0;i<N;i++){const c=i%9;P[i*3]=(c-4.5)*7+(rnd()-.5)*3.4;P[i*3+1]=(rnd()-.5)*54;P[i*3+2]=(rnd()-.5)*8}},
+    P=>{for(let i=0;i<N;i++){const ring=i%4,r=11+ring*7,a=rnd()*TAU,tilt=ring*.36;P[i*3]=Math.cos(a)*r;P[i*3+1]=Math.sin(a)*r*Math.cos(tilt);P[i*3+2]=Math.sin(a)*r*Math.sin(tilt)+(rnd()-.5)*2}},
+    P=>{for(let i=0;i<N;i++){const t=rnd(),a=rnd()*TAU,r=3+t*26;P[i*3]=Math.cos(a)*r;P[i*3+1]=22-t*44;P[i*3+2]=Math.sin(a)*r}},
+    P=>{const c=Math.ceil(Math.sqrt(N));for(let i=0;i<N;i++){const ix=i%c,iz=(i/c)|0;P[i*3]=(ix/c-.5)*66;P[i*3+1]=(iz/c-.5)*52;P[i*3+2]=Math.sin(ix*.34)*Math.cos(iz*.3)*4}}];
+  const vs=`attribute vec3 aFrom;attribute vec3 aTo;attribute vec3 aColor;uniform float uRotY,uRotX,uAspect,uMix;uniform vec2 uMouse,uOffset;varying vec3 vColor;varying float vA;
+    void main(){float m=uMix*uMix*(3.0-2.0*uMix);vec3 p=mix(aFrom,aTo,m);float cx=cos(uRotY),sx=sin(uRotY);float x1=p.x*cx+p.z*sx,z1=-p.x*sx+p.z*cx;
+      float rx=uRotX+uMouse.y*0.3,cy2=cos(rx),sy2=sin(rx);float y2=p.y*cy2-z1*sy2,z2=p.y*sy2+z1*cy2;float x2=x1+uMouse.x*4.0;float persp=140.0/(140.0+z2+60.0);
+      gl_Position=vec4(vec2(x2*persp/uAspect,y2*persp)*0.021+uOffset,0.0,1.0);gl_PointSize=clamp(persp*3.6,0.9,5.0);vColor=aColor;vA=clamp(persp*1.15,0.12,1.0);}`;
+  const fs=`precision mediump float;varying vec3 vColor;varying float vA;void main(){vec2 d=gl_PointCoord-0.5;float r=length(d);if(r>0.5)discard;gl_FragColor=vec4(vColor,(1.0-smoothstep(0.0,0.5,r))*vA);}`;
+  const sh=(t,src)=>{const o=gl.createShader(t);gl.shaderSource(o,src);gl.compileShader(o);return o};
+  const prog=gl.createProgram();gl.attachShader(prog,sh(gl.VERTEX_SHADER,vs));gl.attachShader(prog,sh(gl.FRAGMENT_SHADER,fs));gl.linkProgram(prog);
+  if(!gl.getProgramParameter(prog,gl.LINK_STATUS)) return;
+  gl.useProgram(prog);
+  const RGB=['#1e96d2','#19b9a5','#286ef0','#1c50d2','#1432a0','#5f7aab','#372082','#C8A96E'].map(h=>[1,3,5].map(k=>parseInt(h.slice(k,k+2),16)/255));
+  const col=new Float32Array(N*3);for(let i=0;i<N;i++)col.set(RGB[i%RGB.length],i*3);
+  const from=new Float32Array(N*3),to=new Float32Array(N*3),cache={};
+  // each shape is re-centred on its own centroid, or it slides sideways as the rig turns
+  function geo(k){if(!cache[k]){const P=new Float32Array(N*3);GENS[k](P);let sx=0,sy=0,sz=0;for(let i=0;i<N;i++){sx+=P[i*3];sy+=P[i*3+1];sz+=P[i*3+2]}
+    sx/=N;sy/=N;sz/=N;for(let i=0;i<N;i++){P[i*3]-=sx;P[i*3+1]-=sy;P[i*3+2]-=sz}cache[k]=P}return cache[k]}
+  from.set(geo(0));to.set(geo(0));
+  const buf=(data,name)=>{const b=gl.createBuffer();gl.bindBuffer(gl.ARRAY_BUFFER,b);gl.bufferData(gl.ARRAY_BUFFER,data,gl.DYNAMIC_DRAW);
+    const a=gl.getAttribLocation(prog,name);gl.enableVertexAttribArray(a);gl.vertexAttribPointer(a,3,gl.FLOAT,false,0,0);return b};
+  const bFrom=buf(from,'aFrom'),bTo=buf(to,'aTo');buf(col,'aColor');
+  const U=n=>gl.getUniformLocation(prog,n),uRotY=U('uRotY'),uRotX=U('uRotX'),uAspect=U('uAspect'),uMouse=U('uMouse'),uMix=U('uMix'),uOffset=U('uOffset');
+  gl.enable(gl.BLEND);gl.blendFunc(gl.SRC_ALPHA,gl.ONE);gl.clearColor(0,0,0,0);
+  const dpr=Math.min(devicePixelRatio||1,1.5);
+  const size=()=>{canvas.width=Math.floor(innerWidth*dpr);canvas.height=Math.floor(innerHeight*dpr);gl.viewport(0,0,canvas.width,canvas.height)};
+  size();
+  let mix=1,curGeo=0,mxN=0,myN=0,tmx=0,tmy=0,rotY=0;
+  function onGeo(k){if(k===curGeo)return;const m=mix*mix*(3-2*mix),a=cache[curGeo]||geo(curGeo);
+    for(let i=0;i<N*3;i++)from[i]=a[i]+(to[i]-a[i])*m;   // freeze the current blend as the new origin
+    to.set(geo(k));gl.bindBuffer(gl.ARRAY_BUFFER,bFrom);gl.bufferSubData(gl.ARRAY_BUFFER,0,from);gl.bindBuffer(gl.ARRAY_BUFFER,bTo);gl.bufferSubData(gl.ARRAY_BUFFER,0,to);
+    mix=RM?1:0;curGeo=k;if(RM)draw()}
+  function draw(){gl.uniform1f(uRotY,rotY);gl.uniform1f(uRotX,0.3);gl.uniform1f(uAspect,innerWidth/innerHeight);gl.uniform1f(uMix,mix);
+    gl.uniform2f(uOffset,innerWidth>900?0.34:0.0,innerWidth>900?0.04:0.0);gl.uniform2f(uMouse,mxN,myN);gl.clear(gl.COLOR_BUFFER_BIT);gl.drawArrays(gl.POINTS,0,N)}
+  const GEO={hero:0,flip:2,gate:4,unwritten:7,'one-rule':3,scanner:6,coinflip:5,close:1};
+  const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting&&e.target.id in GEO)onGeo(GEO[e.target.id])}),{rootMargin:'-45% 0px -45% 0px'});
+  document.querySelectorAll('section[id]').forEach(s=>io.observe(s));
+  addEventListener('resize',()=>{size();if(RM)draw()});
+  canvas.classList.add('up');
+  if(RM){draw();return}
+  addEventListener('pointermove',e=>{tmx=e.clientX/innerWidth-.5;tmy=e.clientY/innerHeight-.5});
+  (function frame(){rotY+=0.0015;if(mix<1)mix=Math.min(1,mix+0.016);mxN+=(tmx-mxN)*.04;myN+=(tmy-myN)*.04;draw();requestAnimationFrame(frame)})();
+})();
+draw();strips();let rz;addEventListener('resize',()=>{clearTimeout(rz);rz=setTimeout(draw,120)});
+</script>
+
+</body></html>
