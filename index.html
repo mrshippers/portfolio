@@ -199,13 +199,13 @@ footer{padding:28px 0 48px;color:var(--mute);font-size:13px;display:flex;justify
       <h1>Applied AI<br>engineering.</h1>
       <p class="lede">Founder of <b>StrydeOS</b>, a clinic operating system live in two UK physiotherapy practices: an AI voice receptionist that books straight into the practice-management system, patient retention measured against a randomised holdout, and cited clinical answers from local models. I build it end to end in <b>Next.js, React and TypeScript</b>, take on client builds through <b>Shippers Studio</b>, and bring eight years in MSK physiotherapy, including running my own clinic.</p>
       <div class="legend" role="group" aria-label="What the orb is made of">
-        <button data-k="0"><span class="num">504</span><span>simulated calls gate each Ava release</span></button>
+        <button data-k="0"><span class="num">505</span><span>simulated-caller scenarios gate each release</span></button>
         <button data-k="1"><span class="num">579</span><span>patients scored by Pulse</span></button>
         <button data-k="2"><span class="num">535</span><span>tests behind the Driiva cutover</span></button>
         <button data-k="3"><span class="num">835</span><span>peoples mapped in 3D</span></button>
         <button data-k="4"><span class="num">500</span><span>Evidence training examples</span></button>
       </div>
-      <p class="orb-note">The orb is <span class="num">2,953</span> points, one per number above. Point at one.</p>
+      <p class="orb-note">The orb is <span class="num">2,954</span> points, one per number above. Point at one.</p>
     </div>
   </section>
 </div>
@@ -229,23 +229,23 @@ footer{padding:28px 0 48px;color:var(--mute);font-size:13px;display:flex;justify
     <h2>Selected experience</h2>
     <div>
       <article class="role">
-        <div class="role-head"><h3>StrydeOS <span>founder and director</span></h3><span class="when">Feb 2026 to now, London</span></div>
+        <div class="role-head"><h3>StrydeOS <span>founder</span></h3><span class="when">Feb 2026 to now, London</span></div>
         <p>An operating system for UK physiotherapy clinics: a voice agent, clinical and operational intelligence over the practice-management system, and an evidence layer, in one multi-tenant product. I own engineering, product, infrastructure, security and GDPR.</p>
         <ul>
           <li><b>Ava, the voice agent.</b> Twilio into ElevenLabs Conversational AI running Claude, with webhook tools into a TypeScript booking layer that writes to Cliniko and WriteUpp.</li>
           <li><b>Pulse.</b> Scores 579 patient records at the pilot clinic into lifecycle cohorts with a risk score each, and runs re-engagement on each patient's preferred channel, measured against a randomised holdout.</li>
           <li><b>Evidence.</b> On-device RAG over open-weight models: Qwen, and a Gemma I distilled and fine-tuned for clinical reasoning. Multi-turn answers keep their sources; citations are built in code, never by the model.</li>
-          <li><b>Release gating.</b> A 504-scenario simulated-caller harness runs before each release. Below a 95% pass rate, or with any P0 failure, nothing ships.</li>
+          <li><b>Release gating.</b> A 505-scenario simulated-caller harness runs before each release. Below a 95% pass rate, or with any P0 failure, nothing ships.</li>
           <li><b>Frontend.</b> Next.js, React and TypeScript on a typed token layer, so every surface retints from one palette; WCAG contrast audited across nine routes in both themes.</li>
         </ul>
       </article>
       <article class="role">
-        <div class="role-head"><h3>Shippers Studio <span>founder</span></h3><span class="when">Jan 2026 to now, London</span></div>
+        <div class="role-head"><h3>Shippers Studio <span>product engineer</span></h3><span class="when">Jan 2026 to now, London</span></div>
         <p>My product studio: agent systems, web design and UI builds for clients and for my own ventures. Paying clients from the first month.</p>
         <ul>
           <li><b>Driiva.</b> React, Vite and Firebase web plus an Expo app over one identity layer, rebuilt and cut over in production behind a 535-test suite.</li>
           <li><b>dpsfilm.</b> A live portfolio for a London sports and fashion cinematographer: a WebGL and GSAP site built around their club and brand films, designed and shipped for the client.</li>
-          <li><b>TradeMind.</b> A voice-first operations app for UK electricians: live dictation into certificates, a compliance vault and Stripe Connect payouts. Scoped, built and handed over end to end.</li>
+          <li><b>TradeMind.</b> A voice-first operations app for UK electricians: voice dictation into certificates, a compliance vault and Stripe Connect payouts. Scoped, built and handed over end to end.</li>
         </ul>
       </article>
       <div class="role compact">
@@ -394,7 +394,7 @@ footer{padding:28px 0 48px;color:var(--mute);font-size:13px;display:flex;justify
     <div>
       <h3>TradeMind</h3>
       <p class="what">An electrician talks a job in from the van; the certificate drafts itself and is held until the customer pays.</p>
-      <dl><dt>Built with</dt><dd>Expo, Supabase, ElevenLabs Scribe Realtime, Claude, Stripe Connect</dd><dt>Detail</dt><dd>One amber, used only for the thing to press</dd></dl>
+      <dl><dt>Built with</dt><dd>Expo, Supabase, ElevenLabs Scribe, Claude, Stripe Connect</dd><dt>Detail</dt><dd>One amber, used only for the thing to press</dd></dl>
     </div>
   </article>
 
@@ -418,7 +418,7 @@ footer{padding:28px 0 48px;color:var(--mute);font-size:13px;display:flex;justify
 <script>
 (() => {
   const RM = matchMedia('(prefers-reduced-motion: reduce)').matches;
-  const COUNTS = [504, 579, 535, 835, 500];
+  const COUNTS = [505, 579, 535, 835, 500];
   const TOTAL = COUNTS.reduce((a, b) => a + b, 0);
   // cool aperture ramp from the Shippers mark, outer to inner
   const RAMP = ['#5f7aab', '#6a5bd0', '#3f62e0', '#4d8dff', '#7fb0ff'];
