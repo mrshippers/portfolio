@@ -3,16 +3,16 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Jamal Ofori-Adu</title>
-<meta name="description" content="Applied AI engineering. Founder of StrydeOS: voice agents, evaluation-gated releases, production web apps in React and TypeScript.">
-<meta property="og:title" content="Jamal Ofori-Adu">
-<meta property="og:description" content="Applied AI engineering. Founder of StrydeOS, live in two UK physiotherapy clinics.">
-<meta property="og:image" content="https://joadu.pages.dev/assets/og.jpg">
+<title>joai</title>
+<meta name="description" content="Jamal Ofori-Adu. Applied AI engineer and chartered physiotherapist. Founder of StrydeOS, live in two UK clinics: voice agents, evaluation-gated releases, interfaces people enjoy using.">
+<meta property="og:title" content="joai">
+<meta property="og:description" content="Applied AI, built inside the problem. Founder of StrydeOS, live in two UK physiotherapy clinics.">
+<meta property="og:image" content="https://joai.pages.dev/assets/og.jpg">
 <meta name="theme-color" content="#07080c">
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><circle cx='50' cy='50' r='34' fill='none' stroke='%234d8dff' stroke-width='10'/><circle cx='50' cy='50' r='9' fill='%23eef0f6'/></svg>">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@1,9..144,400;1,9..144,500&family=Hanken+Grotesk:wght@300;400;500;600;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@300;400;500;600;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
 :root{
   --bg:#07080c; --bg-2:#0c0e14; --line:#1a1e28; --line-2:#262b37;
@@ -20,6 +20,7 @@
   --blue:#4d8dff; --blue-deep:#1c50d2; --gold:#cdb76e;
   --r:4px;
   --ease:cubic-bezier(.2,.7,.1,1);
+  --rv:420ms;
 }
 *{margin:0;padding:0;box-sizing:border-box}
 html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
@@ -31,23 +32,35 @@ img,video{display:block;max-width:100%}
 .wrap{max-width:1180px;margin:0 auto;padding:0 32px}
 .num{font-family:"JetBrains Mono",ui-monospace,monospace;font-variant-numeric:tabular-nums;font-feature-settings:"tnum"}
 
+/* scroll progress */
+#prog{position:fixed;top:0;left:0;height:2px;width:100%;background:var(--gold);transform-origin:0 50%;transform:scaleX(0);z-index:9;pointer-events:none}
+
+/* reveal on scroll */
+.rv{opacity:0;transform:translateY(14px);filter:blur(6px);transition:opacity var(--rv) var(--ease),transform var(--rv) var(--ease),filter var(--rv) var(--ease)}
+.rv.in{opacity:1;transform:none;filter:none}
+
 /* top */
 .top{position:relative;z-index:3;display:flex;justify-content:space-between;align-items:center;padding:28px 0}
-.mark{font-weight:800;font-size:19px;letter-spacing:-.02em;text-decoration:none}
+.mark{font-weight:800;font-size:21px;letter-spacing:-.03em;text-decoration:none}
 .mark i{font-style:normal;color:var(--blue)}
 .top nav{display:flex;gap:28px;font-size:15px;color:var(--mute)}
 .top nav a{text-decoration:none;transition:color .2s}
 .top nav a:hover{color:var(--ink)}
 
 /* hero */
-.hero{position:relative;min-height:min(760px,100svh);display:grid;grid-template-columns:minmax(0,1fr);align-items:center}
-#orb{position:absolute;top:50%;right:-2vw;width:min(520px,44vw);aspect-ratio:1;transform:translateY(-52%);z-index:0}
-.hero-copy{position:relative;z-index:2;max-width:700px;padding:40px 0 24px}
-h1{font-weight:800;font-size:clamp(52px,8.6vw,124px);line-height:.92;letter-spacing:-.045em}
-h1 em{display:block;font-family:"Fraunces",serif;font-style:italic;font-weight:400;letter-spacing:-.02em;color:var(--gold);font-size:.4em;line-height:1.15;margin-top:.22em}
-.lede{margin-top:34px;font-size:clamp(18px,1.7vw,21px);line-height:1.55;color:var(--body);max-width:560px;font-weight:300}
+.hero{position:relative;min-height:min(780px,100svh);display:grid;grid-template-columns:minmax(0,1fr);align-items:center}
+#orb{position:absolute;top:50%;right:-2vw;width:min(520px,44vw);aspect-ratio:1;transform:translateY(-52%);z-index:0;will-change:transform,opacity}
+.hero-copy{position:relative;z-index:2;max-width:720px;padding:40px 0 24px}
+.hero-copy>*{animation:land .7s var(--ease) both}
+.hero-copy>:nth-child(2){animation-delay:.08s}
+.hero-copy>:nth-child(3){animation-delay:.16s}
+.hero-copy>:nth-child(4){animation-delay:.24s}
+@keyframes land{from{opacity:0;transform:translateY(12px);filter:blur(8px)}to{opacity:1;transform:none;filter:none}}
+h1{font-weight:800;font-size:clamp(50px,8.2vw,118px);line-height:.92;letter-spacing:-.045em}
+h1 em{display:block;font-style:normal;font-weight:300;letter-spacing:-.01em;color:var(--gold);font-size:max(19px,.3em);line-height:1.2;margin-top:.5em}
+.lede{margin-top:34px;font-size:clamp(18px,1.7vw,21px);line-height:1.55;color:var(--body);max-width:600px;font-weight:300}
 .lede b{color:var(--ink);font-weight:500}
-.legend{margin-top:44px;display:grid;grid-template-columns:repeat(5,auto);gap:0;justify-content:start;border-top:1px solid var(--line);max-width:640px}
+.legend{margin-top:44px;display:grid;grid-template-columns:repeat(5,auto);gap:0;justify-content:start;border-top:1px solid var(--line);max-width:660px}
 .legend button{all:unset;cursor:pointer;padding:14px 22px 0 0;display:grid;gap:2px;align-content:start}
 .legend .num{font-size:26px;font-weight:500;color:var(--ink);transition:color .25s}
 .legend span:last-child{text-wrap:balance;font-size:13px;color:var(--mute);line-height:1.35;transition:color .25s}
@@ -55,7 +68,6 @@ h1 em{display:block;font-family:"Fraunces",serif;font-style:italic;font-weight:4
 .legend button:hover span:last-child,.legend button.on span:last-child{color:var(--ink)}
 .legend button:focus-visible{outline-offset:6px}
 .orb-note{margin-top:18px;font-size:14px;color:var(--mute)}
-.orb-note .num{color:var(--ink)}
 
 /* tabs */
 .tabbar{position:sticky;top:0;z-index:5;background:linear-gradient(var(--bg) 70%,transparent);padding:14px 0 26px}
@@ -71,8 +83,9 @@ h1 em{display:block;font-family:"Fraunces",serif;font-style:italic;font-weight:4
 @keyframes rise{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
 
 /* work */
-.sec{display:grid;grid-template-columns:220px 1fr;gap:48px;padding:56px 0;border-top:1px solid var(--line)}
-.sec>h2{font-size:15px;font-weight:600;color:var(--mute);letter-spacing:.01em;padding-top:6px}
+.sec{display:grid;grid-template-columns:220px 1fr;gap:48px;padding:56px 0;border-top:1px solid var(--line);align-items:start}
+.sec>h2{position:sticky;top:104px;font-size:15px;font-weight:600;color:var(--mute);letter-spacing:.01em;padding-top:6px;display:flex;gap:12px;align-items:baseline}
+.sec>h2 .n{font-family:"JetBrains Mono",monospace;font-weight:400;font-size:12px;color:var(--gold)}
 .role{padding-bottom:40px}
 .role+.role{padding-top:40px;border-top:1px solid var(--line)}
 .role-head{display:flex;justify-content:space-between;gap:20px;align-items:baseline;flex-wrap:wrap}
@@ -106,6 +119,7 @@ a.proj:hover h3{color:var(--gold)}
 .edu p+p{margin-top:8px}
 
 .contact{padding:80px 0 40px;border-top:1px solid var(--line);display:grid;grid-template-columns:1fr auto;gap:40px;align-items:end}
+.contact .who{font-size:14px;color:var(--mute);margin-bottom:14px}
 .contact h2{font-weight:800;font-size:clamp(34px,5vw,64px);letter-spacing:-.04em;line-height:1}
 .contact h2 a{text-decoration:none;background:linear-gradient(var(--blue),var(--blue)) 0 100%/0 2px no-repeat;transition:background-size .5s var(--ease)}
 .contact h2 a:hover{background-size:100% 2px}
@@ -122,8 +136,10 @@ a.proj:hover h3{color:var(--gold)}
 .piece.wide .stage{aspect-ratio:16/10}
 .piece.wide .cap{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.2fr);gap:48px;align-items:start}
 .piece.wide .cap dl{margin-top:4px}
-.piece:nth-of-type(even) .frame{order:2}
-.frame{position:relative;border:1px solid var(--line-2);border-radius:var(--r);background:var(--bg-2);overflow:hidden;box-shadow:0 40px 80px -40px rgba(0,0,0,.8)}
+.piece:nth-of-type(even) .frame,.piece:nth-of-type(even) .duo,.piece:nth-of-type(even) .phones{order:2}
+.piece.pending{display:none}
+.frame{position:relative;border:1px solid var(--line-2);border-radius:var(--r);background:var(--bg-2);overflow:hidden;box-shadow:0 40px 80px -40px rgba(0,0,0,.8);transition:border-color .3s,transform .4s var(--ease)}
+.frame:hover{border-color:#3a4256;transform:translateY(-2px)}
 .chrome{display:flex;align-items:center;gap:12px;height:34px;padding:0 12px;border-bottom:1px solid var(--line);font-size:12.5px;color:var(--mute)}
 .chrome i{width:9px;height:9px;border-radius:50%;background:#2a2f3b;display:inline-block;margin-right:-6px}
 .chrome .url{flex:1;text-align:center;font-family:"JetBrains Mono",monospace;font-size:12px}
@@ -131,18 +147,21 @@ a.proj:hover h3{color:var(--gold)}
 .chrome button:hover{border-color:var(--blue)}
 .stage{position:relative;aspect-ratio:16/10;background:#000}
 .stage>video,.stage>img,.stage>iframe{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:top;border:0}
+.stage>img[data-px]{transform:scale(1.08) translateY(var(--px,0));will-change:transform}
 .piece h3{font-size:30px;font-weight:600;letter-spacing:-.025em;line-height:1.1}
 .piece .what{margin-top:12px;color:var(--body)}
 .piece dl{margin-top:22px;display:grid;grid-template-columns:auto 1fr;gap:8px 18px;font-size:15px}
 .piece dt{color:var(--mute)}
 .piece dd{color:var(--body)}
 .piece .go{display:inline-block;margin-top:22px;font-size:15px;color:var(--ink);text-decoration:none;border-bottom:1px solid var(--blue);padding-bottom:2px}
-.duo{display:grid;grid-template-columns:1fr 1fr;gap:16px}
-.duo{align-items:start}
+.duo{display:grid;grid-template-columns:1fr 1fr;gap:16px;align-items:start}
 .phones{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;align-items:end}
-.phone{border:1px solid var(--line-2);border-radius:26px;padding:7px;background:#0b0c10}
+.phone{border:1px solid var(--line-2);border-radius:26px;padding:7px;background:#0b0c10;transition:transform .5s var(--ease)}
 .phone img{border-radius:20px;width:100%;aspect-ratio:780/1688;object-fit:cover}
 .phone:nth-child(2){transform:translateY(-28px)}
+.phones:hover .phone:nth-child(1){transform:translateY(6px)}
+.phones:hover .phone:nth-child(2){transform:translateY(-36px)}
+.phones:hover .phone:nth-child(3){transform:translateY(6px)}
 .self{text-wrap:balance;margin:72px auto 0;max-width:760px;text-align:center;color:var(--mute);font-size:15px}
 .self a{color:var(--ink)}
 
@@ -158,6 +177,7 @@ footer{padding:28px 0 48px;color:var(--mute);font-size:13px;display:flex;justify
   .legend{grid-template-columns:repeat(3,1fr)}
   .legend button{padding-right:10px}
   .sec{grid-template-columns:1fr;gap:20px;padding:40px 0}
+  .sec>h2{position:static}
   .proj{grid-template-columns:64px 1fr;gap:16px}
   .proj canvas{width:64px;height:64px}
   .proj .rc{grid-column:2;text-align:left;display:flex;gap:10px;align-items:baseline}
@@ -166,7 +186,7 @@ footer{padding:28px 0 48px;color:var(--mute);font-size:13px;display:flex;justify
   .contact{grid-template-columns:1fr}
   .links{text-align:left}
   .piece,.piece:nth-of-type(even){grid-template-columns:1fr;gap:24px;padding:40px 0}
-  .piece:nth-of-type(even) .frame{order:0}
+  .piece:nth-of-type(even) .frame,.piece:nth-of-type(even) .duo,.piece:nth-of-type(even) .phones{order:0}
   .duo{grid-template-columns:1fr}
   .piece.wide .cap{grid-template-columns:1fr;gap:20px}
   .piece.wide .stage{aspect-ratio:16/10}
@@ -174,48 +194,53 @@ footer{padding:28px 0 48px;color:var(--mute);font-size:13px;display:flex;justify
   .chrome .url{text-align:left;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;min-width:0}
   .phones{gap:10px}
   .phone{border-radius:18px;padding:4px}.phone img{border-radius:14px}
+  .phone:nth-child(2),.phones:hover .phone:nth-child(2){transform:translateY(-14px)}
   footer{flex-direction:column}
 }
 @media (prefers-reduced-motion:reduce){
   *{animation:none!important;transition:none!important;scroll-behavior:auto!important}
+  .rv{opacity:1;transform:none;filter:none}
+  .stage>img[data-px]{transform:none}
 }
 </style>
 </head>
 <body>
+<div id="prog" aria-hidden="true"></div>
 
 <div class="wrap">
   <header class="top">
-    <a class="mark" href="#">Jamal Ofori-Adu<i>.</i></a>
+    <a class="mark" href="#">joai<i>.</i></a>
     <nav aria-label="profiles">
-      <a href="https://github.com/mrshippers">GitHub</a>
-      <a href="https://www.linkedin.com/in/joaphysio">LinkedIn</a>
-      <a class="hide-s" href="mailto:jamal@strydeos.com">jamal@strydeos.com</a>
+      <a href="https://shippersstudio.io">studio</a>
+      <a href="https://github.com/mrshippers">github</a>
+      <a href="https://www.linkedin.com/in/joaphysio">linkedin</a>
+      <a class="hide-s" href="mailto:jamal@strydeos.com">email</a>
     </nav>
   </header>
 
   <section class="hero">
     <canvas id="orb" aria-hidden="true"></canvas>
     <div class="hero-copy">
-      <h1>Applied AI<br>engineering.<em>Physiotherapy background.</em></h1>
-      <p class="lede">Founder of <b>StrydeOS</b>, a clinic operating system live in two UK physiotherapy practices: an AI voice receptionist that books straight into the practice-management system, patient retention measured against a randomised holdout, and cited clinical answers from local models. I build it end to end in <b>Next.js, React and TypeScript</b>, take on client builds through <b>Shippers Studio</b>, and bring eight years in MSK physiotherapy, including running my own clinic.</p>
+      <h1>applied AI,<br>built inside<br>the problem.<em>creations of niche pursuit.</em></h1>
+      <p class="lede">I'm a chartered physio who co-owns a clinic in West Hampstead and got tired of waiting for someone else to fix clinic software. So I built it. <b>StrydeOS</b> answers the clinic phone, books the slot, scores every patient for drop-off risk and cites its clinical answers from code, not from the model. Live in two clinics, built end to end in <b>Next.js and TypeScript</b>. Everything else on this page comes from the same habit: find the corner nobody is building for, then ship something I'd want to be judged on.</p>
       <div class="legend" role="group" aria-label="What the orb is made of">
-        <button data-k="0"><span class="num">505</span><span>simulated-caller scenarios gate each release</span></button>
+        <button data-k="0"><span class="num">505</span><span>simulated callers before each release</span></button>
         <button data-k="1"><span class="num">579</span><span>patients scored by Pulse</span></button>
         <button data-k="2"><span class="num">535</span><span>tests behind the Driiva cutover</span></button>
         <button data-k="3"><span class="num">835</span><span>peoples mapped in 3D</span></button>
-        <button data-k="4"><span class="num">500</span><span>Evidence training examples</span></button>
+        <button data-k="4"><span class="num">500</span><span>training examples for Evidence</span></button>
       </div>
-      <p class="orb-note">The orb is <span class="num">2,954</span> points, one per number above. Point at one.</p>
+      <p class="orb-note">The orb is drawn from these five. Point at one.</p>
     </div>
   </section>
 </div>
 
-<div class="tabbar">
+<div class="tabbar" id="tabbar">
   <div class="wrap">
     <div class="tabs" role="tablist" aria-label="Portfolio" data-on="work">
       <span class="ind" aria-hidden="true"></span>
-      <button role="tab" id="t-work" aria-controls="work" aria-selected="true">The work<small>roles, products, receipts</small></button>
-      <button role="tab" id="t-craft" aria-controls="craft" aria-selected="false" tabindex="-1">The craft<small>interfaces, live and recorded</small></button>
+      <button role="tab" id="t-work" aria-controls="work" aria-selected="true">the work<small>what I've done</small></button>
+      <button role="tab" id="t-craft" aria-controls="craft" aria-selected="false" tabindex="-1">the craft<small>what it looks like</small></button>
     </div>
   </div>
 </div>
@@ -226,69 +251,69 @@ footer{padding:28px 0 48px;color:var(--mute);font-size:13px;display:flex;justify
 <section class="panel on" id="work" role="tabpanel" aria-labelledby="t-work">
 
   <div class="sec">
-    <h2>Selected experience</h2>
+    <h2 class="rv"><span class="n">01</span>experience</h2>
     <div>
-      <article class="role">
+      <article class="role rv">
         <div class="role-head"><h3>StrydeOS <span>founder</span></h3><span class="when">Feb 2026 to now, London</span></div>
-        <p>An operating system for UK physiotherapy clinics: a voice agent, clinical and operational intelligence over the practice-management system, and an evidence layer, in one multi-tenant product. I own engineering, product, infrastructure, security and GDPR.</p>
+        <p>An operating system for UK MSK clinics that sits on top of the practice-management system they already run. I own all of it: engineering, product, infrastructure, security and the GDPR paperwork.</p>
         <ul>
-          <li><b>Ava, the voice agent.</b> Twilio into ElevenLabs Conversational AI running Claude, with webhook tools into a TypeScript booking layer that writes to Cliniko and WriteUpp.</li>
-          <li><b>Pulse.</b> Scores 579 patient records at the pilot clinic into lifecycle cohorts with a risk score each, and runs re-engagement on each patient's preferred channel, measured against a randomised holdout.</li>
-          <li><b>Evidence.</b> On-device RAG over open-weight models: Qwen, and a Gemma I distilled and fine-tuned for clinical reasoning. Multi-turn answers keep their sources; citations are built in code, never by the model.</li>
-          <li><b>Release gating.</b> A 505-scenario simulated-caller harness runs before each release. Below a 95% pass rate, or with any P0 failure, nothing ships.</li>
-          <li><b>Frontend.</b> Next.js, React and TypeScript on a typed token layer, so every surface retints from one palette; WCAG contrast audited across nine routes in both themes.</li>
+          <li><b>Ava</b> answers the clinic phone. Twilio into ElevenLabs conversational AI running Claude, with tool calls into a TypeScript booking layer that writes to Cliniko and WriteUpp.</li>
+          <li><b>Pulse</b> sorts patients into lifecycle cohorts, scores drop-off risk and runs re-engagement on whatever channel each patient actually replies to. Measured against a randomised holdout, so the number it reports is a real one.</li>
+          <li><b>Evidence</b> gives cited clinical answers from local open-weight models, including a Gemma I distilled and fine-tuned myself. Citations are built in code, never written by the model.</li>
+          <li><b>The release gate.</b> 505 simulated callers run before anything ships. Under 95%, or a single P0, and it doesn't.</li>
+          <li><b>The frontend</b> is Next.js, React and TypeScript on a typed token layer, so every surface retints from one palette. Contrast audited in both themes.</li>
         </ul>
       </article>
-      <article class="role">
+      <article class="role rv">
         <div class="role-head"><h3>Shippers Studio <span>product engineer</span></h3><span class="when">Jan 2026 to now, London</span></div>
-        <p>My product studio: agent systems, web design and UI builds for clients and for my own ventures. Paying clients from the first month.</p>
+        <p>My studio. Agent systems, interfaces and 3D for clients and for my own ventures. The first invoice went out on 6 May 2026 and it got paid.</p>
         <ul>
-          <li><b>Driiva.</b> React, Vite and Firebase web plus an Expo app over one identity layer, rebuilt and cut over in production behind a 535-test suite.</li>
-          <li><b>dpsfilm.</b> A live portfolio for a London sports and fashion cinematographer: a WebGL and GSAP site built around their club and brand films, designed and shipped for the client.</li>
-          <li><b>TradeMind.</b> A voice-first operations app for UK electricians: voice dictation into certificates, a compliance vault and Stripe Connect payouts. Scoped, built and handed over end to end.</li>
+          <li><b>Driiva.</b> Insurtech. React, Vite and Firebase on the web plus an Expo app, both over one identity layer, rebuilt and cut over in production.</li>
+          <li><b>dpsfilm.</b> A portfolio site for a London sports and fashion cinematographer. WebGL and GSAP built around his club and brand films.</li>
+          <li><b>TradeMind.</b> A voice-first operations app for UK electricians. Design system and brand book first, then the app: dictation into certificates, a compliance vault, Stripe Connect payouts. Scoped, built and handed over.</li>
         </ul>
       </article>
-      <div class="role compact">
+      <div class="role compact rv">
         <div><div class="role-head"><h3>Spires Physiotherapy <span>managing director, senior physio</span></h3><span class="when">2021 to now</span></div>
-          <p>Grew to four clinicians with year-on-year revenue growth; 150+ five-star reviews. Led AI adoption across the practice, cutting clinician admin by roughly 40%.</p></div>
-        <div><div class="role-head"><h3>Bupa <span>remote MSK triage physiotherapist</span></h3><span class="when">2025 to now</span></div>
-          <p>Triage and caseload management for national insurer services, inside Meddbase and Citrix. Entered Bupa Accelerate 2026, the internal AI hackathon.</p></div>
+          <p>Co-own and run a four-clinician clinic with 150+ five-star reviews. Put AI into the admin and took roughly 40% of it off the clinicians.</p></div>
+        <div><div class="role-head"><h3>Bupa <span>remote MSK triage physiotherapist</span></h3><span class="when">2025 to 2026</span></div>
+          <p>Triage and caseload management for national insurer services, inside Meddbase and Citrix. Entered Bupa Accelerate 2026, the internal AI hack.</p></div>
         <div><div class="role-head"><h3>Square Health <span>remote MSK physiotherapist</span></h3><span class="when">2023 to 2025</span></div>
-          <p>Remote MSK caseloads across several insurer brands as an independent supplier: rehabilitation and patient education by video.</p></div>
+          <p>Remote MSK caseloads across several insurer brands as an independent supplier. Rehab and patient education by video.</p></div>
         <div><div class="role-head"><h3>CodeVerse <span>business development manager</span></h3><span class="when">2022 to 2023</span></div>
-          <p>Closed enterprise accounts in banking, media and consulting, placing technologists from under-represented communities at Spotify, Sky and Accenture. Ran the technical demos, including live prototypes in Python and HTML.</p></div>
+          <p>Closed enterprise accounts at Spotify, Sky and Accenture, placing technologists from under-represented communities. Ran the technical demos myself, live prototypes included.</p></div>
         <div><div class="role-head"><h3>Connect Health, and Hills Physical Developments</h3><span class="when">2018 to 2021</span></div>
-          <p>Graduate to senior physiotherapist in 18 months at the UK's largest integrated MSK provider. In 2021, private MSK practice with S&amp;C coaches at Hills alongside it.</p></div>
+          <p>Graduate to senior physiotherapist in 18 months at the UK's largest integrated MSK provider. Private MSK practice alongside S&amp;C coaches at Hills from 2021.</p></div>
       </div>
     </div>
   </div>
 
   <div class="sec">
-    <h2>Products, with receipts</h2>
+    <h2 class="rv"><span class="n">02</span>products, with receipts</h2>
     <div>
-      <a class="proj" href="https://strydeos.com" data-k="0"><canvas aria-hidden="true"></canvas><div><h3>StrydeOS <small>live, two clinics</small></h3><p>Voice agent, patient intelligence and evidence in one clinic platform.</p></div><div class="rc"><span class="num">5,264</span><span>tests in the platform suite</span></div></a>
-      <a class="proj" href="https://github.com/mrshippers/evidence" data-k="4"><canvas aria-hidden="true"></canvas><div><h3>Evidence <small>open source</small></h3><p>Cited clinical answers from local models; the failing metric is published too.</p></div><div class="rc"><span class="num">100%</span><span>red-flag recall, misses published</span></div></a>
-      <a class="proj" href="https://peoples-of-africa.pages.dev" data-k="3"><canvas aria-hidden="true"></canvas><div><h3>Peoples of Africa <small>WebGL, open source</small></h3><p>A 3D terrain diorama of 835 ethnographic groups joined across three academic datasets.</p></div><div class="rc"><span class="num">6.7&times;</span><span>faster load, 37s to 5.5s</span></div></a>
-      <a class="proj" href="https://injury-time.vercel.app" data-k="-1"><canvas aria-hidden="true"></canvas><div><h3>Injury Time <small>Next.js, Supabase, R3F</small></h3><p>Football management for non-league clubs: squad load, injury risk and readiness.</p></div><div class="rc"><span class="num">16</span><span>PRs merged in under three days</span></div></a>
-      <div class="proj" data-k="2"><canvas aria-hidden="true"></canvas><div><h3>Driiva <small>insurtech, client build</small></h3><p>Web and mobile over one identity layer; insurer and Stripe webhooks hardened for production.</p></div><div class="rc"><span class="num">535</span><span>tests green at cutover</span></div></div>
+      <a class="proj rv" href="https://strydeos.com" data-k="0"><canvas aria-hidden="true"></canvas><div><h3>StrydeOS <small>live, two clinics</small></h3><p>Voice agent, patient intelligence and evidence on one clinic platform.</p></div><div class="rc"><span class="num">5,264</span><span>tests in the platform suite</span></div></a>
+      <a class="proj rv" href="https://github.com/mrshippers/evidence" data-k="4"><canvas aria-hidden="true"></canvas><div><h3>Evidence <small>open source</small></h3><p>Cited clinical answers from local models. The failing metric is published too.</p></div><div class="rc"><span class="num">100%</span><span>red-flag recall, misses published</span></div></a>
+      <a class="proj rv" href="https://peoples-of-africa.pages.dev" data-k="3"><canvas aria-hidden="true"></canvas><div><h3>Peoples of Africa <small>WebGL, open source</small></h3><p>A 3D terrain diorama of 835 ethnographic groups joined across three academic datasets.</p></div><div class="rc"><span class="num">6.7&times;</span><span>faster load, 37s to 5.5s</span></div></a>
+      <a class="proj rv" href="https://injury-time.vercel.app" data-k="-1"><canvas aria-hidden="true"></canvas><div><h3>Injury Time <small>Next.js, Supabase, R3F</small></h3><p>Football management for non-league clubs: squad load, injury risk, readiness.</p></div><div class="rc"><span class="num">16</span><span>PRs merged in under three days</span></div></a>
+      <div class="proj rv" data-k="2"><canvas aria-hidden="true"></canvas><div><h3>Driiva <small>insurtech, client build</small></h3><p>Web and mobile over one identity layer. Insurer and Stripe webhooks hardened for production.</p></div><div class="rc"><span class="num">535</span><span>tests green at cutover</span></div></div>
     </div>
   </div>
 
   <div class="sec">
-    <h2>Skills</h2>
+    <h2 class="rv"><span class="n">03</span>what I reach for</h2>
     <div class="skills">
-      <div><h3>Frontend</h3><p>React, Next.js, TypeScript, Tailwind, Three.js and React Three Fiber, motion design, accessible interfaces.</p></div>
-      <div><h3>Agent systems</h3><p>Tool-using agents, orchestration across a fleet, memory between runs, prompt and context design.</p></div>
-      <div><h3>Evaluation</h3><p>Release-gating harnesses, simulated callers, red-flag recall testing, contract tests on every schema.</p></div>
-      <div><h3>Models and data</h3><p>RAG on sqlite-vec, local open-weight models, distillation and LoRA fine-tuning, MCP servers.</p></div>
-      <div><h3>Voice</h3><p>Twilio, ElevenLabs Conversational AI, webhook tool design, practice-management booking integrations.</p></div>
-      <div><h3>Platform</h3><p>Firebase, Firestore, Postgres, Supabase, Vercel, Cloudflare, GitHub CI/CD, GDPR documentation.</p></div>
+      <div class="rv"><h3>Frontend</h3><p>React, Next.js, TypeScript, Tailwind, Three.js and React Three Fiber, motion design, accessible interfaces.</p></div>
+      <div class="rv"><h3>Agent systems</h3><p>Tool-using agents, orchestration across a fleet, memory between runs, prompt and context design.</p></div>
+      <div class="rv"><h3>Evaluation</h3><p>Release-gating harnesses, simulated callers, red-flag recall testing, contract tests on every schema.</p></div>
+      <div class="rv"><h3>Models and data</h3><p>RAG on sqlite-vec, local open-weight models, distillation and LoRA fine-tuning, MCP servers.</p></div>
+      <div class="rv"><h3>Voice</h3><p>Twilio, ElevenLabs conversational AI, webhook tool design, practice-management booking integrations.</p></div>
+      <div class="rv"><h3>Platform</h3><p>Firebase, Firestore, Postgres, Supabase, Vercel, Cloudflare, GitHub CI/CD, GDPR documentation.</p></div>
     </div>
   </div>
 
   <div class="sec edu">
-    <h2>Education and volunteering</h2>
-    <div>
+    <h2 class="rv"><span class="n">04</span>education</h2>
+    <div class="rv">
       <p>BSc (Hons) Physiotherapy, 2:1, University of East London, 2018.</p>
       <p>HCPC registered. Member of the Chartered Society of Physiotherapy.</p>
       <p>Volunteer, medical team, IAAF World Athletics Championships, London 2017.</p>
@@ -299,7 +324,7 @@ footer{padding:28px 0 48px;color:var(--mute);font-size:13px;display:flex;justify
 
 <!-- CRAFT -->
 <section class="panel" id="craft" role="tabpanel" aria-labelledby="t-craft" hidden>
-  <p class="craft-intro">Everything here is running somewhere. The recordings are real sessions; switch any frame to the live site and use it in place.</p>
+  <p class="craft-intro">All of it is live. The recordings are real sessions, and any frame swaps to the live site so you can use it in place.</p>
 
   <article class="piece wide">
     <div class="frame">
@@ -314,6 +339,19 @@ footer{padding:28px 0 48px;color:var(--mute);font-size:13px;display:flex;justify
     </div>
   </article>
 
+  <!-- slots: each hides until its file is listed in assets/manifest.json -->
+  <article class="piece pending">
+    <div class="frame">
+      <div class="chrome"><span class="url">bypass</span></div>
+      <div class="stage"><img data-src="assets/bypass.jpg" alt="Bypass: two parametric turbofan engines exploded apart, dimension lines drawn over the parts" data-px></div>
+    </div>
+    <div>
+      <h3>Bypass</h3>
+      <p class="what">A parametric turbofan study. Two engines at true scale, every part a Three.js primitive built from a parameters object, no model files anywhere. Explode it, cut a section through it, spool the throttle and watch the afterburner light past 80%.</p>
+      <dl><dt>Built with</dt><dd>Three.js, one build function, single HTML file</dd><dt>Detail</dt><dd>Dimension lines are projected from the real bounding boxes, so they stay true when a part moves</dd></dl>
+    </div>
+  </article>
+
   <article class="piece">
     <div class="frame">
       <div class="chrome"><span class="url">shippersstudio.io</span><button data-live="https://shippersstudio.io">Open live here</button></div>
@@ -321,16 +359,28 @@ footer{padding:28px 0 48px;color:var(--mute);font-size:13px;display:flex;justify
     </div>
     <div>
       <h3>Shippers Studio</h3>
-      <p class="what">The studio site is a six-act scroll driving one WebGL aperture of 92,000 points, which resolves into type as you read.</p>
+      <p class="what">The studio site. A six-act scroll drives one WebGL aperture of 92,000 points, which resolves into type as you read.</p>
       <dl><dt>Built with</dt><dd>WebGL2 point cloud, GSAP, hand-set type</dd><dt>Detail</dt><dd>A command palette sits behind the / key</dd></dl>
       <a class="go" href="https://shippersstudio.io">Visit shippersstudio.io</a>
+    </div>
+  </article>
+
+  <article class="piece pending">
+    <div class="frame">
+      <div class="chrome"><span class="url">west hampstead renovation</span></div>
+      <div class="stage"><img data-src="assets/renovation.jpg" alt="Rendered walkthrough of the West Hampstead clinic renovation" data-px></div>
+    </div>
+    <div>
+      <h3>West Hampstead renovation</h3>
+      <p class="what">The clinic's renovation, rendered before a wall moved, so the people paying for it could walk the room and argue about it with something in front of them.</p>
+      <dl><dt>Built with</dt><dd>Three.js, procedural materials, hand-rolled orbit and walk controls</dd><dt>Detail</dt><dd>Six camera positions, one per decision that needed making</dd></dl>
     </div>
   </article>
 
   <article class="piece">
     <div class="frame">
       <div class="chrome"><span class="url">dpsfilm.netlify.app</span><button data-live="https://dpsfilm.netlify.app">Open live here</button></div>
-      <div class="stage"><img src="assets/dpsfilm.jpg" alt="dpsfilm home: a sport, fashion and culture cinematographer's site, DPS set large in a high-contrast serif" loading="lazy"></div>
+      <div class="stage"><img src="assets/dpsfilm.jpg" alt="dpsfilm home: a sport, fashion and culture cinematographer's site, DPS set large in a high-contrast serif" loading="lazy" data-px></div>
     </div>
     <div>
       <h3>dpsfilm</h3>
@@ -340,10 +390,22 @@ footer{padding:28px 0 48px;color:var(--mute);font-size:13px;display:flex;justify
     </div>
   </article>
 
+  <article class="piece pending">
+    <div class="frame">
+      <div class="chrome"><span class="url">trademind design system</span></div>
+      <div class="stage"><img data-src="assets/tm-system.jpg" alt="TradeMind design system: wordmark, monogram, colour tokens and a ten-screen mobile kit" data-px></div>
+    </div>
+    <div>
+      <h3>TradeMind, designed first</h3>
+      <p class="what">Before a line of app code: a ten-screen mobile kit, the wordmark and monogram, the colour and type tokens, and a brand book with the don'ts written down. The build inherited all of it.</p>
+      <dl><dt>Built with</dt><dd>Design tokens, light mode only, sentence case, numbers up front</dd><dt>Detail</dt><dd>Trade in charcoal, Mind in amber, and the full stop is amber too</dd></dl>
+    </div>
+  </article>
+
   <article class="piece" id="wr">
     <div class="frame">
-      <div class="chrome"><span class="url">joadu.pages.dev/week-resolved</span><button data-live="week-resolved/">Open live here</button></div>
-      <div class="stage"><img src="assets/week-resolved.jpg" alt="The week, resolved, edition 2.3: twelve days of commits drawn as a tape, one mark per commit, a lane per repository" loading="lazy"></div>
+      <div class="chrome"><span class="url">joai.pages.dev/week-resolved</span><button data-live="week-resolved/">Open live here</button></div>
+      <div class="stage"><img src="assets/week-resolved.jpg" alt="The week, resolved, edition 2.3: twelve days of commits drawn as a tape, one mark per commit, a lane per repository" loading="lazy" data-px></div>
     </div>
     <div>
       <h3>The week, resolved</h3>
@@ -357,31 +419,55 @@ footer{padding:28px 0 48px;color:var(--mute);font-size:13px;display:flex;justify
     <div class="duo">
       <div class="frame">
         <div class="chrome"><span class="url">strydeos.com</span><button data-live="https://strydeos.com">Open live here</button></div>
-        <div class="stage"><img src="assets/strydeos.jpg" alt="StrydeOS marketing site hero: The Clinic OS for private practice" loading="lazy"></div>
+        <div class="stage"><img src="assets/strydeos.jpg" alt="StrydeOS home: The Clinic OS for private practice" loading="lazy" data-px></div>
       </div>
       <div class="frame">
-        <div class="chrome"><span class="url">portal, demo clinic</span></div>
-        <div class="stage"><img src="assets/portal.jpg" alt="StrydeOS portal home in demo mode, leading with one sentence about patients with nothing booked next" loading="lazy"></div>
+        <div class="chrome"><span class="url">strydeos.com/ava</span><button data-live="https://strydeos.com/ava">Open live here</button></div>
+        <div class="stage"><img src="assets/ava.jpg" alt="Ava's page: a caller asks for a shoulder appointment, Ava offers two slots and books Thursday" loading="lazy" data-px></div>
       </div>
     </div>
     <div>
       <h3>StrydeOS</h3>
-      <p class="what">The portal leads with one sentence about the clinic, then the record underneath it. Owners act on the sentence; the tiles are there to check it.</p>
-      <dl><dt>Built with</dt><dd>Next.js, TypeScript, Tailwind, Firebase</dd><dt>Detail</dt><dd>Status never carried by colour alone; contrast audited in both themes</dd></dl>
-      <a class="go" href="https://portal.strydeos.com/login?demo=1">Try the demo clinic</a>
+      <p class="what">The product site and Ava's page. Ava's page shows a call as it happens: the caller, the slot offered, the booking written back and the text sent. The portal underneath leads with one sentence about the clinic; owners act on the sentence and use the tiles to check it.</p>
+      <dl><dt>Built with</dt><dd>Next.js, TypeScript, Tailwind, Firebase</dd><dt>Detail</dt><dd>Status is never carried by colour alone</dd></dl>
+      <a class="go" href="https://portal.strydeos.com/login?demo=1">Open the portal</a>
+    </div>
+  </article>
+
+  <article class="piece pending">
+    <div class="frame">
+      <div class="chrome"><span class="url">home-screen marks</span></div>
+      <div class="stage"><img data-src="assets/icons.jpg" alt="Four home-screen icons: an eclipse for Oracle, a scent trail for Sillage, a clapper board for Slate, the aperture for Shippers" data-px></div>
+    </div>
+    <div>
+      <h3>Marks for the fleet</h3>
+      <p class="what">Home-screen icons for four of my own apps. An eclipse for Oracle, a single scent trail for Sillage, a clapper board on griptape for Slate, the aperture for Shippers. Drawn in SVG, exported at five sizes, wired into the head of each site.</p>
+      <dl><dt>Built with</dt><dd>SVG, Playwright for the exports</dd><dt>Detail</dt><dd>Each one still reads at 32px, which is where most icon sets fall over</dd></dl>
     </div>
   </article>
 
   <article class="piece">
     <div class="frame">
       <div class="chrome"><span class="url">injury-time.vercel.app</span><button data-live="https://injury-time.vercel.app">Open live here</button></div>
-      <div class="stage"><img src="assets/injury.jpg" alt="Injury Time hub for Belstone: 27 points with a season chart against promotion pace" loading="lazy"></div>
+      <div class="stage"><img src="assets/injury.jpg" alt="Injury Time hub for Belstone: 27 points with a season chart against promotion pace" loading="lazy" data-px></div>
     </div>
     <div>
       <h3>Injury Time</h3>
       <p class="what">The hub reads the season as a sentence a manager would say, with the points line plotted against promotion and play-off pace.</p>
       <dl><dt>Built with</dt><dd>Next.js, Supabase, React Three Fiber</dd><dt>Detail</dt><dd>A real club in read-only; switch to the fictional club to try everything</dd></dl>
       <a class="go" href="https://injury-time.vercel.app">Open the hub</a>
+    </div>
+  </article>
+
+  <article class="piece pending">
+    <div class="frame">
+      <div class="chrome"><span class="url">room scan viewer</span></div>
+      <div class="stage"><img data-src="assets/splat.jpg" alt="A gaussian splat scan of a room, viewed from inside" data-px></div>
+    </div>
+    <div>
+      <h3>Room scan viewer</h3>
+      <p class="what">A gaussian splat viewer for phone scans of real rooms. Orbit it or walk it, drop a scan on it, share it with a link. The first real capture is a clinic, so a prospective patient can see the treatment room before they book.</p>
+      <dl><dt>Built with</dt><dd>PlayCanvas gsplat, single HTML file, SOG and PLY input</dd><dt>Detail</dt><dd>Progress bar wired to the engine's real load events, not a timer</dd></dl>
     </div>
   </article>
 
@@ -393,27 +479,29 @@ footer{padding:28px 0 48px;color:var(--mute);font-size:13px;display:flex;justify
     </div>
     <div>
       <h3>TradeMind</h3>
-      <p class="what">An electrician talks a job in from the van; the certificate drafts itself and is held until the customer pays.</p>
+      <p class="what">An electrician talks a job in from the van. The certificate drafts itself and is held until the customer pays.</p>
       <dl><dt>Built with</dt><dd>Expo, Supabase, ElevenLabs Scribe, Claude, Stripe Connect</dd><dt>Detail</dt><dd>One amber, used only for the thing to press</dd></dl>
     </div>
   </article>
 
-  <p class="self">This page is hand-built, no framework. The orb at the top is drawn from the five numbers beside it. <a href="https://github.com/mrshippers/portfolio">Read the source</a>.</p>
+  <p class="self">Hand-built, no framework. The orb at the top is the five numbers beside it. <a href="https://github.com/mrshippers/portfolio">Read the source</a>.</p>
 </section>
 
-<section class="contact">
+<section class="contact rv">
   <div>
+    <p class="who">Jamal Ofori-Adu, London</p>
     <h2><a href="mailto:jamal@strydeos.com">jamal@strydeos.com</a></h2>
-    <p>Open to applied AI and frontend engineering roles in London or remote.</p>
+    <p>Open to applied AI and frontend roles, London or remote, and to client builds through Shippers Studio.</p>
   </div>
   <div class="links">
     <a href="https://github.com/mrshippers">github.com/mrshippers</a>
     <a href="https://www.linkedin.com/in/joaphysio">linkedin.com/in/joaphysio</a>
+    <a href="https://shippersstudio.io">shippersstudio.io</a>
   </div>
 </section>
 </main>
 
-<footer class="wrap"><span>London, 2026</span><span>Hanken Grotesk, Fraunces, JetBrains Mono</span></footer>
+<footer class="wrap"><span>London, 2026</span><span>Hanken Grotesk, JetBrains Mono</span></footer>
 
 <script>
 (() => {
@@ -441,7 +529,7 @@ footer{padding:28px 0 48px;color:var(--mute);font-size:13px;display:flex;justify
     }
     start += span + GAP;
   });
-  let active = -1, glow = [0, 0, 0, 0, 0], W = 0, H = 0, dpr = 1, mx = 0, my = 0, visible = true;
+  let active = -1, glow = [0, 0, 0, 0, 0], W = 0, H = 0, dpr = 1, mx = 0, my = 0, visible = true, sy = 0, sv = 0;
   function size() {
     dpr = Math.min(2, devicePixelRatio || 1);
     const b = cv.getBoundingClientRect(); W = b.width; H = b.height;
@@ -449,18 +537,21 @@ footer{padding:28px 0 48px;color:var(--mute);font-size:13px;display:flex;justify
   }
   function draw(t) {
     ctx.clearRect(0, 0, W, H);
-    const cx = W / 2 + mx * 14, cy = H / 2 + my * 14, rad = W * 0.46, rot = t * 0.00004;
+    // the orb opens as you scroll away from it: the ring widens and thins out
+    const open = Math.min(1, sy / 700);
+    const cx = W / 2 + mx * 14, cy = H / 2 + my * 14, rad = W * (0.46 + open * 0.12), rot = t * 0.00004 + sy * 0.0006;
     for (let k = 0; k < 5; k++) glow[k] += ((active === k ? 1 : 0) - glow[k]) * 0.2;
     // lens
     ctx.beginPath(); ctx.arc(cx, cy, rad * 0.47, 0, 6.283);
-    ctx.strokeStyle = 'rgba(77,141,255,.45)'; ctx.lineWidth = 1; ctx.stroke();
+    ctx.strokeStyle = 'rgba(77,141,255,' + (0.45 * (1 - open)) + ')'; ctx.lineWidth = 1; ctx.stroke();
+    const fade = 1 - open * 0.75;
     for (const p of pts) {
       const breathe = 1 + Math.sin(t * 0.0006 + p.w) * 0.012;
       const a = p.a + rot * (1 + p.z * 0.15);
       const x = cx + Math.cos(a) * p.r * rad * breathe;
       const y = cy + Math.sin(a) * p.r * rad * breathe * 0.98;
       const g = glow[p.k], dim = active >= 0 && active !== p.k ? 0.12 : 1;
-      ctx.globalAlpha = Math.min(1, (0.5 + (p.z + 1) * 0.24) * dim + g * 0.5);
+      ctx.globalAlpha = Math.min(1, (0.5 + (p.z + 1) * 0.24) * dim + g * 0.5) * fade;
       ctx.fillStyle = g > 0.3 ? '#cdb76e' : p.c;
       const s = p.s * (1 + g);
       ctx.fillRect(x - s / 2, y - s / 2, s, s);
@@ -509,6 +600,37 @@ footer{padding:28px 0 48px;color:var(--mute);font-size:13px;display:flex;justify
     d();
   });
 
+  /* scroll: progress rule, orb state, frame parallax */
+  const prog = document.getElementById('prog');
+  const px = [...document.querySelectorAll('img[data-px]')];
+  let ticking = false;
+  function onScroll() {
+    sy = scrollY;
+    if (ticking) return; ticking = true;
+    requestAnimationFrame(() => {
+      ticking = false;
+      const max = document.documentElement.scrollHeight - innerHeight;
+      prog.style.transform = 'scaleX(' + (max > 0 ? sy / max : 0) + ')';
+      if (RM) { draw(0); return; }
+      const vh = innerHeight;
+      for (const im of px) {
+        const b = im.parentElement.getBoundingClientRect();
+        if (b.bottom < 0 || b.top > vh) continue;
+        const c = (b.top + b.height / 2 - vh / 2) / vh; // -0.5 at bottom edge, 0.5 at top
+        im.style.setProperty('--px', (c * -3.5).toFixed(2) + '%');
+      }
+    });
+  }
+  addEventListener('scroll', onScroll, { passive: true }); onScroll();
+
+  /* reveal on scroll */
+  const rvs = [...document.querySelectorAll('.rv')];
+  if (RM) rvs.forEach(el => el.classList.add('in'));
+  else {
+    const io = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } }), { rootMargin: '0px 0px -8% 0px', threshold: 0.08 });
+    rvs.forEach(el => io.observe(el));
+  }
+
   /* tabs */
   const tabs = [...document.querySelectorAll('[role=tab]')], bar = document.querySelector('.tabs');
   function show(id, focus) {
@@ -522,6 +644,10 @@ footer{padding:28px 0 48px;color:var(--mute);font-size:13px;display:flex;justify
     bar.dataset.on = id;
     document.querySelectorAll('#craft video').forEach(v => id === 'craft' ? v.play().catch(() => {}) : v.pause());
     history.replaceState(null, '', id === 'craft' ? '#craft' : location.pathname);
+    // anything newly shown below the fold still gets its reveal
+    rvs.forEach(el => { if (!el.classList.contains('in') && el.getBoundingClientRect().top < innerHeight) el.classList.add('in'); });
+    const tb = document.getElementById('tabbar').getBoundingClientRect();
+    if (tb.top < 0) scrollTo({ top: scrollY + tb.top, behavior: RM ? 'auto' : 'smooth' });
   }
   tabs.forEach((t, i) => {
     t.addEventListener('click', () => show(t.getAttribute('aria-controls')));
@@ -532,6 +658,16 @@ footer{padding:28px 0 48px;color:var(--mute);font-size:13px;display:flex;justify
   if (location.hash === '#craft') show('craft');
   addEventListener('hashchange', () => show(location.hash === '#craft' ? 'craft' : 'work'));
   if (RM) document.querySelectorAll('#craft video').forEach(v => v.removeAttribute('loop'));
+
+  /* slots: pieces whose asset isn't shipped yet stay out of the page */
+  fetch('assets/manifest.json').then(r => r.json()).catch(() => ({ ready: [] })).then(m => {
+    document.querySelectorAll('.piece.pending').forEach(el => {
+      const im = el.querySelector('img[data-src]');
+      if (im && (m.ready || []).includes(im.dataset.src.split('/').pop())) { im.src = im.dataset.src; el.classList.remove('pending'); px.push(im); }
+      else el.remove();
+    });
+    onScroll();
+  });
 
   /* swap a recording for the live site, in place */
   document.querySelectorAll('[data-live]').forEach(btn => {
