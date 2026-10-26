@@ -6,13 +6,13 @@
 <title>joai</title>
 <meta name="description" content="Jamal Ofori-Adu. Applied AI engineer and chartered physiotherapist. Founder of StrydeOS, one method for running an MSK clinic and measuring whether it is growing, live in two UK clinics.">
 <meta property="og:title" content="joai">
-<meta property="og:description" content="Applied AI, built inside the problem. Founder of StrydeOS, currently running live in two clinics.">
+<meta property="og:description" content="Applied AI, built inside the problem. Healthcare domain expertise, and the founder of StrydeOS.">
 <meta property="og:image" content="https://joai.pages.dev/assets/og.jpg">
 <meta name="theme-color" content="#07080c">
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><circle cx='50' cy='50' r='34' fill='none' stroke='%234d8dff' stroke-width='10'/><circle cx='50' cy='50' r='9' fill='%23eef0f6'/></svg>">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@300;400;500;600;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:ital,wght@0,300;0,400;0,500;0,600;0,800;1,300&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
 :root{
   --bg:#07080c; --bg-2:#0c0e14; --line:#1a1e28; --line-2:#262b37;
@@ -57,7 +57,7 @@ img,video{display:block;max-width:100%}
 .hero-copy>:nth-child(4){animation-delay:.24s}
 @keyframes land{from{opacity:0;transform:translateY(12px);filter:blur(8px)}to{opacity:1;transform:none;filter:none}}
 h1{font-weight:800;font-size:clamp(50px,8.2vw,118px);line-height:.92;letter-spacing:-.045em}
-h1 em{display:block;font-style:normal;font-weight:300;letter-spacing:-.01em;color:var(--gold);font-size:max(19px,.3em);line-height:1.2;margin-top:.5em}
+h1 em{display:block;font-style:italic;font-weight:300;letter-spacing:-.01em;color:var(--gold);font-size:max(17px,calc(.3em - 2px));line-height:1.2;margin-top:.5em}
 .lede{margin-top:34px;font-size:clamp(18px,1.7vw,21px);line-height:1.55;color:var(--body);max-width:600px;font-weight:300}
 .lede b{color:var(--ink);font-weight:500}
 .legend{margin-top:44px;display:grid;grid-template-columns:repeat(5,auto);gap:0;justify-content:start;border-top:1px solid var(--line);max-width:660px}
@@ -145,7 +145,7 @@ a.proj:hover h3{color:var(--gold)}
 .chrome .url{flex:1;text-align:center;font-family:"JetBrains Mono",monospace;font-size:12px}
 .chrome button{all:unset;cursor:pointer;font-size:12.5px;color:var(--ink);padding:3px 9px;border:1px solid var(--line-2);border-radius:3px;white-space:nowrap}
 .chrome button:hover{border-color:var(--blue)}
-.stage{position:relative;aspect-ratio:16/10;background:#000}
+.stage{position:relative;aspect-ratio:16/10;background:#000;overflow:hidden}
 .stage>video,.stage>img,.stage>iframe{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:top;border:0}
 .stage>img[data-px]{transform:scale(1.08) translateY(var(--px,0));will-change:transform}
 .piece h3{font-size:30px;font-weight:600;letter-spacing:-.025em;line-height:1.1}
@@ -221,11 +221,11 @@ footer{padding:28px 0 48px;color:var(--mute);font-size:13px;display:flex;justify
   <section class="hero">
     <canvas id="orb" aria-hidden="true"></canvas>
     <div class="hero-copy">
-      <h1>applied AI,<br>built inside<br>the problem.<em>currently running live in two clinics.</em></h1>
+      <h1>applied AI,<br>built inside<br>the problem.<em>healthcare domain expertise.</em></h1>
       <p class="lede">I've been inside computers since I was a kid: Rainmeter skins and game mods, anything that could be taken apart and put back better. Then physiotherapy, a clinic of my own in West Hampstead, and the realisation that nobody had built an actual method for running one. <b>StrydeOS</b> is that method. One place that unifies clinic operations and measures whether the business is growing, built end to end in <b>Next.js and TypeScript</b>. The rest of this page is the same instinct pointed at other rooms.</p>
       <div class="legend" role="group" aria-label="What the orb is made of">
         <button data-k="0"><span class="num">898</span><span>calls in Ava's go-live run, 97.4% passed</span></button>
-        <button data-k="1"><span class="num">579</span><span>patients scored by Pulse</span></button>
+        <button data-k="1"><span class="num">601</span><span>patients scored by Pulse</span></button>
         <button data-k="2"><span class="num">840</span><span>commits across 13 repos since September</span></button>
         <button data-k="3"><span class="num">521</span><span>nodes in Cortex, my knowledge graph</span></button>
         <button data-k="4"><span class="num">500</span><span>training examples for Evidence</span></button>
@@ -343,7 +343,7 @@ footer{padding:28px 0 48px;color:var(--mute);font-size:13px;display:flex;justify
   <article class="piece pending">
     <div class="frame">
       <div class="chrome"><span class="url">bypass</span></div>
-      <div class="stage"><img data-src="assets/bypass.jpg" alt="Bypass: two parametric turbofan engines exploded apart, dimension lines drawn over the parts" data-px></div>
+      <div class="stage"><img data-src="assets/bypass.jpg" alt="Bypass: a high-bypass and a low-bypass turbofan exploded apart, with throttle, explode and cut controls below" data-px></div>
     </div>
     <div>
       <h3>Bypass</h3>
@@ -367,13 +367,13 @@ footer{padding:28px 0 48px;color:var(--mute);font-size:13px;display:flex;justify
 
   <article class="piece pending">
     <div class="frame">
-      <div class="chrome"><span class="url">spires renovation</span></div>
-      <div class="stage"><img data-src="assets/renovation.jpg" alt="Rendered walkthrough of the West Hampstead clinic renovation" data-px></div>
+      <div class="chrome"><span class="url">west hampstead renovation</span></div>
+      <div class="stage"><img data-src="assets/renovation.jpg" alt="Rendered treatment room from the West Hampstead clinic renovation" data-px></div>
     </div>
     <div>
-      <h3>Spires renovation</h3>
-      <p class="what">The clinic's renovation rendered before a wall moved, so the people paying for it could walk the room and argue about it with something in front of them.</p>
-      <dl><dt>Built with</dt><dd>Three.js, procedural materials, hand-rolled orbit and walk controls</dd><dt>Detail</dt><dd>Six camera positions, one per decision that needed making</dd></dl>
+      <h3>West Hampstead renovation</h3>
+      <p class="what">One treatment room turned into two, built from my hand sketch before a wall moved, so the clinic and the landlord could walk the rooms and settle where everything goes with something in front of them.</p>
+      <dl><dt>Built with</dt><dd>Blender from a plan file, Cycles light baked into atlases, a Three.js viewer with walk, aerial and 360 views</dd><dt>Detail</dt><dd>The build fails if anything we agreed to take out comes back into the model</dd></dl>
     </div>
   </article>
 
@@ -398,7 +398,7 @@ footer{padding:28px 0 48px;color:var(--mute);font-size:13px;display:flex;justify
     <div>
       <h3>TradeMind, designed first</h3>
       <p class="what">Before a line of app code: a ten-screen mobile kit, the wordmark and monogram, the colour and type tokens, and a brand book with the don'ts written down. The build inherited all of it.</p>
-      <dl><dt>Built with</dt><dd>Design tokens, light mode only, sentence case, numbers up front</dd><dt>Detail</dt><dd>Trade in charcoal, Mind in amber, and the full stop is amber too</dd></dl>
+      <dl><dt>Built with</dt><dd>Design tokens, sentence case, numbers up front</dd><dt>Detail</dt><dd>The full stop is the only amber in the wordmark</dd></dl>
     </div>
   </article>
 
@@ -429,43 +429,31 @@ footer{padding:28px 0 48px;color:var(--mute);font-size:13px;display:flex;justify
     <div>
       <h3>StrydeOS, from the inside</h3>
       <p class="what">Not the website. The weekly summary the system writes me about my own clinic, and the report Ava has to pass before a release goes out. The product is the method; the site only describes it.</p>
-      <dl><dt>Built with</dt><dd>Next.js, TypeScript, Firebase, a Python eval harness on GitHub Actions</dd><dt>Detail</dt><dd>Every headline number states the window it was measured over</dd></dl>
+      <dl><dt>Built with</dt><dd>Next.js, TypeScript, Firebase, a simulated-caller harness on GitHub Actions</dd><dt>Detail</dt><dd>Every headline number states the window it was measured over</dd></dl>
     </div>
   </article>
 
   <article class="piece pending">
     <div class="frame">
       <div class="chrome"><span class="url">home-screen marks</span></div>
-      <div class="stage"><img data-src="assets/icons.jpg" alt="Four home-screen icons: an eclipse for Oracle, a scent trail for Sillage, a clapper board for Slate, the aperture for Shippers" data-px></div>
+      <div class="stage"><img data-src="assets/icons.jpg" alt="Three home-screen icons, each shown large and at 64 and 32 pixels: a scent trail for Sillage, a clapper board for Slate, the aperture for Shippers" data-px></div>
     </div>
     <div>
       <h3>Marks for the fleet</h3>
-      <p class="what">Home-screen icons for four of my own apps. An eclipse for Oracle, a single scent trail for Sillage, a clapper board on griptape for Slate, the aperture for Shippers. Drawn in SVG, exported at five sizes, wired into the head of each site.</p>
-      <dl><dt>Built with</dt><dd>SVG, Playwright for the exports</dd><dt>Detail</dt><dd>Each one still reads at 32px, which is where most icon sets fall over</dd></dl>
-    </div>
-  </article>
-
-  <article class="piece pending">
-    <div class="frame">
-      <div class="chrome"><span class="url">flashing lights</span></div>
-      <div class="stage"><img data-src="assets/flashing-lights.jpg" alt="Flashing lights: a 3D light study" data-px></div>
-    </div>
-    <div>
-      <h3>Flashing lights</h3>
-      <p class="what">A light study. Emissive surfaces, additive blending and a camera that moves on its own, built to find out how far a browser can be pushed before it drops a frame.</p>
-      <dl><dt>Built with</dt><dd>Three.js, single HTML file</dd><dt>Detail</dt><dd>An adaptive governor steps quality down to hold the frame rate, then back up</dd></dl>
+      <p class="what">Home-screen icons for three of my own apps. A single scent trail for Sillage, a clapper board for Slate, the aperture for Shippers. One source each, exported to every size a phone or a browser tab asks for.</p>
+      <dl><dt>Built with</dt><dd>SVG, Playwright for the exports</dd><dt>Detail</dt><dd>Every tile is fully opaque, because iOS paints transparent corners black</dd></dl>
     </div>
   </article>
 
   <article class="piece pending">
     <div class="frame">
       <div class="chrome"><span class="url">padel</span></div>
-      <div class="stage"><img data-src="assets/padel.jpg" alt="Padel: a rendered court" data-px></div>
+      <div class="stage"><img data-src="assets/padel.jpg" alt="Padel: two glass-walled courts side by side in a dark slatted hall, a lounge in the foreground" data-px></div>
     </div>
     <div>
       <h3>Padel</h3>
-      <p class="what">A padel court, rendered to true dimensions. Glass walls, the service lines, the lighting rig, the lot.</p>
-      <dl><dt>Built with</dt><dd>Three.js, procedural materials</dd><dt>Detail</dt><dd>Built from the regulation dimensions, not from a model file</dd></dl>
+      <p class="what">A padel hall for a friend's venue, built so it could be walked before any of it exists. Two courts side by side with a lane between, spectator tiers, a lounge, a bar and a self check-in kiosk.</p>
+      <dl><dt>Built with</dt><dd>Blender, Cycles light baked into texture atlases, a Three.js walk-through</dd><dt>Detail</dt><dd>No live lights in the browser, which took it from 21 frames a second to 60</dd></dl>
     </div>
   </article>
 
@@ -529,7 +517,7 @@ footer{padding:28px 0 48px;color:var(--mute);font-size:13px;display:flex;justify
 <script>
 (() => {
   const RM = matchMedia('(prefers-reduced-motion: reduce)').matches;
-  const COUNTS = [898, 579, 840, 521, 500];
+  const COUNTS = [898, 601, 840, 521, 500];
   const TOTAL = COUNTS.reduce((a, b) => a + b, 0);
   // cool aperture ramp from the Shippers mark, outer to inner
   const RAMP = ['#5f7aab', '#6a5bd0', '#3f62e0', '#4d8dff', '#7fb0ff'];
@@ -552,7 +540,7 @@ footer{padding:28px 0 48px;color:var(--mute);font-size:13px;display:flex;justify
     }
     start += span + GAP;
   });
-  let active = -1, glow = [0, 0, 0, 0, 0], W = 0, H = 0, dpr = 1, mx = 0, my = 0, visible = true, sy = 0, sv = 0;
+  let active = -1, glow = [0, 0, 0, 0, 0], W = 0, H = 0, dpr = 1, mx = 0, my = 0, ex = 0, ey = 0, visible = true, sy = 0, sv = 0;
   function size() {
     dpr = Math.min(2, devicePixelRatio || 1);
     const b = cv.getBoundingClientRect(); W = b.width; H = b.height;
@@ -562,19 +550,23 @@ footer{padding:28px 0 48px;color:var(--mute);font-size:13px;display:flex;justify
     ctx.clearRect(0, 0, W, H);
     // the orb opens as you scroll away from it: the ring widens and thins out
     const open = Math.min(1, sy / 700);
-    const cx = W / 2 + mx * 14, cy = H / 2 + my * 14, rad = W * (0.46 + open * 0.12), rot = t * 0.00004 + sy * 0.0006;
+    // the pointer pulls the ring with a lag, and the whole ring pulses slowly
+    ex += (mx - ex) * 0.06; ey += (my - ey) * 0.06;
+    const pulse = 1 + Math.sin(t * 0.0009) * 0.015;
+    const cx = W / 2 + ex * 24, cy = H / 2 + ey * 24, rad = W * (0.46 + open * 0.12) * pulse, rot = t * 0.0001 + sy * 0.0006;
     for (let k = 0; k < 5; k++) glow[k] += ((active === k ? 1 : 0) - glow[k]) * 0.2;
     // lens
     ctx.beginPath(); ctx.arc(cx, cy, rad * 0.47, 0, 6.283);
     ctx.strokeStyle = 'rgba(77,141,255,' + (0.45 * (1 - open)) + ')'; ctx.lineWidth = 1; ctx.stroke();
     const fade = 1 - open * 0.75;
     for (const p of pts) {
-      const breathe = 1 + Math.sin(t * 0.0006 + p.w) * 0.012;
-      const a = p.a + rot * (1 + p.z * 0.15);
+      const breathe = 1 + Math.sin(t * 0.0008 * (0.6 + p.s * 0.3) + p.w) * 0.028;
+      const a = p.a + rot * (1 + p.z * 0.35);
       const x = cx + Math.cos(a) * p.r * rad * breathe;
       const y = cy + Math.sin(a) * p.r * rad * breathe * 0.98;
       const g = glow[p.k], dim = active >= 0 && active !== p.k ? 0.12 : 1;
-      ctx.globalAlpha = Math.min(1, (0.5 + (p.z + 1) * 0.24) * dim + g * 0.5) * fade;
+      const twinkle = 0.8 + 0.2 * Math.sin(t * 0.003 + p.w * 3);
+      ctx.globalAlpha = Math.min(1, (0.5 + (p.z + 1) * 0.24) * dim * twinkle + g * 0.5) * fade;
       ctx.fillStyle = g > 0.3 ? '#cdb76e' : p.c;
       const s = p.s * (1 + g);
       ctx.fillRect(x - s / 2, y - s / 2, s, s);
