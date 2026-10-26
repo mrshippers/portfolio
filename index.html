@@ -4,9 +4,9 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>joai</title>
-<meta name="description" content="Jamal Ofori-Adu. Applied AI engineer and chartered physiotherapist. Founder of StrydeOS, live in two UK clinics: voice agents, evaluation-gated releases, interfaces people enjoy using.">
+<meta name="description" content="Jamal Ofori-Adu. Applied AI engineer and chartered physiotherapist. Founder of StrydeOS, one method for running an MSK clinic and measuring whether it is growing, live in two UK clinics.">
 <meta property="og:title" content="joai">
-<meta property="og:description" content="Applied AI, built inside the problem. Founder of StrydeOS, live in two UK physiotherapy clinics.">
+<meta property="og:description" content="Applied AI, built inside the problem. Founder of StrydeOS, currently running live in two clinics.">
 <meta property="og:image" content="https://joai.pages.dev/assets/og.jpg">
 <meta name="theme-color" content="#07080c">
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><circle cx='50' cy='50' r='34' fill='none' stroke='%234d8dff' stroke-width='10'/><circle cx='50' cy='50' r='9' fill='%23eef0f6'/></svg>">
@@ -221,13 +221,13 @@ footer{padding:28px 0 48px;color:var(--mute);font-size:13px;display:flex;justify
   <section class="hero">
     <canvas id="orb" aria-hidden="true"></canvas>
     <div class="hero-copy">
-      <h1>applied AI,<br>built inside<br>the problem.<em>creations of niche pursuit.</em></h1>
-      <p class="lede">I'm a chartered physio who co-owns a clinic in West Hampstead and got tired of waiting for someone else to fix clinic software. So I built it. <b>StrydeOS</b> answers the clinic phone, books the slot, scores every patient for drop-off risk and cites its clinical answers from code, not from the model. Live in two clinics, built end to end in <b>Next.js and TypeScript</b>. Everything else on this page comes from the same habit: find the corner nobody is building for, then ship something I'd want to be judged on.</p>
+      <h1>applied AI,<br>built inside<br>the problem.<em>currently running live in two clinics.</em></h1>
+      <p class="lede">I've been inside computers since I was a kid: Rainmeter skins and game mods, anything that could be taken apart and put back better. Then physiotherapy, a clinic of my own in West Hampstead, and the realisation that nobody had built an actual method for running one. <b>StrydeOS</b> is that method. One place that unifies clinic operations and measures whether the business is growing, built end to end in <b>Next.js and TypeScript</b>. The rest of this page is the same instinct pointed at other rooms.</p>
       <div class="legend" role="group" aria-label="What the orb is made of">
-        <button data-k="0"><span class="num">505</span><span>simulated callers before each release</span></button>
+        <button data-k="0"><span class="num">898</span><span>calls in Ava's go-live run, 97.4% passed</span></button>
         <button data-k="1"><span class="num">579</span><span>patients scored by Pulse</span></button>
-        <button data-k="2"><span class="num">535</span><span>tests behind the Driiva cutover</span></button>
-        <button data-k="3"><span class="num">835</span><span>peoples mapped in 3D</span></button>
+        <button data-k="2"><span class="num">840</span><span>commits across 13 repos since September</span></button>
+        <button data-k="3"><span class="num">521</span><span>nodes in Cortex, my knowledge graph</span></button>
         <button data-k="4"><span class="num">500</span><span>training examples for Evidence</span></button>
       </div>
       <p class="orb-note">The orb is drawn from these five. Point at one.</p>
@@ -239,8 +239,8 @@ footer{padding:28px 0 48px;color:var(--mute);font-size:13px;display:flex;justify
   <div class="wrap">
     <div class="tabs" role="tablist" aria-label="Portfolio" data-on="work">
       <span class="ind" aria-hidden="true"></span>
-      <button role="tab" id="t-work" aria-controls="work" aria-selected="true">the work<small>what I've done</small></button>
-      <button role="tab" id="t-craft" aria-controls="craft" aria-selected="false" tabindex="-1">the craft<small>what it looks like</small></button>
+      <button role="tab" id="t-work" aria-controls="work" aria-selected="true">the work<small>roles and products</small></button>
+      <button role="tab" id="t-craft" aria-controls="craft" aria-selected="false" tabindex="-1">the craft<small>interfaces and renders</small></button>
     </div>
   </div>
 </div>
@@ -255,34 +255,36 @@ footer{padding:28px 0 48px;color:var(--mute);font-size:13px;display:flex;justify
     <div>
       <article class="role rv">
         <div class="role-head"><h3>StrydeOS <span>founder</span></h3><span class="when">Feb 2026 to now, London</span></div>
-        <p>An operating system for UK MSK clinics that sits on top of the practice-management system they already run. I own all of it: engineering, product, infrastructure, security and the GDPR paperwork.</p>
+        <p>One place to run an MSK clinic and know whether it is growing. It sits over the practice-management system the clinic already uses and gives operations an actual method: the phone, the patient base, the clinical questions and the numbers, unified and measured. I own engineering, product, infrastructure, security and GDPR.</p>
         <ul>
           <li><b>Ava</b> answers the clinic phone. Twilio into ElevenLabs conversational AI running Claude, with tool calls into a TypeScript booking layer that writes to Cliniko and WriteUpp.</li>
           <li><b>Pulse</b> sorts patients into lifecycle cohorts, scores drop-off risk and runs re-engagement on whatever channel each patient actually replies to. Measured against a randomised holdout, so the number it reports is a real one.</li>
           <li><b>Evidence</b> gives cited clinical answers from local open-weight models, including a Gemma I distilled and fine-tuned myself. Citations are built in code, never written by the model.</li>
-          <li><b>The release gate.</b> 505 simulated callers run before anything ships. Under 95%, or a single P0, and it doesn't.</li>
+          <li><b>The release gate.</b> Ava passed go-live on strict terms: 898 simulated calls across the fleet run, 97.4% passed, zero critical faults. The gate is 95% with zero critical. Under it, nothing ships.</li>
           <li><b>The frontend</b> is Next.js, React and TypeScript on a typed token layer, so every surface retints from one palette. Contrast audited in both themes.</li>
         </ul>
       </article>
       <article class="role rv">
         <div class="role-head"><h3>Shippers Studio <span>product engineer</span></h3><span class="when">Jan 2026 to now, London</span></div>
-        <p>My studio. Agent systems, interfaces and 3D for clients and for my own ventures. The first invoice went out on 6 May 2026 and it got paid.</p>
+        <p>My studio. Agent systems, interfaces and 3D for clients and for my own ventures.</p>
         <ul>
           <li><b>Driiva.</b> Insurtech. React, Vite and Firebase on the web plus an Expo app, both over one identity layer, rebuilt and cut over in production.</li>
           <li><b>dpsfilm.</b> A portfolio site for a London sports and fashion cinematographer. WebGL and GSAP built around his club and brand films.</li>
-          <li><b>TradeMind.</b> A voice-first operations app for UK electricians. Design system and brand book first, then the app: dictation into certificates, a compliance vault, Stripe Connect payouts. Scoped, built and handed over.</li>
+          <li><b>TradeMind.</b> A voice-first operations platform for UK electricians, shipped to iOS through TestFlight. Design system and brand book first, then the app: dictation into certificates, a compliance vault, Stripe Connect payouts. Scoped, built and handed over.</li>
+          <li><b>Counsel.</b> Case management for a family law practice: clients, cases and conflict-of-interest checks before a case opens. Cloudflare Workers and Supabase, delivered.</li>
+          <li><b>Slate.</b> A pricing and invoicing app for creatives, wrapped for mobile. Plus the smaller things a studio accumulates: an iCloud Mail MCP server, a fragrance app, home-screen marks for the fleet.</li>
         </ul>
       </article>
       <div class="role compact rv">
-        <div><div class="role-head"><h3>Spires Physiotherapy <span>managing director, senior physio</span></h3><span class="when">2021 to now</span></div>
-          <p>Co-own and run a four-clinician clinic with 150+ five-star reviews. Put AI into the admin and took roughly 40% of it off the clinicians.</p></div>
+        <div><div class="role-head"><h3>Spires Physiotherapy <span>managing director, senior physiotherapist</span></h3><span class="when">2021 to now</span></div>
+          <p>Co-own and run a three-person clinic with 150+ five-star reviews. Led the workflow improvements that put AI into how the clinic runs, clinical and administrative.</p></div>
         <div><div class="role-head"><h3>Bupa <span>remote MSK triage physiotherapist</span></h3><span class="when">2025 to 2026</span></div>
-          <p>Triage and caseload management for national insurer services, inside Meddbase and Citrix. Entered Bupa Accelerate 2026, the internal AI hack.</p></div>
-        <div><div class="role-head"><h3>Square Health <span>remote MSK physiotherapist</span></h3><span class="when">2023 to 2025</span></div>
-          <p>Remote MSK caseloads across several insurer brands as an independent supplier. Rehab and patient education by video.</p></div>
+          <p>Triage and caseload management for national insurer services, inside Meddbase and Citrix. Taking part in Bupa Accelerate 2026, the internal AI hack, and forked StrydeOS into StrydeLens, a KPI dashboard for the internal team.</p></div>
+        <div><div class="role-head"><h3>Square Health <span>remote MSK physiotherapist, independent contractor</span></h3><span class="when">2023 to 2025</span></div>
+          <p>Triage and rehabilitation service via telemedicine across several insurer brands.</p></div>
         <div><div class="role-head"><h3>CodeVerse <span>business development manager</span></h3><span class="when">2022 to 2023</span></div>
-          <p>Closed enterprise accounts at Spotify, Sky and Accenture, placing technologists from under-represented communities. Ran the technical demos myself, live prototypes included.</p></div>
-        <div><div class="role-head"><h3>Connect Health, and Hills Physical Developments</h3><span class="when">2018 to 2021</span></div>
+          <p>Worked on enterprise accounts at Spotify, Sky and Accenture, placing technologists from under-represented communities. Ran the technical demos myself, live prototypes included.</p></div>
+        <div><div class="role-head"><h3>Early career <span>Connect Health, Hills Physical Developments</span></h3><span class="when">2018 to 2021</span></div>
           <p>Graduate to senior physiotherapist in 18 months at the UK's largest integrated MSK provider. Private MSK practice alongside S&amp;C coaches at Hills from 2021.</p></div>
       </div>
     </div>
@@ -293,9 +295,9 @@ footer{padding:28px 0 48px;color:var(--mute);font-size:13px;display:flex;justify
     <div>
       <a class="proj rv" href="https://strydeos.com" data-k="0"><canvas aria-hidden="true"></canvas><div><h3>StrydeOS <small>live, two clinics</small></h3><p>Voice agent, patient intelligence and evidence on one clinic platform.</p></div><div class="rc"><span class="num">5,264</span><span>tests in the platform suite</span></div></a>
       <a class="proj rv" href="https://github.com/mrshippers/evidence" data-k="4"><canvas aria-hidden="true"></canvas><div><h3>Evidence <small>open source</small></h3><p>Cited clinical answers from local models. The failing metric is published too.</p></div><div class="rc"><span class="num">100%</span><span>red-flag recall, misses published</span></div></a>
-      <a class="proj rv" href="https://peoples-of-africa.pages.dev" data-k="3"><canvas aria-hidden="true"></canvas><div><h3>Peoples of Africa <small>WebGL, open source</small></h3><p>A 3D terrain diorama of 835 ethnographic groups joined across three academic datasets.</p></div><div class="rc"><span class="num">6.7&times;</span><span>faster load, 37s to 5.5s</span></div></a>
+      <a class="proj rv" href="https://peoples-of-africa.pages.dev" data-k="-1"><canvas aria-hidden="true"></canvas><div><h3>Peoples of Africa <small>WebGL, open source</small></h3><p>A 3D terrain diorama of 835 ethnographic groups joined across three academic datasets.</p></div><div class="rc"><span class="num">6.7&times;</span><span>faster load, 37s to 5.5s</span></div></a>
       <a class="proj rv" href="https://injury-time.vercel.app" data-k="-1"><canvas aria-hidden="true"></canvas><div><h3>Injury Time <small>Next.js, Supabase, R3F</small></h3><p>Football management for non-league clubs: squad load, injury risk, readiness.</p></div><div class="rc"><span class="num">16</span><span>PRs merged in under three days</span></div></a>
-      <div class="proj rv" data-k="2"><canvas aria-hidden="true"></canvas><div><h3>Driiva <small>insurtech, client build</small></h3><p>Web and mobile over one identity layer. Insurer and Stripe webhooks hardened for production.</p></div><div class="rc"><span class="num">535</span><span>tests green at cutover</span></div></div>
+      <div class="proj rv" data-k="-1"><canvas aria-hidden="true"></canvas><div><h3>Driiva <small>insurtech, client build</small></h3><p>Web and mobile over one identity layer. Insurer and Stripe webhooks hardened for production.</p></div><div class="rc"><span class="num">535</span><span>tests green at cutover</span></div></div>
     </div>
   </div>
 
@@ -324,8 +326,6 @@ footer{padding:28px 0 48px;color:var(--mute);font-size:13px;display:flex;justify
 
 <!-- CRAFT -->
 <section class="panel" id="craft" role="tabpanel" aria-labelledby="t-craft" hidden>
-  <p class="craft-intro">All of it is live. The recordings are real sessions, and any frame swaps to the live site so you can use it in place.</p>
-
   <article class="piece wide">
     <div class="frame">
       <div class="chrome"><span class="url">peoples-of-africa.pages.dev</span><button data-live="https://peoples-of-africa.pages.dev">Open live here</button></div>
@@ -359,20 +359,20 @@ footer{padding:28px 0 48px;color:var(--mute);font-size:13px;display:flex;justify
     </div>
     <div>
       <h3>Shippers Studio</h3>
-      <p class="what">The studio site. A six-act scroll drives one WebGL aperture of 92,000 points, which resolves into type as you read.</p>
-      <dl><dt>Built with</dt><dd>WebGL2 point cloud, GSAP, hand-set type</dd><dt>Detail</dt><dd>A command palette sits behind the / key</dd></dl>
+      <p class="what">The studio site, live as an A/B test: 3.0's point cloud against 4.5's raw-GLSL beam, the same copy on both arms, first-party tracking and no cookies. The aperture is 92,000 points that resolve into type as you read.</p>
+      <dl><dt>Built with</dt><dd>WebGL2 and raw GLSL, GSAP, hand-set type</dd><dt>Under it</dt><dd>Structured data, Search Console on every domain, field notes written to rank</dd></dl>
       <a class="go" href="https://shippersstudio.io">Visit shippersstudio.io</a>
     </div>
   </article>
 
   <article class="piece pending">
     <div class="frame">
-      <div class="chrome"><span class="url">west hampstead renovation</span></div>
+      <div class="chrome"><span class="url">spires renovation</span></div>
       <div class="stage"><img data-src="assets/renovation.jpg" alt="Rendered walkthrough of the West Hampstead clinic renovation" data-px></div>
     </div>
     <div>
-      <h3>West Hampstead renovation</h3>
-      <p class="what">The clinic's renovation, rendered before a wall moved, so the people paying for it could walk the room and argue about it with something in front of them.</p>
+      <h3>Spires renovation</h3>
+      <p class="what">The clinic's renovation rendered before a wall moved, so the people paying for it could walk the room and argue about it with something in front of them.</p>
       <dl><dt>Built with</dt><dd>Three.js, procedural materials, hand-rolled orbit and walk controls</dd><dt>Detail</dt><dd>Six camera positions, one per decision that needed making</dd></dl>
     </div>
   </article>
@@ -415,22 +415,21 @@ footer{padding:28px 0 48px;color:var(--mute);font-size:13px;display:flex;justify
     </div>
   </article>
 
-  <article class="piece">
+  <article class="piece pending">
     <div class="duo">
       <div class="frame">
-        <div class="chrome"><span class="url">strydeos.com</span><button data-live="https://strydeos.com">Open live here</button></div>
-        <div class="stage"><img src="assets/strydeos.jpg" alt="StrydeOS home: The Clinic OS for private practice" loading="lazy" data-px></div>
+        <div class="chrome"><span class="url">the weekly summary, to me</span></div>
+        <div class="stage"><img data-src="assets/stryde-weekly.jpg" alt="The weekly summary email StrydeOS sends about the clinic" data-px></div>
       </div>
       <div class="frame">
-        <div class="chrome"><span class="url">strydeos.com/ava</span><button data-live="https://strydeos.com/ava">Open live here</button></div>
-        <div class="stage"><img src="assets/ava.jpg" alt="Ava's page: a caller asks for a shoulder appointment, Ava offers two slots and books Thursday" loading="lazy" data-px></div>
+        <div class="chrome"><span class="url">ava's gate report</span></div>
+        <div class="stage"><img data-src="assets/stryde-gate.jpg" alt="Ava's go-live gate report: 898 calls, 97.4% passed, zero critical" data-px></div>
       </div>
     </div>
     <div>
-      <h3>StrydeOS</h3>
-      <p class="what">The product site and Ava's page. Ava's page shows a call as it happens: the caller, the slot offered, the booking written back and the text sent. The portal underneath leads with one sentence about the clinic; owners act on the sentence and use the tiles to check it.</p>
-      <dl><dt>Built with</dt><dd>Next.js, TypeScript, Tailwind, Firebase</dd><dt>Detail</dt><dd>Status is never carried by colour alone</dd></dl>
-      <a class="go" href="https://portal.strydeos.com/login?demo=1">Open the portal</a>
+      <h3>StrydeOS, from the inside</h3>
+      <p class="what">Not the website. The weekly summary the system writes me about my own clinic, and the report Ava has to pass before a release goes out. The product is the method; the site only describes it.</p>
+      <dl><dt>Built with</dt><dd>Next.js, TypeScript, Firebase, a Python eval harness on GitHub Actions</dd><dt>Detail</dt><dd>Every headline number states the window it was measured over</dd></dl>
     </div>
   </article>
 
@@ -443,6 +442,30 @@ footer{padding:28px 0 48px;color:var(--mute);font-size:13px;display:flex;justify
       <h3>Marks for the fleet</h3>
       <p class="what">Home-screen icons for four of my own apps. An eclipse for Oracle, a single scent trail for Sillage, a clapper board on griptape for Slate, the aperture for Shippers. Drawn in SVG, exported at five sizes, wired into the head of each site.</p>
       <dl><dt>Built with</dt><dd>SVG, Playwright for the exports</dd><dt>Detail</dt><dd>Each one still reads at 32px, which is where most icon sets fall over</dd></dl>
+    </div>
+  </article>
+
+  <article class="piece pending">
+    <div class="frame">
+      <div class="chrome"><span class="url">flashing lights</span></div>
+      <div class="stage"><img data-src="assets/flashing-lights.jpg" alt="Flashing lights: a 3D light study" data-px></div>
+    </div>
+    <div>
+      <h3>Flashing lights</h3>
+      <p class="what">A light study. Emissive surfaces, additive blending and a camera that moves on its own, built to find out how far a browser can be pushed before it drops a frame.</p>
+      <dl><dt>Built with</dt><dd>Three.js, single HTML file</dd><dt>Detail</dt><dd>An adaptive governor steps quality down to hold the frame rate, then back up</dd></dl>
+    </div>
+  </article>
+
+  <article class="piece pending">
+    <div class="frame">
+      <div class="chrome"><span class="url">padel</span></div>
+      <div class="stage"><img data-src="assets/padel.jpg" alt="Padel: a rendered court" data-px></div>
+    </div>
+    <div>
+      <h3>Padel</h3>
+      <p class="what">A padel court, rendered to true dimensions. Glass walls, the service lines, the lighting rig, the lot.</p>
+      <dl><dt>Built with</dt><dd>Three.js, procedural materials</dd><dt>Detail</dt><dd>Built from the regulation dimensions, not from a model file</dd></dl>
     </div>
   </article>
 
@@ -501,12 +524,12 @@ footer{padding:28px 0 48px;color:var(--mute);font-size:13px;display:flex;justify
 </section>
 </main>
 
-<footer class="wrap"><span>London, 2026</span><span>Hanken Grotesk, JetBrains Mono</span></footer>
+<footer class="wrap"><span>London, 2026</span><span>joai.</span></footer>
 
 <script>
 (() => {
   const RM = matchMedia('(prefers-reduced-motion: reduce)').matches;
-  const COUNTS = [505, 579, 535, 835, 500];
+  const COUNTS = [898, 579, 840, 521, 500];
   const TOTAL = COUNTS.reduce((a, b) => a + b, 0);
   // cool aperture ramp from the Shippers mark, outer to inner
   const RAMP = ['#5f7aab', '#6a5bd0', '#3f62e0', '#4d8dff', '#7fb0ff'];
@@ -661,9 +684,14 @@ footer{padding:28px 0 48px;color:var(--mute);font-size:13px;display:flex;justify
 
   /* slots: pieces whose asset isn't shipped yet stay out of the page */
   fetch('assets/manifest.json').then(r => r.json()).catch(() => ({ ready: [] })).then(m => {
+    const ready = m.ready || [];
     document.querySelectorAll('.piece.pending').forEach(el => {
-      const im = el.querySelector('img[data-src]');
-      if (im && (m.ready || []).includes(im.dataset.src.split('/').pop())) { im.src = im.dataset.src; el.classList.remove('pending'); px.push(im); }
+      let shown = 0;
+      el.querySelectorAll('img[data-src]').forEach(im => {
+        if (ready.includes(im.dataset.src.split('/').pop())) { im.src = im.dataset.src; px.push(im); shown++; }
+        else im.closest('.frame').remove();
+      });
+      if (shown) { el.classList.remove('pending'); const duo = el.querySelector('.duo'); if (duo && duo.children.length === 1) duo.style.gridTemplateColumns = '1fr'; }
       else el.remove();
     });
     onScroll();
