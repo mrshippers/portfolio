@@ -8,16 +8,16 @@
 <meta property="og:title" content="joai">
 <meta property="og:description" content="Applied AI, built inside the problem. Healthcare domain expertise, and the founder of StrydeOS.">
 <meta property="og:image" content="https://joai.pages.dev/assets/og.jpg">
-<meta name="theme-color" content="#07080c">
-<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><circle cx='50' cy='50' r='34' fill='none' stroke='%234d8dff' stroke-width='10'/><circle cx='50' cy='50' r='9' fill='%23eef0f6'/></svg>">
+<meta name="theme-color" content="#f5f5f4">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><circle cx='50' cy='50' r='34' fill='none' stroke='%234d8dff' stroke-width='10'/><circle cx='50' cy='50' r='9' fill='%230d0f14'/></svg>">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:ital,wght@0,300;0,400;0,500;0,600;0,800;1,300&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
 :root{
-  --bg:#07080c; --bg-2:#0c0e14; --line:#1a1e28; --line-2:#262b37;
-  --ink:#eef0f6; --body:#b9bfcc; --mute:#878e9e;
-  --blue:#4d8dff; --blue-deep:#1c50d2; --gold:#cdb76e;
+  --bg:#f5f5f4; --bg-2:#ececea; --line:#dcdcda; --line-2:#c8c9c8;
+  --ink:#0d0f14; --body:#3a404d; --mute:#616877;
+  --blue:#2f6df0; --blue-deep:#1c50d2; --gold:#8a6d1a;
   --r:4px;
   --ease:cubic-bezier(.2,.7,.1,1);
   --rv:420ms;
@@ -57,7 +57,6 @@ img,video{display:block;max-width:100%}
 .hero-copy>:nth-child(4){animation-delay:.24s}
 @keyframes land{from{opacity:0;transform:translateY(12px);filter:blur(8px)}to{opacity:1;transform:none;filter:none}}
 h1{font-weight:800;font-size:clamp(50px,8.2vw,118px);line-height:.92;letter-spacing:-.045em}
-h1 em{display:block;font-style:italic;font-weight:300;letter-spacing:-.01em;color:var(--gold);font-size:max(17px,calc(.3em - 2px));line-height:1.2;margin-top:.5em}
 .lede{margin-top:34px;font-size:clamp(18px,1.7vw,21px);line-height:1.55;color:var(--body);max-width:600px;font-weight:300}
 .lede b{color:var(--ink);font-weight:500}
 .legend{margin-top:44px;display:grid;grid-template-columns:repeat(5,auto);gap:0;justify-content:start;border-top:1px solid var(--line);max-width:660px}
@@ -71,19 +70,22 @@ h1 em{display:block;font-style:italic;font-weight:300;letter-spacing:-.01em;colo
 
 /* tabs */
 .tabbar{position:sticky;top:0;z-index:5;background:linear-gradient(var(--bg) 70%,transparent);padding:14px 0 26px}
-.tabs{position:relative;display:grid;grid-template-columns:1fr 1fr;max-width:520px;margin:0 auto;border:1px solid var(--line-2);border-radius:var(--r);background:var(--bg-2)}
+.tabs{position:relative;display:grid;grid-template-columns:1fr 1fr;max-width:520px;margin:0 0 0 auto;border:1px solid var(--line-2);border-radius:var(--r);background:var(--bg-2)}
 .tabs button{all:unset;cursor:pointer;text-align:center;padding:14px 10px;font-size:16px;font-weight:600;color:var(--mute);position:relative;z-index:1;transition:color .25s}
 .tabs button[aria-selected=true]{color:var(--ink)}
 .tabs button small{display:block;font-weight:400;font-size:13px;color:var(--mute);margin-top:1px}
-.tabs .ind{position:absolute;inset:3px auto 3px 3px;width:calc(50% - 3px);background:#141824;border:1px solid var(--line-2);border-radius:3px;transition:transform .45s var(--ease)}
+.tabs .ind{position:absolute;inset:3px auto 3px 3px;width:calc(50% - 3px);background:#fff;border:1px solid var(--line-2);border-radius:3px;transition:transform .45s var(--ease)}
 .tabs[data-on=craft] .ind{transform:translateX(100%)}
 .tabs button:focus-visible{outline-offset:-4px}
 .panel{display:none;padding-bottom:40px}
-.panel.on{display:block;animation:rise .5s var(--ease)}
+.panel.on{display:block;animation:rise .36s var(--ease)}
+.panel.leaving{opacity:0;transform:translateY(-8px);transition:opacity .14s ease-in,transform .14s ease-in}
 @keyframes rise{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
 
 /* work */
-.sec{display:grid;grid-template-columns:220px 1fr;gap:48px;padding:56px 0;border-top:1px solid var(--line);align-items:start}
+.sec{position:relative;display:grid;grid-template-columns:220px 1fr;gap:48px;padding:56px 0;align-items:start}
+.sec::before{content:"";position:absolute;left:0;right:0;top:0;height:1px;background:var(--line);transform:scaleX(0);transform-origin:0 50%;transition:transform .9s var(--ease)}
+.sec.in::before{transform:none}
 .sec>h2{position:sticky;top:104px;font-size:15px;font-weight:600;color:var(--mute);letter-spacing:.01em;padding-top:6px;display:flex;gap:12px;align-items:baseline}
 .sec>h2 .n{font-family:"JetBrains Mono",monospace;font-weight:400;font-size:12px;color:var(--gold)}
 .role{padding-bottom:40px}
@@ -97,6 +99,9 @@ h1 em{display:block;font-style:italic;font-weight:300;letter-spacing:-.01em;colo
 .role li{position:relative;padding-left:22px;color:var(--body)}
 .role li::before{content:"";position:absolute;left:0;top:.72em;width:9px;height:1px;background:var(--blue)}
 .role li b{color:var(--ink);font-weight:600}
+.role li{opacity:0;transform:translateY(8px);transition:opacity .36s var(--ease),transform .36s var(--ease);transition-delay:calc(var(--i,0)*50ms + 140ms)}
+.role.in li{opacity:1;transform:none}
+.role li:nth-child(2){--i:1}.role li:nth-child(3){--i:2}.role li:nth-child(4){--i:3}.role li:nth-child(5){--i:4}.role li:nth-child(6){--i:5}
 .compact{display:grid;gap:22px}
 .compact .role-head h3{font-size:20px}
 .compact p{color:var(--body);margin-top:4px;max-width:720px}
@@ -138,14 +143,14 @@ a.proj:hover h3{color:var(--gold)}
 .piece.wide .cap dl{margin-top:4px}
 .piece:nth-of-type(even) .frame,.piece:nth-of-type(even) .duo,.piece:nth-of-type(even) .phones{order:2}
 .piece.pending{display:none}
-.frame{position:relative;border:1px solid var(--line-2);border-radius:var(--r);background:var(--bg-2);overflow:hidden;box-shadow:0 40px 80px -40px rgba(0,0,0,.8);transition:border-color .3s,transform .4s var(--ease)}
-.frame:hover{border-color:#3a4256;transform:translateY(-2px)}
+.frame{position:relative;border:1px solid var(--line-2);border-radius:var(--r);background:var(--bg-2);overflow:hidden;box-shadow:0 40px 80px -40px rgba(20,24,40,.28);transition:border-color .3s,transform .4s var(--ease)}
+.frame:hover{border-color:#9aa0ad;transform:translateY(-2px)}
 .chrome{display:flex;align-items:center;gap:12px;height:34px;padding:0 12px;border-bottom:1px solid var(--line);font-size:12.5px;color:var(--mute)}
-.chrome i{width:9px;height:9px;border-radius:50%;background:#2a2f3b;display:inline-block;margin-right:-6px}
+.chrome i{width:9px;height:9px;border-radius:50%;background:#c8c9c8;display:inline-block;margin-right:-6px}
 .chrome .url{flex:1;text-align:center;font-family:"JetBrains Mono",monospace;font-size:12px}
 .chrome button{all:unset;cursor:pointer;font-size:12.5px;color:var(--ink);padding:3px 9px;border:1px solid var(--line-2);border-radius:3px;white-space:nowrap}
 .chrome button:hover{border-color:var(--blue)}
-.stage{position:relative;aspect-ratio:16/10;background:#000;overflow:hidden}
+.stage{position:relative;aspect-ratio:16/10;background:var(--bg-2);overflow:hidden}
 .stage>video,.stage>img,.stage>iframe{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:top;border:0}
 .stage>img[data-px]{transform:scale(1.08) translateY(var(--px,0));will-change:transform}
 .piece h3{font-size:30px;font-weight:600;letter-spacing:-.025em;line-height:1.1}
@@ -172,7 +177,7 @@ footer{padding:28px 0 48px;color:var(--mute);font-size:13px;display:flex;justify
   .top nav{gap:16px;font-size:14px}
   .top nav a.hide-s{display:none}
   .hero{min-height:auto}
-  #orb{right:auto;top:-8vw;left:50%;transform:translateX(-50%);width:92vw;opacity:.45}
+  #orb{right:auto;top:-8vw;left:50%;transform:translateX(-50%);width:92vw;opacity:.75}
   .hero-copy{padding:78vw 0 56px}
   .legend{grid-template-columns:repeat(3,1fr)}
   .legend button{padding-right:10px}
@@ -200,6 +205,8 @@ footer{padding:28px 0 48px;color:var(--mute);font-size:13px;display:flex;justify
 @media (prefers-reduced-motion:reduce){
   *{animation:none!important;transition:none!important;scroll-behavior:auto!important}
   .rv{opacity:1;transform:none;filter:none}
+  .role li{opacity:1;transform:none}
+  .sec::before{transform:none}
   .stage>img[data-px]{transform:none}
 }
 </style>
@@ -221,12 +228,12 @@ footer{padding:28px 0 48px;color:var(--mute);font-size:13px;display:flex;justify
   <section class="hero">
     <canvas id="orb" aria-hidden="true"></canvas>
     <div class="hero-copy">
-      <h1>applied AI,<br>built inside<br>the problem.<em>healthcare domain expertise.</em></h1>
-      <p class="lede">I've been inside computers since I was a kid: Rainmeter skins and game mods, anything that could be taken apart and put back better. Then physiotherapy, a clinic of my own in West Hampstead, and the realisation that nobody had built an actual method for running one. <b>StrydeOS</b> is that method. One place that unifies clinic operations and measures whether the business is growing, built end to end in <b>Next.js and TypeScript</b>. The rest of this page is the same instinct pointed at other rooms.</p>
+      <h1>applied AI,<br>built inside<br>the problem.</h1>
+      <p class="lede">I take an AI problem from the first conversation with the people who'll use it to a live product, and I stay on it after it ships. What decides whether it works is rarely the model. It's knowing the domain well enough to catch it being confidently wrong, and having the taste to cut what shouldn't ship. I'm looking for that full time, as an applied AI or forward-deployed engineer. London&nbsp;or&nbsp;remote.</p>
       <div class="legend" role="group" aria-label="What the orb is made of">
         <button data-k="0"><span class="num">898</span><span>calls in Ava's go-live run, 97.4% passed</span></button>
-        <button data-k="1"><span class="num">601</span><span>patients scored by Pulse</span></button>
-        <button data-k="2"><span class="num">840</span><span>commits across 13 repos since September</span></button>
+        <button data-k="1"><span class="num">110</span><span>intent-eval utterances, 95% and zero missed red flags to pass</span></button>
+        <button data-k="2"><span class="num">54</span><span>agent scenarios replayed in CI, outreach and nurture</span></button>
         <button data-k="3"><span class="num">521</span><span>nodes in Cortex, my knowledge graph</span></button>
         <button data-k="4"><span class="num">500</span><span>training examples for Evidence</span></button>
       </div>
@@ -266,7 +273,7 @@ footer{padding:28px 0 48px;color:var(--mute);font-size:13px;display:flex;justify
       </article>
       <article class="role rv">
         <div class="role-head"><h3>Shippers Studio <span>product engineer</span></h3><span class="when">Jan 2026 to now, London</span></div>
-        <p>My studio. Agent systems, interfaces and 3D for clients and for my own ventures.</p>
+        <p>My studio. Agent systems, interfaces and 3D for clients and my own ventures, scoped up front and handed over as a live URL. I cut the generic choices before anyone sees a draft, and a weekly write-up of what broke means the next build starts from what the last one got wrong.</p>
         <ul>
           <li><b>Driiva.</b> Insurtech. React, Vite and Firebase on the web plus an Expo app, both over one identity layer, rebuilt and cut over in production.</li>
           <li><b>dpsfilm.</b> A portfolio site for a London sports and fashion cinematographer. WebGL and GSAP built around his club and brand films.</li>
@@ -367,11 +374,11 @@ footer{padding:28px 0 48px;color:var(--mute);font-size:13px;display:flex;justify
 
   <article class="piece pending">
     <div class="frame">
-      <div class="chrome"><span class="url">west hampstead renovation</span></div>
-      <div class="stage"><img data-src="assets/renovation.jpg" alt="Rendered treatment room from the West Hampstead clinic renovation" data-px></div>
+      <div class="chrome"><span class="url">treatment room renovation</span></div>
+      <div class="stage"><img data-src="assets/renovation.jpg" alt="Rendered treatment room from a clinic renovation" data-px></div>
     </div>
     <div>
-      <h3>West Hampstead renovation</h3>
+      <h3>Treatment room renovation</h3>
       <p class="what">One treatment room turned into two, built from my hand sketch before a wall moved, so the clinic and the landlord could walk the rooms and settle where everything goes with something in front of them.</p>
       <dl><dt>Built with</dt><dd>Blender from a plan file, Cycles light baked into atlases, a Three.js viewer with walk, aerial and 360 views</dd><dt>Detail</dt><dd>The build fails if anything we agreed to take out comes back into the model</dd></dl>
     </div>
@@ -517,10 +524,10 @@ footer{padding:28px 0 48px;color:var(--mute);font-size:13px;display:flex;justify
 <script>
 (() => {
   const RM = matchMedia('(prefers-reduced-motion: reduce)').matches;
-  const COUNTS = [898, 601, 840, 521, 500];
+  const COUNTS = [898, 110, 54, 521, 500];
   const TOTAL = COUNTS.reduce((a, b) => a + b, 0);
   // cool aperture ramp from the Shippers mark, outer to inner
-  const RAMP = ['#5f7aab', '#6a5bd0', '#3f62e0', '#4d8dff', '#7fb0ff'];
+  const RAMP = ['#4b5f8a', '#5a49c0', '#2d4fd0', '#2f6df0', '#4d8dff'];
 
   function rand(seed) { return () => (seed = (seed * 16807) % 2147483647) / 2147483647; }
 
@@ -567,7 +574,7 @@ footer{padding:28px 0 48px;color:var(--mute);font-size:13px;display:flex;justify
       const g = glow[p.k], dim = active >= 0 && active !== p.k ? 0.12 : 1;
       const twinkle = 0.8 + 0.2 * Math.sin(t * 0.003 + p.w * 3);
       ctx.globalAlpha = Math.min(1, (0.5 + (p.z + 1) * 0.24) * dim * twinkle + g * 0.5) * fade;
-      ctx.fillStyle = g > 0.3 ? '#cdb76e' : p.c;
+      ctx.fillStyle = g > 0.3 ? '#8a6d1a' : p.c;
       const s = p.s * (1 + g);
       ctx.fillRect(x - s / 2, y - s / 2, s, s);
     }
@@ -602,7 +609,7 @@ footer{padding:28px 0 48px;color:var(--mute);font-size:13px;display:flex;justify
       for (const p of sub) {
         const lit = p.k === k;
         x.globalAlpha = lit ? 1 : (on ? 0.18 : 0.32);
-        x.fillStyle = lit ? '#cdb76e' : p.c;
+        x.fillStyle = lit ? '#8a6d1a' : p.c;
         const sz = lit ? 1.7 : 1.1;
         x.fillRect(m + Math.cos(p.a + spin) * p.r * m * 0.98 - sz / 2, m + Math.sin(p.a + spin) * p.r * m * 0.98 - sz / 2, sz, sz);
       }
@@ -639,7 +646,7 @@ footer{padding:28px 0 48px;color:var(--mute);font-size:13px;display:flex;justify
   addEventListener('scroll', onScroll, { passive: true }); onScroll();
 
   /* reveal on scroll */
-  const rvs = [...document.querySelectorAll('.rv')];
+  const rvs = [...document.querySelectorAll('.rv, .sec')];
   if (RM) rvs.forEach(el => el.classList.add('in'));
   else {
     const io = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } }), { rootMargin: '0px 0px -8% 0px', threshold: 0.08 });
@@ -648,21 +655,28 @@ footer{padding:28px 0 48px;color:var(--mute);font-size:13px;display:flex;justify
 
   /* tabs */
   const tabs = [...document.querySelectorAll('[role=tab]')], bar = document.querySelector('.tabs');
+  let swapTimer;
   function show(id, focus) {
+    const cur = document.querySelector('.panel.on'), next = document.getElementById(id);
     tabs.forEach(t => {
       const on = t.getAttribute('aria-controls') === id;
       t.setAttribute('aria-selected', on); t.tabIndex = on ? 0 : -1;
-      const p = document.getElementById(t.getAttribute('aria-controls'));
-      p.hidden = !on; p.classList.toggle('on', on);
       if (on && focus) t.focus();
     });
     bar.dataset.on = id;
-    document.querySelectorAll('#craft video').forEach(v => id === 'craft' ? v.play().catch(() => {}) : v.pause());
     history.replaceState(null, '', id === 'craft' ? '#craft' : location.pathname);
-    // anything newly shown below the fold still gets its reveal
-    rvs.forEach(el => { if (!el.classList.contains('in') && el.getBoundingClientRect().top < innerHeight) el.classList.add('in'); });
-    const tb = document.getElementById('tabbar').getBoundingClientRect();
-    if (tb.top < 0) scrollTo({ top: scrollY + tb.top, behavior: RM ? 'auto' : 'smooth' });
+    const swap = () => {
+      document.querySelectorAll('.panel').forEach(p => { const on = p === next; p.hidden = !on; p.classList.toggle('on', on); p.classList.remove('leaving'); });
+      document.querySelectorAll('#craft video').forEach(v => id === 'craft' ? v.play().catch(() => {}) : v.pause());
+      // anything newly shown below the fold still gets its reveal
+      rvs.forEach(el => { if (!el.classList.contains('in') && el.getBoundingClientRect().top < innerHeight) el.classList.add('in'); });
+      const tb = document.getElementById('tabbar').getBoundingClientRect();
+      if (tb.top < 0) scrollTo({ top: scrollY + tb.top, behavior: RM ? 'auto' : 'smooth' });
+    };
+    clearTimeout(swapTimer);
+    // the old panel eases out (140ms) before the new one rises in; the tab indicator slides straight away
+    if (RM || !cur || cur === next) swap();
+    else { cur.classList.add('leaving'); swapTimer = setTimeout(swap, 140); }
   }
   tabs.forEach((t, i) => {
     t.addEventListener('click', () => show(t.getAttribute('aria-controls')));
