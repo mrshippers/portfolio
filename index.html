@@ -3,10 +3,10 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>joai</title>
-<meta name="description" content="Jamal Ofori-Adu. Applied AI engineer and chartered physiotherapist. Founder of StrydeOS, one method for running an MSK clinic and measuring whether it is growing, live in two UK clinics.">
-<meta property="og:title" content="joai">
-<meta property="og:description" content="Applied AI, built inside the problem. Healthcare domain expertise, and the founder of StrydeOS.">
+<title>joa.ai</title>
+<meta name="description" content="Jamal Ofori-Adu. Applied AI engineer with a physiotherapy background. Founder of StrydeOS, one method for running an MSK clinic and measuring whether it is growing, live in two UK clinics.">
+<meta property="og:title" content="joa.ai">
+<meta property="og:description" content="Applied AI, built inside the problem. Jamal Ofori-Adu, founder of StrydeOS.">
 <meta property="og:image" content="https://joai.pages.dev/assets/og.jpg">
 <meta name="theme-color" content="#f5f5f4">
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><circle cx='50' cy='50' r='34' fill='none' stroke='%234d8dff' stroke-width='10'/><circle cx='50' cy='50' r='9' fill='%230d0f14'/></svg>">
@@ -708,16 +708,19 @@ footer{padding:28px 0 48px;color:var(--mute);font-size:13px;display:flex;justify
 
   /* swap a recording for the live site, in place */
   document.querySelectorAll('[data-live]').forEach(btn => {
+    const piece = btn.closest('.piece').querySelector('h3').textContent.trim();
+    const name = open => btn.setAttribute('aria-label', (open ? 'Back to recording: ' : 'Open live here: ') + piece);
+    name(false);
     btn.addEventListener('click', () => {
       const stage = btn.closest('.frame').querySelector('.stage');
       if (stage.querySelector('iframe')) {
-        stage.querySelector('iframe').remove(); stage.firstElementChild.hidden = false; btn.textContent = 'Open live here'; return;
+        stage.querySelector('iframe').remove(); stage.firstElementChild.hidden = false; btn.textContent = 'Open live here'; name(false); return;
       }
       const f = document.createElement('iframe');
       f.src = btn.dataset.live; f.title = 'Live: ' + btn.dataset.live; f.loading = 'lazy';
       f.allow = 'fullscreen; accelerometer; gyroscope';
       stage.firstElementChild.hidden = true; stage.firstElementChild.pause?.();
-      stage.appendChild(f); btn.textContent = 'Back to recording';
+      stage.appendChild(f); btn.textContent = 'Back to recording'; name(true);
     });
   });
 })();

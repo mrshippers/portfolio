@@ -34,7 +34,7 @@ Pages projects are not git-linked, and a `pages.dev` subdomain cannot be renamed
 ```
 rm -rf /tmp/joai && mkdir /tmp/joai && git archive HEAD | tar -x -C /tmp/joai && rm /tmp/joai/HANDOFF.md
 npx wrangler pages deploy /tmp/joai --project-name=joai --branch=main
-curl -s https://joai.pages.dev | grep '<title>'   # <title>joai</title>
+curl -s https://joai.pages.dev | grep '<title>'   # <title>joa.ai</title>
 ```
 
 ## 4. verify before "done"
