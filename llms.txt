@@ -1,0 +1,9 @@
+# joa.ai
+
+> Jamal Ofori-Adu. Applied AI engineer with a physiotherapy background. Founder of StrydeOS, one method for running an MSK clinic and measuring whether it is growing, live in two UK clinics.
+
+## Pages
+
+- [Portfolio](https://joai.pages.dev/): the work (roles and products) and the craft (interfaces and renders)
+- [The week, resolved](https://joai.pages.dev/week-resolved/): an engineering write-up built from git by a scheduled agent run
+- [Citrus Jelly](https://joai.pages.dev/citrus-jelly/): a soft-body orange slice rendered in WebGPU

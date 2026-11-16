@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://joai.pages.dev/sitemap.xml
