@@ -1,10 +1,9 @@
 {
-  "_": "list a filename here once it is in assets/ and its craft piece appears: bypass.jpg, renovation.jpg, padel.jpg, icons.jpg, splat.jpg, stryde-weekly.jpg, stryde-gate.jpg",
+  "_": "list a filename here once it is in assets/ and its craft piece appears: bypass.jpg, renovation.jpg, padel.jpg, icons.jpg, splat.jpg",
   "ready": [
     "bypass.jpg",
     "renovation.jpg",
     "padel.jpg",
-    "icons.jpg",
-    "stryde-gate.jpg"
+    "icons.jpg"
   ]
 }

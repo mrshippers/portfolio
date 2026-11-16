@@ -202,7 +202,10 @@ a.proj:hover h3{color:var(--gold)}
 .duo{display:grid;grid-template-columns:1fr 1fr;gap:16px;align-items:start}
 .phones{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;align-items:end}
 .phone{border:1px solid var(--line-2);border-radius:26px;padding:7px;background:#0b0c10;transition:transform .5s var(--ease)}
-.phone img{border-radius:19px;width:100%;aspect-ratio:462/884;object-fit:cover}
+.phone img{border-radius:19px;width:100%;aspect-ratio:462/1000;object-fit:cover}
+.code{margin:0;padding:22px 24px;background:#0d0f14;color:#d9dce3;font:400 12.5px/1.75 "JetBrains Mono",monospace;overflow-x:auto;tab-size:2}
+.code .k{color:#8fb0ff}.code .s{color:#e6c46a}.code .c{color:#8b92a1}
+.code:focus-visible{outline:2px solid var(--blue);outline-offset:-2px}
 .phone:nth-child(2){transform:translateY(-28px)}
 .phones:hover .phone:nth-child(1){transform:translateY(6px)}
 .phones:hover .phone:nth-child(2){transform:translateY(-36px)}
@@ -320,7 +323,7 @@ footer{padding:28px 0 48px;color:var(--mute);font-size:13px;display:flex;justify
           <li><b>dpsfilm.</b> A site for a London football and fashion photographer and cinematographer. A WebGL sky takes its colour from whichever frame is on screen, one tournament scrolls from dusk into floodlights, and his logo is a three.js model in the footer.</li>
           <li><b>TradeMind.</b> A voice-first operations platform for UK electricians, shipped to iOS through TestFlight. Design system and brand book first, then the app: dictation into certificates, a compliance vault, Stripe Connect payouts. Scoped, built and handed over.</li>
           <li><b>Counsel.</b> Case management for a family law practice: clients, cases and conflict-of-interest checks before a case opens. Cloudflare Workers and Supabase, delivered.</li>
-          <li><b>Slate.</b> A pricing and invoicing app for creatives, wrapped for mobile. Plus the smaller things a studio accumulates: an iCloud Mail MCP server, a fragrance app, home-screen marks for the fleet.</li>
+          <li><b>Slate.</b> A pricing and invoicing app for creatives, wrapped for mobile. Plus the smaller things a studio accumulates: an iCloud Mail MCP server, a fragrance app, and home-screen icons for my own apps.</li>
         </ul>
       </article>
       <div class="role compact rv">
@@ -412,7 +415,7 @@ footer{padding:28px 0 48px;color:var(--mute);font-size:13px;display:flex;justify
   <article class="piece pending">
     <div class="frame">
       <div class="chrome"><span class="url">clinic renovation, aerial</span></div>
-      <div class="stage"><img data-src="assets/renovation.jpg" alt="Aerial view of the clinic renovation: two treatment rooms, a waiting strip and the stairwell, rendered from above" data-px></div>
+      <div class="stage"><img data-src="assets/renovation.jpg" alt="Cutaway from above the shopfront: the two new treatment rooms side by side, the corridor with its waiting chairs, and the street door" data-px></div>
     </div>
     <div>
       <h3>A clinic renovation</h3>
@@ -423,8 +426,8 @@ footer{padding:28px 0 48px;color:var(--mute);font-size:13px;display:flex;justify
 
   <article class="piece pending">
     <div class="frame">
-      <div class="chrome"><span class="url">padel</span></div>
-      <div class="stage"><img data-src="assets/padel.jpg" alt="Padel: two glass-walled courts side by side in a dark slatted hall, a lounge in the foreground" data-px></div>
+      <div class="chrome"><span class="url">padel garden, the entrance</span></div>
+      <div class="stage"><img data-src="assets/padel.jpg" alt="Padel Garden at dusk from outside: a glazed lobby under a slatted oak ceiling, the sign on a living green wall, the check-in kiosk, and the lit courts through the far door" data-px></div>
     </div>
     <div>
       <h3>Padel</h3>
@@ -436,7 +439,7 @@ footer{padding:28px 0 48px;color:var(--mute);font-size:13px;display:flex;justify
   <article class="piece">
     <div class="frame">
       <div class="chrome"><span class="url">dpsfilm.netlify.app</span><button data-live="https://dpsfilm.netlify.app">Open live here</button></div>
-      <div class="stage"><img src="assets/dpsfilm.jpg" alt="dpsfilm footer: the wordmark and a camera as one 3D model, an orange line running into the camera's tally lamp" loading="lazy" data-px></div>
+      <div class="stage"><video src="assets/dpsfilm.mp4" poster="assets/dpsfilm-poster.jpg" muted loop playsinline preload="none" aria-label="Recording: the dpsfilm logo, the wordmark on a 3D camera, rolls one full turn forward while an orange line runs into the camera's lit tally lamp"></video></div>
     </div>
     <div>
       <h3>dpsfilm</h3>
@@ -462,7 +465,7 @@ footer{padding:28px 0 48px;color:var(--mute);font-size:13px;display:flex;justify
   <article class="piece" id="wr">
     <div class="frame">
       <div class="chrome"><span class="url">joai.pages.dev/week-resolved</span><button data-live="week-resolved/">Open live here</button></div>
-      <div class="stage"><img src="assets/week-resolved.jpg" alt="The week, resolved, edition 2.8: four and a half days of commits drawn as a tape, one mark per commit, a lane per repository" loading="lazy" data-px></div>
+      <div class="stage"><img src="assets/week-resolved.jpg" alt="The week, resolved, edition 2.8: every commit of the week as a tape, one mark per commit and a lane per repository, Friday the busiest with 49, one StrydeOS commit read out underneath" loading="lazy" data-px></div>
     </div>
     <div>
       <h3>The week, resolved</h3>
@@ -472,33 +475,46 @@ footer{padding:28px 0 48px;color:var(--mute);font-size:13px;display:flex;justify
     </div>
   </article>
 
-  <article class="piece pending">
-    <div class="duo">
-      <div class="frame">
-        <div class="chrome"><span class="url">the weekly summary, to me</span></div>
-        <div class="stage"><img data-src="assets/stryde-weekly.jpg" alt="The weekly summary email StrydeOS sends about the clinic" data-px></div>
-      </div>
-      <div class="frame">
-        <div class="chrome"><span class="url">ava's gate report</span></div>
-        <div class="stage"><img data-src="assets/stryde-gate.jpg" alt="Ava's go-live gate report: 898 calls, 97.4% passed, zero critical" data-px></div>
-      </div>
+  <article class="piece">
+    <div class="frame">
+      <div class="chrome"><span class="url">lib/contracts/patient-state.ts</span></div>
+      <pre class="code" tabindex="0" aria-label="Code excerpt: classifyPatient, the one function that decides each patient's state"><code><span class="c">// Where a patient is in their care. One rule, read by every surface.</span>
+<span class="k">export function</span> classifyPatient(f, cfg, now) {
+<span class="c">  // measured against their own gap between visits, not a flat number</span>
+  <span class="k">const</span> gap = f.ownIntervalDays ?? cfg.defaultRebookingDays;
+  <span class="k">const</span> overdueAt  = max(cfg.overdueFloorDays, gap * cfg.overdueFactor);
+  <span class="k">const</span> chaseUntil = min(cfg.chaseMaxDays,
+                       max(cfg.chaseMinDays, gap * cfg.churnFactor));
+
+  <span class="k">if</span> (!seen)                     <span class="k">return</span> out(<span class="s">"NOT_STARTED"</span>);
+  <span class="k">if</span> (f.nextBookingAt)           <span class="k">return</span> wasDrifting ? out(<span class="s">"RE_ENGAGED"</span>)
+                                                    : out(<span class="s">"BOOKED"</span>);
+  <span class="k">if</span> (f.dischargeConfirmed)      <span class="k">return</span> out(<span class="s">"FINISHED"</span>, <span class="s">"confirmed"</span>);
+  <span class="k">if</span> (days &lt;= overdueAt)         <span class="k">return</span> out(<span class="s">"BETWEEN"</span>);
+  <span class="k">if</span> (f.courseLengthReached &amp;&amp; !cancelledSinceLastVisit)
+                                 <span class="k">return</span> out(<span class="s">"FINISHED"</span>, <span class="s">"likely"</span>);
+  <span class="k">if</span> (days &lt;= chaseUntil)        <span class="k">return</span> out(<span class="s">"OVERDUE"</span>);
+  <span class="k">if</span> (days &lt;= cfg.pastAfterDays) <span class="k">return</span> out(<span class="s">"STOPPED"</span>);
+  <span class="k">return</span> out(<span class="s">"PAST"</span>);
+}</code></pre>
     </div>
     <div>
-      <h3>StrydeOS, from the inside</h3>
-      <p class="what">Not the website. The weekly summary the system writes me about my own clinic, and the report Ava has to pass before a release goes out. The product is the method; the site only describes it.</p>
-      <dl><dt>Built with</dt><dd>Next.js, TypeScript, Firebase, a simulated-caller harness on GitHub Actions</dd><dt>Detail</dt><dd>Every headline number states the window it was measured over</dd></dl>
+      <h3>StrydeOS patient state</h3>
+      <p class="what">The platform once had four different definitions of a patient who had drifted away, and one of them depended on whether we had texted the patient lately. Now one function decides. The clinic board, the patient messages, the review ask and Ava all import it.</p>
+      <p class="what">Each patient is measured against their own gap between visits, not a fixed number of days. A course only counts as finished once a clinician confirms it. Until then it reads "likely finished", because clinicians almost never record a discharge.</p>
+      <dl><dt>Built with</dt><dd>TypeScript, imported by 16 modules, 11 tests on the rule itself</dd><dt>Detail</dt><dd>Every result carries one plain sentence saying why, so a surprising state can be read instead of debugged</dd></dl>
     </div>
   </article>
 
   <article class="piece pending">
     <div class="frame">
-      <div class="chrome"><span class="url">home-screen marks</span></div>
+      <div class="chrome"><span class="url">app icons</span></div>
       <div class="stage"><img data-src="assets/icons.jpg" alt="Three home-screen icons, each shown large and at 64 and 32 pixels: a scent trail for Sillage, a clapper board for Slate, the aperture for Shippers" data-px></div>
     </div>
     <div>
-      <h3>Marks for the fleet</h3>
-      <p class="what">Home-screen icons for three of my own apps. A single scent trail for Sillage, a clapper board for Slate, the aperture for Shippers. One source each, exported to every size a phone or a browser tab asks for.</p>
-      <dl><dt>Built with</dt><dd>SVG, Playwright for the exports</dd><dt>Detail</dt><dd>Every tile is fully opaque, because iOS paints transparent corners black</dd></dl>
+      <h3>App icons</h3>
+      <p class="what">Home-screen icons for three of my apps: a scent trail for Sillage, a clapper board for Slate and the aperture for Shippers. Each one is drawn once in SVG and exported to every size a phone or browser needs.</p>
+      <dl><dt>Built with</dt><dd>SVG, Playwright for the exports</dd><dt>Detail</dt><dd>Every icon is fully opaque, because iOS fills transparent corners with black</dd></dl>
     </div>
   </article>
 
@@ -509,8 +525,8 @@ footer{padding:28px 0 48px;color:var(--mute);font-size:13px;display:flex;justify
     </div>
     <div>
       <h3>Injury Time</h3>
-      <p class="what">The hub reads the season as a sentence a manager would say, with the points line plotted against promotion and play-off pace.</p>
-      <dl><dt>Built with</dt><dd>Next.js, Supabase, React Three Fiber</dd><dt>Detail</dt><dd>A real club in read-only; switch to the fictional club to try everything</dd></dl>
+      <p class="what">Football management for non-league clubs. The hub opens with one sentence on where the season stands, then plots the club's points against the pace needed for promotion and the play-offs.</p>
+      <dl><dt>Built with</dt><dd>Next.js, Supabase, React Three Fiber</dd><dt>Detail</dt><dd>A real club's season is read-only. Switch to the demo club to try every feature.</dd></dl>
       <a class="go" href="https://injury-time.vercel.app">Open the hub</a>
     </div>
   </article>
@@ -529,9 +545,9 @@ footer{padding:28px 0 48px;color:var(--mute);font-size:13px;display:flex;justify
 
   <article class="piece">
     <div class="phones">
-      <div class="phone"><img loading="eager" src="assets/tm-welcome.jpg" alt="TradeMind welcome: jobs recorded, certs issued, payment collected, from one voice note"></div>
-      <div class="phone"><img loading="eager" src="assets/tm-home.jpg" alt="TradeMind home: talk in a job, jobs booked in with certificate status"></div>
-      <div class="phone"><img loading="eager" src="assets/tm-onboard.jpg" alt="TradeMind onboarding: four short steps to a working line"></div>
+      <div class="phone"><img loading="eager" src="assets/tm-welcome.jpg" alt="TradeMind sign-up at night: switched on, over a circuit chart of the app's seven parts with their amp ratings"></div>
+      <div class="phone"><img loading="eager" src="assets/tm-home.jpg" alt="TradeMind home at dusk: four jobs paid, two not paid yet, the week as a row of lights, held certificates with a chase link, and today's three stops"></div>
+      <div class="phone"><img loading="eager" src="assets/tm-onboard.jpg" alt="TradeMind onboarding, step one of five: your line, your first job, paid before release"></div>
     </div>
     <div>
       <h3>TradeMind</h3>

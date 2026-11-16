@@ -22,7 +22,6 @@ A `article.piece.pending` renders only when its `img[data-src]` file is listed i
 
 | file | piece | state |
 |---|---|---|
-| `stryde-weekly.jpg` | StrydeOS, from the inside (frame 1) | The weekly Brief was unpaused 22 Oct; its cron first fires Mon 26 Oct 07:00 UTC. Screenshot the first real one, redact patient names. The piece shows with the gate frame alone until then. |
 | `splat.jpg` | Room scan viewer | `splat-viewer.html` was not found on disk, in GitHub, or among the artifacts. Needs Jamal to point at it. |
 
 Removed on purpose, ask Jamal before restoring: the Flashing lights slot (a private piece; its own spec says unlisted, noindex, no OG image) and Oracle from the icon sheet (no Oracle icon exists anywhere; the sheet shows Sillage, Slate and Shippers).
