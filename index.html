@@ -181,7 +181,9 @@ a.proj:hover h3{color:var(--gold)}
 .stage>video,.stage>img,.stage>iframe{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:top;border:0}
 .stage>img[data-px]{transform:scale(1.08) translateY(var(--px,0));will-change:transform}
 .ticker{position:absolute;inset:0;overflow:hidden;outline:none}
-.ticker .track{display:flex;gap:10px;height:100%;width:max-content;animation:tick 34s linear infinite}
+.ticker .track{display:flex;gap:10px;height:100%;width:max-content;animation:tick 26s linear infinite}
+.ticker figure>a{display:block;height:100%;color:inherit;text-decoration:none}
+.ticker figure>a:focus-visible{outline-offset:-4px}
 .ticker:hover .track,.ticker:focus-visible .track{animation-play-state:paused}
 .ticker figure{position:relative;flex:none;height:100%;width:var(--tw,640px);overflow:hidden;background:var(--bg-2)}
 .ticker img{width:100%;height:100%;object-fit:cover;object-position:center}
@@ -194,11 +196,13 @@ a.proj:hover h3{color:var(--gold)}
 .piece dl{margin-top:22px;display:grid;grid-template-columns:auto 1fr;gap:8px 18px;font-size:15px}
 .piece dt{color:var(--mute)}
 .piece dd{color:var(--body)}
+.piece .gos{display:flex;flex-wrap:wrap;gap:8px 24px}
+.piece .what+.what{margin-top:10px}
 .piece .go{display:inline-block;margin-top:22px;font-size:15px;color:var(--ink);text-decoration:none;border-bottom:1px solid var(--blue);padding-bottom:2px}
 .duo{display:grid;grid-template-columns:1fr 1fr;gap:16px;align-items:start}
 .phones{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;align-items:end}
 .phone{border:1px solid var(--line-2);border-radius:26px;padding:7px;background:#0b0c10;transition:transform .5s var(--ease)}
-.phone img{border-radius:20px;width:100%;aspect-ratio:780/1688;object-fit:cover}
+.phone img{border-radius:19px;width:100%;aspect-ratio:462/884;object-fit:cover}
 .phone:nth-child(2){transform:translateY(-28px)}
 .phones:hover .phone:nth-child(1){transform:translateY(6px)}
 .phones:hover .phone:nth-child(2){transform:translateY(-36px)}
@@ -386,71 +390,72 @@ footer{padding:28px 0 48px;color:var(--mute);font-size:13px;display:flex;justify
   <!-- slots: each hides until its file is listed in assets/manifest.json -->
   <article class="piece">
     <div class="frame">
-      <div class="chrome"><span class="url">3d renders</span><button data-live="citrus-jelly/">Open live here</button></div>
-      <div class="stage"><div class="ticker" tabindex="0" aria-label="3D renders, scrolling: Citrus Jelly, then Bypass">
+      <div class="chrome"><span class="url">3D rendering</span></div>
+      <div class="stage"><div class="ticker" tabindex="0" aria-label="3D rendering, scrolling: Citrus Jelly, then Bypass. Pause by pointing at it.">
         <div class="track">
-          <figure><img src="assets/jelly.jpg" alt="Citrus Jelly: a gummy orange slice pulled up by its rind, the flesh narrowing, segments, membranes and bubbles stretching with it" loading="lazy"><figcaption>citrus jelly</figcaption></figure>
-          <figure class="dark"><img src="assets/bypass.jpg" alt="Bypass: a high-bypass and a low-bypass turbofan exploded apart, with throttle, explode and cut controls below" loading="lazy"><figcaption>bypass</figcaption></figure>
-          <figure aria-hidden="true"><img src="assets/jelly.jpg" alt="" loading="lazy"><figcaption>citrus jelly</figcaption></figure>
-          <figure class="dark" aria-hidden="true"><img src="assets/bypass.jpg" alt="" loading="lazy"><figcaption>bypass</figcaption></figure>
+          <figure><a href="citrus-jelly/"><img src="assets/jelly.jpg" alt="Citrus Jelly: a gummy orange slice pulled up by its rind, the flesh narrowing, segments, membranes and bubbles stretching with it. Opens Citrus Jelly" loading="lazy"><figcaption>citrus jelly</figcaption></a></figure>
+          <figure class="dark"><a href="https://shippersstudio.io/demos/bypass/"><img src="assets/bypass.jpg" alt="Bypass: two turbofans with their casings opened, throttle at 92%, live fan speed and thrust along the bottom. Opens Bypass" loading="lazy"><figcaption>bypass</figcaption></a></figure>
+          <figure aria-hidden="true"><a href="citrus-jelly/" tabindex="-1"><img src="assets/jelly.jpg" alt="" loading="lazy"><figcaption>citrus jelly</figcaption></a></figure>
+          <figure class="dark" aria-hidden="true"><a href="https://shippersstudio.io/demos/bypass/" tabindex="-1"><img src="assets/bypass.jpg" alt="" loading="lazy"><figcaption>bypass</figcaption></a></figure>
         </div>
       </div></div>
     </div>
     <div>
-      <h3>3D renders</h3>
-      <p class="what">Objects made entirely in code, no model files anywhere. Citrus Jelly is a gummy orange slice you grab and stretch: 2,496 tetrahedra that keep their volume, so the flesh narrows under the pull and wobbles back when you let go. Bypass is a parametric turbofan study, two engines at true scale you can explode or cut in section, with an afterburner that lights past 80% throttle.</p>
-      <dl><dt>Built with</dt><dd>WebGPU and WGSL for the jelly, Three.js for the engines, a single HTML file each</dd><dt>Detail</dt><dd>The segments, membranes and bubbles live inside the flesh, so they stretch with it instead of floating free</dd></dl>
-      <a class="go" href="citrus-jelly/">Open Citrus Jelly</a>
-    </div>
-  </article>
-
-  <article class="piece">
-    <div class="frame">
-      <div class="chrome"><span class="url">shippersstudio.io</span><button data-live="https://shippersstudio.io">Open live here</button></div>
-      <div class="stage"><video src="assets/shippers.mp4" poster="assets/shippers-poster.jpg" muted loop playsinline preload="none" aria-label="Recording: scrolling the Shippers Studio home page"></video></div>
-    </div>
-    <div>
-      <h3>Shippers Studio</h3>
-      <p class="what">The studio site, live as an A/B test: 3.0's point cloud against 4.5's raw-GLSL beam, the same copy on both arms, first-party tracking and no cookies. The aperture is 92,000 points that resolve into type as you read.</p>
-      <dl><dt>Built with</dt><dd>WebGL2 and raw GLSL, GSAP, hand-set type</dd><dt>Under it</dt><dd>Structured data, Search Console on every domain, field notes written to rank</dd></dl>
-      <a class="go" href="https://shippersstudio.io">Visit shippersstudio.io</a>
+      <h3>3D rendering</h3>
+      <p class="what">I like seeing a thing properly before it exists, and I'm fussy about how it reads. Surfaces come first: the fibres on a court, the gloss on a casing, a shader that looks like the material instead of like a computer. Then truth to the source: real dimensions, real colours, nothing invented to fill a gap.</p>
+      <p class="what">Citrus Jelly and Bypass are objects made entirely in code. The jelly is 2,496 tetrahedra that keep their volume, so the flesh narrows when you pull it and wobbles back when you let go. Bypass is two turbofans at true scale that you can take apart, cut in section, and throttle past 80% until the afterburner lights.</p>
+      <dl><dt>Built with</dt><dd>WebGPU and WGSL for the jelly, Three.js for the engines, one HTML file each</dd><dt>Detail</dt><dd>The segments, membranes and bubbles sit inside the flesh, so they stretch with it</dd></dl>
+      <p class="gos"><a class="go" href="citrus-jelly/">Open Citrus Jelly</a><a class="go" href="https://shippersstudio.io/demos/bypass/">Open Bypass</a></p>
     </div>
   </article>
 
   <article class="piece pending">
     <div class="frame">
-      <div class="chrome"><span class="url">treatment room renovation</span></div>
-      <div class="stage"><img data-src="assets/renovation.jpg" alt="Rendered treatment room from a clinic renovation" data-px></div>
+      <div class="chrome"><span class="url">clinic renovation, aerial</span></div>
+      <div class="stage"><img data-src="assets/renovation.jpg" alt="Aerial view of the clinic renovation: two treatment rooms, a waiting strip and the stairwell, rendered from above" data-px></div>
     </div>
     <div>
-      <h3>Treatment room renovation</h3>
-      <p class="what">One treatment room turned into two, built from my hand sketch before a wall moved, so the clinic and the landlord could walk the rooms and settle where everything goes with something in front of them.</p>
-      <dl><dt>Built with</dt><dd>Blender from a plan file, Cycles light baked into atlases, a Three.js viewer with walk, aerial and 360 views</dd><dt>Detail</dt><dd>The build fails if anything we agreed to take out comes back into the model</dd></dl>
+      <h3>A clinic renovation</h3>
+      <p class="what">Our clinic's ground floor, split from one treatment room into two before a wall moved. I modelled it from my hand sketch so the clinic and the landlord could walk the rooms and agree where everything goes. Real dimensions and finishes, room to walk round the couch, and nothing parked in front of a door.</p>
+      <dl><dt>Built with</dt><dd>Blender from a plan file, Cycles light baked into atlases, a Three.js viewer you can walk, fly over or see in 360</dd><dt>Detail</dt><dd>The build fails if anything we agreed to take out comes back into the model</dd></dl>
+    </div>
+  </article>
+
+  <article class="piece pending">
+    <div class="frame">
+      <div class="chrome"><span class="url">padel</span></div>
+      <div class="stage"><img data-src="assets/padel.jpg" alt="Padel: two glass-walled courts side by side in a dark slatted hall, a lounge in the foreground" data-px></div>
+    </div>
+    <div>
+      <h3>Padel</h3>
+      <p class="what">A padel hall for a friend's venue, built to be walked before any of it exists. Two courts with a lane between, spectator tiers, a lounge, a bar and a self check-in kiosk. The court fibres and the glass had to read as real at walking pace.</p>
+      <dl><dt>Built with</dt><dd>Blender, Cycles light baked into texture atlases, a Three.js walk-through</dd><dt>Detail</dt><dd>No live lights in the browser, which took it from 21 frames a second to 60</dd></dl>
     </div>
   </article>
 
   <article class="piece">
     <div class="frame">
       <div class="chrome"><span class="url">dpsfilm.netlify.app</span><button data-live="https://dpsfilm.netlify.app">Open live here</button></div>
-      <div class="stage"><img src="assets/dpsfilm.jpg" alt="dpsfilm home: a match film playing in a curved screen above the headline Bringing the cameras to the parts of the game the broadcast doesn't reach, beside a portrait of the photographer" loading="lazy" data-px></div>
+      <div class="stage"><img src="assets/dpsfilm.jpg" alt="dpsfilm footer: the wordmark and a camera as one 3D model, an orange line running into the camera's tally lamp" loading="lazy" data-px></div>
     </div>
     <div>
       <h3>dpsfilm</h3>
-      <p class="what">A client site for a London photographer and cinematographer who shoots football and fashion. His frames roll through a curved cinema screen on the home page, an under-16 tournament in Antalya scrolls from dusk into floodlights, and the sky behind it all shifts to match the photograph on screen.</p>
+      <p class="what">A client site for a London photographer and cinematographer who shoots football and fashion. His frames roll through a curved cinema screen on the home page, a tournament in Antalya scrolls from dusk into floodlights, and the sky behind it all shifts to match the photograph on screen.</p>
       <dl><dt>Built with</dt><dd>Hand-built HTML, WebGL, three.js, GSAP, Netlify</dd><dt>Detail</dt><dd>One orange line runs from the headline's full stop to the tally lamp on the 3D camera in the footer</dd></dl>
       <a class="go" href="https://dpsfilm.netlify.app">Visit dpsfilm</a>
     </div>
   </article>
 
-  <article class="piece pending">
+  <article class="piece">
     <div class="frame">
-      <div class="chrome"><span class="url">trademind design system</span></div>
-      <div class="stage"><img data-src="assets/tm-system.jpg" alt="TradeMind design system: wordmark, monogram, colour tokens and a ten-screen mobile kit" data-px></div>
+      <div class="chrome"><span class="url">shippersstudio.io</span><button data-live="https://shippersstudio.io">Open live here</button></div>
+      <div class="stage"><img src="assets/shippers.jpg" alt="Shippers Studio, selected work: a point-cloud planet behind the headline the work, minus the logos, over three project cards" loading="lazy" data-px></div>
     </div>
     <div>
-      <h3>TradeMind, designed first</h3>
-      <p class="what">Before a line of app code: a ten-screen mobile kit, the wordmark and monogram, the colour and type tokens, and a brand book with the don'ts written down. The build inherited all of it.</p>
-      <dl><dt>Built with</dt><dd>Design tokens, sentence case, numbers up front</dd><dt>Detail</dt><dd>The full stop is the only amber in the wordmark</dd></dl>
+      <h3>Shippers Studio</h3>
+      <p class="what">The studio site, running as a live A/B test: two hero builds with the same copy, measured first-party with no cookies. 92,000 points settle into a new shape at each section as you scroll.</p>
+      <dl><dt>Built with</dt><dd>WebGL2 and raw GLSL, GSAP, hand-set type</dd><dt>Under it</dt><dd>Structured data, Search Console on every domain, field notes written to rank</dd></dl>
+      <a class="go" href="https://shippersstudio.io">Visit shippersstudio.io</a>
     </div>
   </article>
 
@@ -497,18 +502,6 @@ footer{padding:28px 0 48px;color:var(--mute);font-size:13px;display:flex;justify
     </div>
   </article>
 
-  <article class="piece pending">
-    <div class="frame">
-      <div class="chrome"><span class="url">padel</span></div>
-      <div class="stage"><img data-src="assets/padel.jpg" alt="Padel: two glass-walled courts side by side in a dark slatted hall, a lounge in the foreground" data-px></div>
-    </div>
-    <div>
-      <h3>Padel</h3>
-      <p class="what">A padel hall for a friend's venue, built so it could be walked before any of it exists. Two courts side by side with a lane between, spectator tiers, a lounge, a bar and a self check-in kiosk.</p>
-      <dl><dt>Built with</dt><dd>Blender, Cycles light baked into texture atlases, a Three.js walk-through</dd><dt>Detail</dt><dd>No live lights in the browser, which took it from 21 frames a second to 60</dd></dl>
-    </div>
-  </article>
-
   <article class="piece">
     <div class="frame">
       <div class="chrome"><span class="url">injury-time.vercel.app</span><button data-live="https://injury-time.vercel.app">Open live here</button></div>
@@ -543,7 +536,8 @@ footer{padding:28px 0 48px;color:var(--mute);font-size:13px;display:flex;justify
     <div>
       <h3>TradeMind</h3>
       <p class="what">An electrician talks a job in from the van. The certificate drafts itself and is held until the customer pays.</p>
-      <dl><dt>Built with</dt><dd>Expo, Supabase, ElevenLabs Scribe, Claude, Stripe Connect</dd><dt>Detail</dt><dd>One amber, used only for the thing to press</dd></dl>
+      <p class="what">Designed before a line of app code: a ten-screen kit, the wordmark and monogram, colour and type tokens, and a brand book with the don'ts written down. The build inherited all of it.</p>
+      <dl><dt>Built with</dt><dd>Expo, Supabase, ElevenLabs Scribe, Claude, Stripe Connect</dd><dt>Detail</dt><dd>One amber, used only for the thing to press. In the wordmark it is the full stop.</dd></dl>
     </div>
   </article>
 
@@ -554,7 +548,7 @@ footer{padding:28px 0 48px;color:var(--mute);font-size:13px;display:flex;justify
   <div>
     <p class="who">Jamal Ofori-Adu, London</p>
     <h2><a href="mailto:jamal@strydeos.com">jamal@strydeos.com</a></h2>
-    <p>Open to applied AI and frontend roles, London or remote, and to client builds through Shippers Studio.</p>
+    <p>Open to applied AI and frontend roles, London or remote.</p>
   </div>
   <div class="links">
     <a href="https://github.com/mrshippers">github.com/mrshippers</a>
