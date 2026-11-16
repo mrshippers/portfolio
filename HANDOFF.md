@@ -14,7 +14,7 @@ If any step below fights the page being good, break the step and say which.
 - Do not restore the StrydeOS website screenshots, the "demo clinic" subtext, the font credit in the footer, or the line under the tabs. They were removed on purpose.
 - Images go in `assets/` at 1600×1000 JPEG (quality ~85), 16:10, `object-position: top` is assumed. Phone shots stay 462×1000.
 - Nothing from `SHP001_AGElectrical_Deposit.pdf` goes on the page (bank details). The invoice is not mentioned anywhere.
-- Captures come from the CDP Chrome, which runs the Acrobat extension: check every capture's bottom-right corner for its button (it was baked into the old Shippers poster and video).
+- Captures come from the CDP Chrome, which runs the Acrobat extension: check every capture's bottom-right corner for its button (it was baked into the old Shippers poster and video). Remove it before capturing: the host is `div#aiFabShadowRoot` (`document.getElementById("aiFabShadowRoot").remove()`).
 
 ## 2. slots still waiting
 
